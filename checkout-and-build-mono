@@ -1,0 +1,45 @@
+#!/bin/sh
+
+#	checkout-and-build-mono
+#
+#	Check out mono from svn, apply our patches, and build and install mono.
+#
+#	Neil Mayhew - 2009-05-12
+
+REVISION=138328
+PROJECTS="libgdiplus mcs mono"
+DIRECTORIES="libgdiplus mono"
+
+set -e
+
+echo $0: Starting ...
+
+echo $0: Checking out mono ...
+svn co -r$REVISION --depth empty svn://anonsvn.mono-project.com/source/trunk .
+svn up -r$REVISION $PROJECTS
+cd mcs/class/Mono.Data.Tds
+svn up -r125609
+cd -
+
+echo $0: Reverting mono svn working copy in case it was previously checked out and patched
+svn revert -R .
+
+echo $0: Applying our patches ...
+for PATCH in *.patch
+do
+	patch -p0 -i $PATCH
+done
+
+echo $0: Building mono ...
+for DIR in $DIRECTORIES
+do
+	(cd $DIR; ./autogen.sh; make)
+done
+
+echo $0: Installing mono ...
+for DIR in $DIRECTORIES
+do
+	(cd $DIR; sudo make install)
+done
+
+echo $0: Finished successfully.

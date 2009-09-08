@@ -1,0 +1,75 @@
+Index: mcs/class/Mono.Data.TdsClient/Mono.Data.TdsClient/TdsConnection.cs
+===================================================================
+--- mcs/class/Mono.Data.TdsClient/Mono.Data.TdsClient/TdsConnection.cs	(revision 132913)
++++ mcs/class/Mono.Data.TdsClient/Mono.Data.TdsClient/TdsConnection.cs	(working copy)
+@@ -50,7 +50,7 @@
+ 		bool disposed = false;
+ 
+ 		// The set of SQL connection pools
+-		static TdsConnectionPoolManager tdsConnectionPools = new TdsConnectionPoolManager (TdsVersion.tds42);
++		static TdsConnectionPoolManager tdsConnectionPools = new TdsConnectionPoolManager (TdsVersion.tds70);
+ 
+ 		// The current connection pool
+ 		TdsConnectionPool pool;
+@@ -215,10 +215,11 @@
+ 		public void ChangeDatabase (string database) 
+ 		{
+ 			if (!IsValidDatabaseName (database))
+-				throw new ArgumentException (String.Format ("The database name {0} is not valid."));
++				throw new ArgumentException (String.Format ("The database name {0} is not valid.", database));
+ 			if (State != ConnectionState.Open)
+ 				throw new InvalidOperationException ("The connection is not open");
+-			tds.Execute (String.Format ("use {0}", database));
++
++			tds.Execute (String.Format ("use \"{0}\"", database));
+ 		}
+ 
+ 		private void ChangeState (ConnectionState currentState)
+@@ -545,7 +546,7 @@
+ 				return false;
+ 
+ 			foreach (char c in database.Substring (1, database.Length - 1))
+-				if (!Char.IsLetterOrDigit (c) && c != '_')
++				if (!Char.IsLetterOrDigit (c) && c != '_' && c != '-' && c != ' ' )
+ 					return false;
+ 			return true;
+ 		}
+Index: mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+===================================================================
+--- mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs	(revision 132913)
++++ mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs	(working copy)
+@@ -71,6 +71,8 @@
+ 		public virtual Type GetConfigType (string typeName, bool throwOnError)
+ 		{
+ 			Type type = Type.GetType (typeName);
++			if (type == null && typeName.Split(',').Length == 1) // try System.dll if nothing else specified
++				type = Type.GetType (typeName + ",System");
+ 			if (type == null && throwOnError)
+ 				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
+ 			return type;
+Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+===================================================================
+--- mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs	(revision 132913)
++++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs	(working copy)
+@@ -252,6 +252,8 @@
+ 
+ 		public virtual void Clear ()
+ 		{
++			dataGridView.CurrentCell = null;
++
+ 			int total = list.Count;
+ 			
+ 			for (int i = 0; i < total; i++) {
+Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+===================================================================
+--- mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs	(revision 132913)
++++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs	(working copy)
+@@ -101,6 +101,8 @@
+ 
+ 		public virtual void Clear ()
+ 		{
++			dataGridView.CurrentCell = null;
++
+ 			base.List.Clear ();
+ 			
+ 			// When we clear the column collection, all rows get deleted

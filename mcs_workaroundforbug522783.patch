@@ -1,0 +1,19 @@
+Index: mcs/class/corlib/System.Resources/ResourceManager.cs
+===================================================================
+--- mcs/class/corlib/System.Resources/ResourceManager.cs	(revision 138238)
++++ mcs/class/corlib/System.Resources/ResourceManager.cs	(working copy)
+@@ -337,10 +337,14 @@
+ 
+ 			ResourceSet set;
+ 			
++#if false
+ 			/* if we already have this resource set, return it */
+ 			set = (ResourceSet) ResourceSets [culture];
+ 			if (set != null)
+ 				return set;
++#else
++			set = null;
++#endif
+ 
+ 			if (NonExistent.Contains (culture))
+ 				return null;
