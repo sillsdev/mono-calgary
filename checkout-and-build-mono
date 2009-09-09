@@ -6,7 +6,7 @@
 #
 #	Neil Mayhew - 2009-05-12
 
-REVISION=138328
+REVISION=141180
 PROJECTS="libgdiplus mcs mono"
 DIRECTORIES="libgdiplus mono"
 
@@ -18,6 +18,9 @@ echo $0: Checking out mono ...
 svn co -r$REVISION --depth empty svn://anonsvn.mono-project.com/source/trunk .
 svn up -r$REVISION $PROJECTS
 cd mcs/class/Mono.Data.Tds
+svn up -r125609
+cd -
+cd mcs/class/System.Data/System.Data.SqlClient
 svn up -r125609
 cd -
 
