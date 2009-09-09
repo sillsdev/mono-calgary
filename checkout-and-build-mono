@@ -15,7 +15,8 @@ set -e
 echo $0: Starting ...
 
 echo $0: Reverting mono svn working copy in case it was previously checked out and patched
-svn revert -R .
+# Don't try to revert if svn wasn't checked out yet.
+[ -d .svn ] && svn revert -R .
 
 echo $0: Checking out mono ...
 svn co -r$REVISION --depth empty svn://anonsvn.mono-project.com/source/trunk .
