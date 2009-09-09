@@ -14,6 +14,9 @@ set -e
 
 echo $0: Starting ...
 
+echo $0: Reverting mono svn working copy in case it was previously checked out and patched
+svn revert -R .
+
 echo $0: Checking out mono ...
 svn co -r$REVISION --depth empty svn://anonsvn.mono-project.com/source/trunk .
 svn up -r$REVISION $PROJECTS
@@ -23,9 +26,6 @@ cd -
 cd mcs/class/System.Data/System.Data.SqlClient
 svn up -r125609
 cd -
-
-echo $0: Reverting mono svn working copy in case it was previously checked out and patched
-svn revert -R .
 
 echo $0: Applying our patches ...
 for PATCH in *.patch
