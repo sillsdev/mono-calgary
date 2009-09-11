@@ -3,3 +3,4 @@
 libgdiplus/
 mcs/
 mono/
+checkout-and-build-mono.config

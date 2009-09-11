@@ -16,6 +16,18 @@ set -e
 
 echo $0: Starting ...
 
+if [ -e $0.config ]; then
+	. $0.config
+
+	if [ "$OLD_ARCH" != "$(uname -m)" ]; then
+		echo $0: Switching architecture. Doing a 'make clean'
+		for DIR in $DIRECTORIES
+		do
+			[ -d $DIR ] && (cd $DIR; make clean)
+		done
+	fi
+fi
+
 echo $0: Reverting mono svn working copy in case it was previously checked out and patched
 # Don't try to revert if svn wasn't checked out yet.
 [ -d .svn ] && svn revert -R .
@@ -41,6 +53,8 @@ for DIR in $DIRECTORIES
 do
 	(cd $DIR; ./autogen.sh --prefix=$MONO_PREFIX; make)
 done
+
+echo OLD_ARCH=$(uname -m) > $0.config
 
 echo $0: Installing mono ...
 for DIR in $DIRECTORIES
