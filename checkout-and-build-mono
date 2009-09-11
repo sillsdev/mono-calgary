@@ -10,6 +10,8 @@ REVISION=141180
 PROJECTS="libgdiplus mcs mono"
 DIRECTORIES="libgdiplus mono"
 
+[ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
+
 set -e
 
 echo $0: Starting ...
@@ -37,7 +39,7 @@ done
 echo $0: Building mono ...
 for DIR in $DIRECTORIES
 do
-	(cd $DIR; ./autogen.sh; make)
+	(cd $DIR; ./autogen.sh --prefix=$MONO_PREFIX; make)
 done
 
 echo $0: Installing mono ...
