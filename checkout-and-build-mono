@@ -28,15 +28,19 @@ if [ -e $0.config ]; then
 	fi
 fi
 
-echo $0: Reverting and cleaning mono svn working copy if exists
-# Don't try to revert or clean if svn wasn't checked out yet.
-[ -d .svn ] && svn revert -R . && for dir in $PROJECTS
-do
-	svn-clean $dir
-done
+if [ -d .svn ]; then
+	echo $0: Reverting and cleaning mono svn working copy ...
+	svn revert -R .
+	for dir in $PROJECTS
+	do
+		[ -e $dir ] && svn-clean $dir
+	done
+else
+	echo $0: Creating mono svn working copy ...
+	svn co --depth empty svn://anonsvn.mono-project.com/source/trunk .
+fi
 
-echo $0: Checking out mono ...
-svn co -r$REVISION --depth empty svn://anonsvn.mono-project.com/source/trunk .
+echo $0: Bringing mono svn working copy up to date ...
 svn up -r$REVISION $PROJECTS
 cd mcs/class/Mono.Data.Tds
 svn up -r125609
