@@ -42,12 +42,6 @@ fi
 
 echo $0: Bringing mono svn working copy up to date ...
 svn up -r$REVISION $PROJECTS
-cd mcs/class/Mono.Data.Tds
-svn up -r125609
-cd -
-cd mcs/class/System.Data/System.Data.SqlClient
-svn up -r125609
-cd -
 
 echo $0: Applying our patches ...
 for PATCH in *.patch
