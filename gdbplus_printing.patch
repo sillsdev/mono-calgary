@@ -1,0 +1,13 @@
+Index: libgdiplus/src/print.c
+===================================================================
+--- libgdiplus/src/print.c	(revision 151527)
++++ libgdiplus/src/print.c	(working copy)
+@@ -51,6 +51,8 @@
+ 	gfx = gdip_graphics_new (surface);
+ 	gfx->dpi_x = dpix;
+ 	gfx->dpi_y = dpiy;
++	gfx->bounds.Width = width;
++	gfx->bounds.Height = height;
+ 	cairo_surface_destroy (surface);
+ 
+ 	gfx->type = gtPostScript;
