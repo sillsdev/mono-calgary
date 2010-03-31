@@ -61,4 +61,9 @@ do
 	(cd $DIR; sudo make install)
 done
 
+# Some versions of nant expect mono to use the pkg-config name of 'mono', but 
+# new versions of mono use name 'mono-2'. Support both until we upgrade or 
+# fix our nant.
+sudo ln -sf mono-2.pc $MONO_PREFIX/lib/pkgconfig/mono.pc
+
 echo $0: Finished successfully.
