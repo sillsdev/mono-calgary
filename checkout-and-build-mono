@@ -4,7 +4,7 @@
 #	Check out mono from svn, apply our patches, and build and install mono.
 #	Neil Mayhew - 2009-05-12
 
-REVISION=157465
+REVISION=152577
 PROJECTS="libgdiplus mcs mono"
 DIRECTORIES="libgdiplus mono"
 
