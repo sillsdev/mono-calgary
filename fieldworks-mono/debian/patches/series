@@ -13,3 +13,7 @@ mono-visualstyles-colorscheme.patch
 TabTextVertCenter.patch
 xmlNode.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
+bug-614850_Modal_614850_v6
+bug-616432_ListViewPatch2
+bug-621749-ListView-inserting
+Control-HACK-addedIngoreUpdates

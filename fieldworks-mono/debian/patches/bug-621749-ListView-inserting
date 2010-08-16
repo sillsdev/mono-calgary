@@ -1,0 +1,39 @@
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs
+@@ -5682,6 +5682,8 @@
+ 				if (is_main_collection || item.ListView != null)
+ 					CollectionChanged (true);
+ 
++				if (item.Selected && owner != null)
++					owner.OnSelectedIndexChanged (EventArgs.Empty);
+ #if NET_2_0
+ 				//UIA Framework event: Item Added
+ 				OnUIACollectionChangedEvent (new CollectionChangeEventArgs (CollectionChangeAction.Add, item));
+--- a/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs
++++ b/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs
+@@ -325,5 +325,25 @@
+ 			
+ 			form.Close ();
+ 		}
++
++		[Test]
++		public void InsertSelectedItem ()
++		{
++			Form form = new Form ();
++			form.ShowInTaskbar = false;
++
++			var lvw = new ListView ();
++			lvw.SelectedIndexChanged += ListView_SelectedIndexChanged;
++			form.Controls.Add (lvw);
++			form.Show ();
++
++			var item = new ListViewItem ();
++			item.Selected = true;
++			Assert.AreEqual (0, selectedIndexChanged, "#A1");
++			lvw.Items.Insert (0, item);
++			Assert.AreEqual (1, selectedIndexChanged, "#A2");
++
++			form.Close ();
++		}
+ 	}
+ }
