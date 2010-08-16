@@ -44,7 +44,7 @@ svn up -r$REVISION $PROJECTS
 echo $0: Applying our patches ...
 for PATCH in *.patch
 do
-	patch -p0 -i $PATCH
+	patch -t -N -p0 -i $PATCH
 done
 
 echo $0: Building mono ...
