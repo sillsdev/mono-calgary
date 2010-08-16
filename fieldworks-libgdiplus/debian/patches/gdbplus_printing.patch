@@ -1,0 +1,11 @@
+--- a/src/print.c
++++ b/src/print.c
+@@ -51,6 +51,8 @@
+ 	gfx = gdip_graphics_new (surface);
+ 	gfx->dpi_x = dpix;
+ 	gfx->dpi_y = dpiy;
++	gfx->bounds.Width = width;
++	gfx->bounds.Height = height;
+ 	cairo_surface_destroy (surface);
+ 
+ 	gfx->type = gtPostScript;

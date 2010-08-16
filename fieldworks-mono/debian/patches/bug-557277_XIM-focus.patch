@@ -1,0 +1,24 @@
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -4400,8 +4400,8 @@
+ 						}
+ 						goto ProcessNextMessage;
+ 					}
+-					SendMessage(FocusWindow, Msg.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
+ 					Keyboard.FocusIn (FocusWindow);
++					SendMessage(FocusWindow, Msg.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
+ 					goto ProcessNextMessage;
+ 				}
+ 
+@@ -5559,9 +5559,9 @@
+ 
+ 			if (prev_focus_window != IntPtr.Zero) {
+ 				SendMessage(prev_focus_window, Msg.WM_KILLFOCUS, FocusWindow, IntPtr.Zero);
+-			}
+-			SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
++			}			
+ 			Keyboard.FocusIn (FocusWindow);
++			SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
+ 
+ 			//XSetInputFocus(DisplayHandle, Hwnd.ObjectFromHandle(handle).client_window, RevertTo.None, IntPtr.Zero);
+ 		}

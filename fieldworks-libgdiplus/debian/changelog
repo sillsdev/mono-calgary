@@ -1,0 +1,5 @@
+fieldworks-libgdiplus (2.7-1) unstable; urgency=low
+
+  * Initial release (from svn r152577)
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Thu, 20 May 2010 17:23:40 -0600

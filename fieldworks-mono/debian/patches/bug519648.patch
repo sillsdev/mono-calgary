@@ -1,0 +1,17 @@
+--- mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs	2009-07-06 17:02:22.000000000 -0600
++++ mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs	2009-07-06 17:00:35.000000000 -0600
+@@ -52,7 +52,13 @@
+ 			get { return IsNull (index) ? DBNull.Value : GetValue (index); }
+ 			set {
+ 				if (value == null) {
+-					CopyValue (Column.Table.DefaultValuesRowIndex, index);
++					// Table might not have a default values row to copy from
++					if (Column.Table.DefaultValuesRowIndex == -1) {
++						ZeroOut (index);
++						null_values [index] = true;
++					} else {
++						CopyValue (Column.Table.DefaultValuesRowIndex, index);
++					}
+ 					return;
+ 				}
+ 

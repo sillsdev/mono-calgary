@@ -1,0 +1,11 @@
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+@@ -6252,7 +6252,7 @@
+ 					if (disp_x == Columns.Count - 1)
+ 						delta_x = horizontalScrollBar.Maximum - horizontalScrollBar.Value;
+ 					else
+-						for (int i = first_col_index + displayedColumnsCount - 1; i < disp_x; i++)
++						for (int i = first_col_index + displayedColumnsCount - 1; i < disp_x && i != -1; i++)
+ 							delta_x += Columns[ColumnDisplayIndexToIndex (i)].Width;
+ 
+ 					horizontalScrollBar.SafeValueSet (horizontalScrollBar.Value + delta_x);

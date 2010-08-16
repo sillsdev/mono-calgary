@@ -1,0 +1,106 @@
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
+@@ -351,6 +351,12 @@
+ 		WM_REFLECT                = WM_USER + 0x1c00,
+ 		WM_CLOSE_INTERNAL         = WM_USER + 0x1c01,
+ 
++		// private messages to support on-the-spot IME editing.
++		WM_XIM_PREEDITSTART		  = WM_USER + 0x1d00,
++		WM_XIM_PREEDITDONE		  = WM_USER + 0x1d01,
++		WM_XIM_PREEDITDRAW		  = WM_USER + 0x1d02,
++		WM_XIM_PREEDITCARET		  = WM_USER + 0x1d03,
++
+ 		// NotifyIcon (Systray) Balloon messages 
+ 		NIN_BALLOONSHOW           = WM_USER + 0x0002,
+ 		NIN_BALLOONHIDE           = WM_USER + 0x0003,
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+@@ -32,6 +32,7 @@
+ // 
+ using System;
+ using System.Collections;
++using System.Diagnostics;
+ using System.Drawing;
+ using System.Text;
+ using System.Globalization;
+@@ -1015,10 +1016,10 @@
+ 
+ 			public XIMCallbackContext (IntPtr clientWindow)
+ 			{
+-				startCB = new XIMCallback (IntPtr.Zero, DoPreeditStart);
+-				doneCB = new XIMCallback (IntPtr.Zero, DoPreeditDone);
+-				drawCB = new XIMCallback (IntPtr.Zero, DoPreeditDraw);
+-				caretCB = new XIMCallback (IntPtr.Zero, DoPreeditCaret);
++				startCB = new XIMCallback (clientWindow, DoPreeditStart);
++				doneCB = new XIMCallback (clientWindow, DoPreeditDone);
++				drawCB = new XIMCallback (clientWindow, DoPreeditDraw);
++				caretCB = new XIMCallback (clientWindow, DoPreeditCaret);
+ 				pStartCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
+ 				pDoneCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
+ 				pDrawCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
+@@ -1052,27 +1053,29 @@
+ 
+ 			int DoPreeditStart (IntPtr xic, IntPtr clientData, IntPtr callData)
+ 			{
+-				Console.WriteLine ("DoPreeditStart");
++				Debug.WriteLine ("DoPreeditStart");
++				XplatUI.SendMessage(clientData, Msg.WM_XIM_PREEDITSTART, clientData, callData);
+ 				return 100;
+ 			}
+ 
+ 			int DoPreeditDone (IntPtr xic, IntPtr clientData, IntPtr callData)
+ 			{
+-				Console.WriteLine ("DoPreeditDone");
++				Debug.WriteLine ("DoPreeditDone");
++				XplatUI.SendMessage(clientData, Msg.WM_XIM_PREEDITDONE, clientData, callData);
+ 				return 0;
+ 			}
+ 
+ 			int DoPreeditDraw (IntPtr xic, IntPtr clientData, IntPtr callData)
+ 			{
+-				Console.WriteLine ("DoPreeditDraw");
+-				//XIMPreeditDrawCallbackStruct cd = (XIMPreeditDrawCallbackStruct) Marshal.PtrToStructure (callData, typeof (XIMPreeditDrawCallbackStruct));
++				Debug.WriteLine ("DoPreeditDraw");
++				XplatUI.SendMessage(clientData, Msg.WM_XIM_PREEDITDRAW, clientData, callData);
+ 				return 0;
+ 			}
+ 
+ 			int DoPreeditCaret (IntPtr xic, IntPtr clientData, IntPtr callData)
+ 			{
+-				Console.WriteLine ("DoPreeditCaret");
+-				//XIMPreeditCaretCallbackStruct cd = (XIMPreeditCaretCallbackStruct) Marshal.PtrToStructure (callData, typeof (XIMPreeditCaretCallbackStruct));
++				Debug.WriteLine ("DoPreeditCaret");
++				XplatUI.SendMessage(clientData, Msg.WM_XIM_PREEDITCARET, clientData, callData);
+ 				return 0;
+ 			}
+ 
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs
+@@ -1717,11 +1717,26 @@
+ 			gch.Free ();
+ 		}
+ 	}
++	
++	internal enum XIMFeedback
++	{
++		Reverse = 1,
++		Underline = 2,
++		Highlight = 4,
++		Primary = 32,
++		Secondary = 64,
++		Tertiary = 128,
++	}
+ 
++	internal struct XIMFeedbackStruct
++	{
++		public byte FeedbackMask; // one or more of XIMFeedback enum
++	}
++	
+ 	internal struct XIMText
+ 	{
+ 		public ushort Length;
+-		public IntPtr Feedback;
++		public IntPtr Feedback; // to XIMFeedbackStruct
+ 		public bool EncodingIsWChar;
+ 		public IntPtr String; // it could be either char* or wchar_t*
+ 	}

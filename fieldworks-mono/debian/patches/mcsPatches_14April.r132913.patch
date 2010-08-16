@@ -1,0 +1,33 @@
+--- a/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
++++ b/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+@@ -71,6 +71,8 @@
+ 		public virtual Type GetConfigType (string typeName, bool throwOnError)
+ 		{
+ 			Type type = Type.GetType (typeName);
++			if (type == null && typeName.Split(',').Length == 1) // try System.dll if nothing else specified
++				type = Type.GetType (typeName + ",System");
+ 			if (type == null && throwOnError)
+ 				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
+ 			return type;
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+@@ -257,6 +257,8 @@
+ 
+ 		public virtual void Clear ()
+ 		{
++			dataGridView.CurrentCell = null;
++
+ 			int total = list.Count;
+ 			
+ 			DataGridView.OnRowsPreRemovedInternal (new DataGridViewRowsRemovedEventArgs (0, total));
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+@@ -101,6 +101,8 @@
+ 
+ 		public virtual void Clear ()
+ 		{
++			dataGridView.CurrentCell = null;
++
+ 			base.List.Clear ();
+ 			
+ 			// When we clear the column collection, all rows get deleted
