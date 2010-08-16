@@ -1,6 +1,6 @@
 bug480862.patch
 bug-516960_mcs_DataGridView.patch
-bug519648.patch -p1
+bug519648.patch
 bug-557268_xim-on_the_spot.patch
 bug-557277_XIM-focus.patch
 bug574696.patch
