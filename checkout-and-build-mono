@@ -27,12 +27,14 @@ if [ -e $0.config ]; then
 fi
 
 if [ -d .svn ]; then
-	echo $0: Reverting and cleaning mono svn working copy ...
-	svn revert -R .
-	for dir in $PROJECTS
-	do
-		[ -e $dir ] && svn-clean $dir
-	done
+	if [ ! "$NOREVERT" ]; then
+		echo $0: Reverting mono svn working copy ...
+		svn revert -R .
+	fi
+	if [ ! "$NOCLEAN" ]; then
+		echo $0: Cleaning mono svn working copy ...
+		svn-clean $PROJECTS
+	fi
 else
 	echo $0: Creating mono svn working copy ...
 	svn co --depth empty svn://anonsvn.mono-project.com/source/trunk .
