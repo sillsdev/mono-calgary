@@ -1,3 +1,14 @@
+fieldworks-mono (2.7-3) unstable; urgency=low
+
+  * Add four new patches:
+
+    bug-614850_Modal_614850_v6
+    bug-616432_ListViewPatch2
+    bug-621749-ListView-inserting
+    Control-HACK-addedIngoreUpdates
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 16 Aug 2010 17:29:15 -0600
+
 fieldworks-mono (2.7-2) unstable; urgency=low
 
   * Depend on libglib2.0-cil, libgtk2.0-cil
