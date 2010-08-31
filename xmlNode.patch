@@ -1,5 +1,5 @@
---- a/mcs/class/System.XML/System.Xml/XmlNode.cs
-+++ b/mcs/class/System.XML/System.Xml/XmlNode.cs
+--- mcs/class/System.XML/System.Xml/XmlNode.cs
++++ mcs/class/System.XML/System.Xml/XmlNode.cs
 @@ -864,7 +864,7 @@
  			XPathNodeIterator iter = nav.Select (expr);
  			if (!iter.MoveNext ())
