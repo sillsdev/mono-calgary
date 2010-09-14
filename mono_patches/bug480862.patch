@@ -1,7 +1,7 @@
-Index: mcs/mcs/doc.cs
+Index: mono/mcs/mcs/doc.cs
 ===================================================================
---- mcs/mcs/doc.cs	(revision 132724)
-+++ mcs/mcs/doc.cs	(working copy)
+--- mono/mcs/mcs/doc.cs	(revision 132724)
++++ mono/mcs/mcs/doc.cs	(working copy)
 @@ -621,6 +621,11 @@
  				name = signature.Substring (0, brace_pos).Trim (wsChars);
  				parameters = signature.Substring (brace_pos + 1, signature.Length - brace_pos - 2).Trim (wsChars);

@@ -1,11 +1,11 @@
 #!/bin/sh
 
 #	checkout-and-build-mono
-#	Check out mono from svn, apply our patches, and build and install mono.
+#	Check out mono from git, apply our patches, and build and install mono.
 #	Neil Mayhew - 2009-05-12
 
-REVISION=160737
-PROJECTS="libgdiplus mcs mono"
+GDIPLUS_REVISION=69db5de
+MONO_REVISION=37e6ae5
 DIRECTORIES="libgdiplus mono"
 
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
@@ -26,27 +26,39 @@ if [ -e $0.config ]; then
 	fi
 fi
 
-if [ -d .svn ]; then
-	if [ ! "$NOREVERT" ]; then
-		echo $0: Reverting mono svn working copy ...
-		svn revert -R .
+for DIR in $DIRECTORIES
+do
+	if [ -d $DIR ]; then
+		cd $DIR
+		if [ ! "$NOREVERT" ]; then
+			echo $0: Reverting $DIR git working copy ...
+			git reset --hard HEAD
+		fi
+		if [ ! "$NOCLEAN" ]; then
+			echo $0: Cleaning $DIR git working copy ...
+			git clean -d -f -x
+		fi
+		git pull origin master
+		cd ..
+	else
+		echo $0: Cloning $DIR ...
+		git clone git://github.com/mono/$DIR.git
 	fi
-	if [ ! "$NOCLEAN" ]; then
-		echo $0: Cleaning mono svn working copy ...
-		svn-clean $PROJECTS
-	fi
-else
-	echo $0: Creating mono svn working copy ...
-	svn co --depth empty svn://anonsvn.mono-project.com/source/trunk .
-fi
+done
 
-echo $0: Bringing mono svn working copy up to date ...
-svn up -r$REVISION $PROJECTS
+echo $0: Setting libgdiplus to requested version $GDIPLUS_REVISION
+(cd libgdiplus; git checkout $GDIPLUS_REVISION)
+echo $0: Setting mono to requested version $MONO_REVISION
+(cd mono; git checkout $MONO_REVISION)
 
 echo $0: Applying our patches ...
-for PATCH in *.patch
+for DIR in $DIRECTORIES
 do
-	patch -t -N -p0 -i $PATCH
+	for PATCH in ${DIR}_patches/*.patch
+	do
+		echo $0: Applying patch $PATCH
+		patch -t -N -p0 -i $PATCH
+	done
 done
 
 echo $0: Building mono ...

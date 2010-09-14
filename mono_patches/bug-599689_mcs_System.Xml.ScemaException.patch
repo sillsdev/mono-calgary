@@ -1,7 +1,7 @@
-Index: mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+Index: mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
 ===================================================================
---- mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs	(revision 152577)
-+++ mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs	(working copy)
+--- mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs	(revision 152577)
++++ mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs	(working copy)
 @@ -157,7 +157,7 @@
  
  		private static string GetMessage (string message, string sourceUri, int lineNumber, int linePosition, XmlSchemaObject sourceObj)

@@ -1,16 +1,16 @@
---- mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(revision 160267)
-+++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(revision 160267)
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(working copy)
 @@ -5698,6 +5698,8 @@
  				if (is_main_collection || item.ListView != null)
  					CollectionChanged (true);
  
-+				if (item.Selected && owner != null)
++				if (value.Selected && owner != null)
 +					owner.OnSelectedIndexChanged (EventArgs.Empty);
  #if NET_2_0
  				//UIA Framework event: Item Added
  				OnUIACollectionChangedEvent (new CollectionChangeEventArgs (CollectionChangeAction.Add, item));
---- mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(revision 160267)
-+++ mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(revision 160267)
++++ mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(working copy)
 @@ -325,5 +325,25 @@
  			
  			form.Close ();

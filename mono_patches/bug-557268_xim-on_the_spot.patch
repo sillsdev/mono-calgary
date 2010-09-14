@@ -1,7 +1,7 @@
-Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
 ===================================================================
---- mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(revision 144586)
-+++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(revision 144586)
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(working copy)
 @@ -351,6 +351,12 @@
  		WM_REFLECT                = WM_USER + 0x1c00,
  		WM_CLOSE_INTERNAL         = WM_USER + 0x1c01,
@@ -15,10 +15,10 @@ Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
  		// NotifyIcon (Systray) Balloon messages 
  		NIN_BALLOONSHOW           = WM_USER + 0x0002,
  		NIN_BALLOONHIDE           = WM_USER + 0x0003,
-Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
 ===================================================================
---- mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(revision 144586)
-+++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(revision 144586)
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(working copy)
 @@ -32,6 +32,7 @@
  // 
  using System;
@@ -78,10 +78,10 @@ Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
  				return 0;
  			}
  
-Index: mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs
 ===================================================================
---- mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(revision 144586)
-+++ mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(revision 144586)
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(working copy)
 @@ -1702,11 +1702,26 @@
  			gch.Free ();
  		}

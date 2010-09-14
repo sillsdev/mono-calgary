@@ -1,7 +1,7 @@
-Index: mcs/class/corlib/System.Resources/ResourceManager.cs
+Index: mono/mcs/class/corlib/System.Resources/ResourceManager.cs
 ===================================================================
---- mcs/class/corlib/System.Resources/ResourceManager.cs	(revision 138238)
-+++ mcs/class/corlib/System.Resources/ResourceManager.cs	(working copy)
+--- mono/mcs/class/corlib/System.Resources/ResourceManager.cs	(revision 138238)
++++ mono/mcs/class/corlib/System.Resources/ResourceManager.cs	(working copy)
 @@ -337,10 +337,14 @@
  
  			ResourceSet set;
