@@ -4,8 +4,10 @@
 #	Check out mono from git, apply our patches, and build and install mono.
 #	Neil Mayhew - 2009-05-12
 
-GDIPLUS_REVISION=69db5de
-MONO_REVISION=37e6ae5
+libgdiplus_BRANCH=mono-2-8
+libgdiplus_REVISION=d50e3e6ae
+mono_BRANCH=mono-2-8
+mono_REVISION=052fd53f21
 DIRECTORIES="libgdiplus mono"
 
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
@@ -28,28 +30,26 @@ fi
 
 for DIR in $DIRECTORIES
 do
+	BRANCH=$(eval echo '$'${DIR}_BRANCH)
+	REVISION=$(eval echo '$'${DIR}_REVISION)
 	if [ -d $DIR ]; then
-		cd $DIR
-		if [ ! "$NOREVERT" ]; then
-			echo $0: Reverting $DIR git working copy ...
-			git reset --hard HEAD
-		fi
-		if [ ! "$NOCLEAN" ]; then
-			echo $0: Cleaning $DIR git working copy ...
-			git clean -d -f -x
-		fi
-		git pull origin master
-		cd ..
+		echo $0: Setting branch $BRANCH ...
+		(cd $DIR; git checkout $BRANCH)
 	else
 		echo $0: Cloning $DIR ...
-		git clone git://github.com/mono/$DIR.git
+		git clone -b $BRANCH git://github.com/mono/$DIR.git
 	fi
+	cd $DIR
+	if [ ! "$NOREVERT" ]; then
+		echo $0: Reverting $DIR git working copy ...
+		git reset --hard $REVISION
+	fi
+	if [ ! "$NOCLEAN" ]; then
+		echo $0: Cleaning $DIR git working copy ...
+		git clean -d -f -x
+	fi
+	cd -
 done
-
-echo $0: Setting libgdiplus to requested version $GDIPLUS_REVISION
-(cd libgdiplus; git checkout $GDIPLUS_REVISION)
-echo $0: Setting mono to requested version $MONO_REVISION
-(cd mono; git checkout $MONO_REVISION)
 
 echo $0: Applying our patches ...
 for DIR in $DIRECTORIES
