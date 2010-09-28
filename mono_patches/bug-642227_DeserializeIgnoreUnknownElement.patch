@@ -1,7 +1,7 @@
-diff --git a/mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs b/mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
+diff --git mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
 index 2327331..1b1737e 100644
---- a/mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
-+++ b/mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
+--- mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
++++ mono/mcs/class/System.Runtime.Serialization/System.Runtime.Serialization/SerializationMap.cs
 @@ -420,6 +420,7 @@ namespace System.Runtime.Serialization
  
  				if (dmi == null) {
@@ -10,10 +10,10 @@ index 2327331..1b1737e 100644
  					continue;
  				}
  				SetValue (dmi, instance, deserializer.Deserialize (dmi.MemberType, reader));
-diff --git a/mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs b/mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
+diff --git mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
 index 97b30da..3d94b93 100755
---- a/mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
-+++ b/mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
+--- mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
++++ mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
 @@ -1478,6 +1478,19 @@ namespace MonoTests.System.Runtime.Serialization
  			
  			var ds = (DataSet) x.ReadObject (r);
