@@ -18,7 +18,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
  		[DllImport ("libX11")]
  		private static extern bool XSetLocaleModifiers (string mods);
  
-+		[DllImport ("libX11", CharSet = CharSet.Ansi)]
++		[DllImport ("libX11")]
 +		internal extern static int XLookupString(ref XEvent xevent, IntPtr buffer, int num_bytes, out IntPtr keysym, IntPtr status);
  		[DllImport ("libX11")]
 -		internal extern static int XLookupString(ref XEvent xevent, StringBuilder buffer, int num_bytes, out IntPtr keysym, IntPtr status);
