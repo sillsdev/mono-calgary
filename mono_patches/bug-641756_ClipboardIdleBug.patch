@@ -1,0 +1,42 @@
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+===================================================================
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(revision 152577)
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(working copy)
+@@ -1604,6 +1604,10 @@
+ 		}
+ 
+ 		private void UpdateMessageQueue (XEventQueue queue) {
++			UpdateMessageQueue(queue, true);
++		}
++
++		private void UpdateMessageQueue (XEventQueue queue, bool allowIdle) {
+ 			DateTime	now;
+ 			int		pending;
+ 			Hwnd		hwnd;
+@@ -1614,7 +1618,7 @@
+ 				pending = XPending (DisplayHandle);
+ 			}
+ 
+-			if (pending == 0) {
++			if (pending == 0 && allowIdle) {
+ 				if ((queue == null || queue.DispatchIdle) && Idle != null) {
+ 					Idle (this, EventArgs.Empty);
+ 				}
+@@ -2635,7 +2639,7 @@
+ 
+ 				Clipboard.Enumerating = true;
+ 				while (Clipboard.Enumerating) {
+-					UpdateMessageQueue(null);
++					UpdateMessageQueue(null, false);
+ 				}
+ 				f = f.Next;
+ 			}
+@@ -2696,7 +2700,7 @@
+ 
+ 			Clipboard.Retrieving = true;
+ 			while (Clipboard.Retrieving) {
+-				UpdateMessageQueue(null);
++				UpdateMessageQueue(null, false);
+ 			}
+ 
+ 			return Clipboard.Item;
