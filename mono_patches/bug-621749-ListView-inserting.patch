@@ -1,3 +1,5 @@
+FWNX-313 Flex configure column arrows inapproriately disabling
+
 --- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(revision 160267)
 +++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(working copy)
 @@ -5698,6 +5698,8 @@

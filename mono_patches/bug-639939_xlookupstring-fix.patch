@@ -1,3 +1,5 @@
+FWNX-439 problems with the backspace key being flaky
+
 diff --git mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
 index 3a17e74..ae61c78 100644
 --- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs

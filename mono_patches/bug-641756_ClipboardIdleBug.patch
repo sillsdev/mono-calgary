@@ -1,3 +1,5 @@
+FWNX-448 pasting into TE infrequently causes NullReferenceException
+
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 ===================================================================
 --- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(revision 152577)

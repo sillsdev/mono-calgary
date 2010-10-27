@@ -1,3 +1,5 @@
+FWNX-398 Fixing modal dialogs so parents and children behave correctly
+
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 ===================================================================
 --- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs	(revision 152577)
