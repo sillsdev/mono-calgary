@@ -1,6 +1,6 @@
 .svn/
 *~
-libgdiplus/
-mcs/
-mono/
-checkout-and-build-mono.config
+/libgdiplus/
+/mcs/
+/mono/
+/checkout-and-build-mono.config
