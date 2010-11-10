@@ -1,10 +1,10 @@
 FWNX-439 problems with the backspace key being flaky
 
-diff --git mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-index 3a17e74..ae61c78 100644
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-@@ -51,7 +51,7 @@ namespace System.Windows.Forms {
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+===================================================================
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs.orig	2010-11-09 22:08:53.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	2010-11-09 22:08:54.000000000 -0700
+@@ -52,7 +52,7 @@
  		private XIMProperties ximStyle;
  		private EventMask xic_event_mask = EventMask.NoEventMask;
  		private StringBuilder lookup_buffer;
@@ -13,7 +13,7 @@ index 3a17e74..ae61c78 100644
  		private int min_keycode, max_keycode, keysyms_per_keycode, syms;
  		private int [] keyc2vkey = new int [256];
  		private int [] keyc2scan = new int [256];
-@@ -130,8 +130,6 @@ namespace System.Windows.Forms {
+@@ -131,8 +131,6 @@
  			xim = XOpenIM (display, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
  			if (xim == IntPtr.Zero) 
  				Console.Error.WriteLine ("Could not get XIM");
@@ -22,7 +22,7 @@ index 3a17e74..ae61c78 100644
  
  			initialized = true;
  		}
-@@ -1181,19 +1179,26 @@ namespace System.Windows.Forms {
+@@ -1184,19 +1182,26 @@
  			IntPtr xic = GetXic (client_window);
  			if (xic != IntPtr.Zero) {
  				do {
@@ -53,7 +53,7 @@ index 3a17e74..ae61c78 100644
  				keysym = (XKeySym) keysym_res.ToInt32 ();
  				return res;
  			}
-@@ -1259,7 +1264,7 @@ namespace System.Windows.Forms {
+@@ -1262,7 +1267,7 @@
  		private static extern bool XSetLocaleModifiers (string mods);
  
  		[DllImport ("libX11")]

@@ -2,9 +2,9 @@ FWNX-448 pasting into TE infrequently causes NullReferenceException
 
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(revision 152577)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(working copy)
-@@ -1604,6 +1604,10 @@
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs.orig	2010-11-09 22:08:53.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2010-11-09 22:08:54.000000000 -0700
+@@ -1648,6 +1648,10 @@
  		}
  
  		private void UpdateMessageQueue (XEventQueue queue) {
@@ -15,7 +15,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
  			DateTime	now;
  			int		pending;
  			Hwnd		hwnd;
-@@ -1614,7 +1618,7 @@
+@@ -1658,7 +1662,7 @@
  				pending = XPending (DisplayHandle);
  			}
  
@@ -24,7 +24,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
  				if ((queue == null || queue.DispatchIdle) && Idle != null) {
  					Idle (this, EventArgs.Empty);
  				}
-@@ -2635,7 +2639,7 @@
+@@ -2679,7 +2683,7 @@
  
  				Clipboard.Enumerating = true;
  				while (Clipboard.Enumerating) {
@@ -33,7 +33,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
  				}
  				f = f.Next;
  			}
-@@ -2696,7 +2700,7 @@
+@@ -2740,7 +2744,7 @@
  
  			Clipboard.Retrieving = true;
  			while (Clipboard.Retrieving) {

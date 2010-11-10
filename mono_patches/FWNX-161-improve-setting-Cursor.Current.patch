@@ -1,8 +1,8 @@
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(revision 152005)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(working copy)
-@@ -4905,6 +4905,23 @@
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs.orig	2010-11-09 22:08:54.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2010-11-09 22:08:55.000000000 -0700
+@@ -4953,6 +4953,23 @@
  			}
  
  			OverrideCursorHandle = cursor;

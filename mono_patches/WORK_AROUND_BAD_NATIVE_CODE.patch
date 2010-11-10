@@ -1,7 +1,7 @@
 Index: mono/mono/metadata/cominterop.c
 ===================================================================
---- mono/mono/metadata/cominterop.c	(revision 147501)
-+++ mono/mono/metadata/cominterop.c	(working copy)
+--- mono/mono/metadata/cominterop.c.orig	2010-11-09 22:07:49.000000000 -0700
++++ mono/mono/metadata/cominterop.c	2010-11-09 22:08:55.000000000 -0700
 @@ -34,6 +34,7 @@
  #include "mono/utils/mono-counters.h"
  #include <string.h>
@@ -10,7 +10,7 @@ Index: mono/mono/metadata/cominterop.c
  
  #ifndef DISABLE_COM
  
-@@ -1644,6 +1645,11 @@
+@@ -1664,6 +1665,11 @@
  	return TRUE;
  }
  
@@ -22,7 +22,7 @@ Index: mono/mono/metadata/cominterop.c
  void
  cominterop_release_all_rcws (void)
  {
-@@ -1651,11 +1657,18 @@
+@@ -1671,11 +1677,18 @@
  		return;
  
  	mono_cominterop_lock ();

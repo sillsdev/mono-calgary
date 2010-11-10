@@ -1,7 +1,7 @@
 Index: libgdiplus/src/print.c
 ===================================================================
---- libgdiplus/src/print.c	(revision 151527)
-+++ libgdiplus/src/print.c	(working copy)
+--- libgdiplus/src/print.c.orig	2010-11-09 22:08:15.000000000 -0700
++++ libgdiplus/src/print.c	2010-11-09 22:08:52.000000000 -0700
 @@ -51,6 +51,8 @@
  	gfx = gdip_graphics_new (surface);
  	gfx->dpi_x = dpix;

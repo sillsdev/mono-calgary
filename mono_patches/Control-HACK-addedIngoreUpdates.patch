@@ -2,9 +2,9 @@ Could not identify an FWNX for this
 
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs	(revision 152577)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs	(working copy)
-@@ -5142,6 +5137,18 @@
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs.orig	2010-11-09 22:08:14.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs	2010-11-09 22:08:54.000000000 -0700
+@@ -5142,6 +5142,18 @@
  			UpdateBounds(x, y, width, height, width - (rect.Right - rect.Left), height - (rect.Bottom - rect.Top));
  		}
  
@@ -23,27 +23,21 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
  		[EditorBrowsable(EditorBrowsableState.Advanced)]
  		protected void UpdateBounds(int x, int y, int width, int height, int clientWidth, int clientHeight) {
  			// UpdateBounds only seems to set our sizes and fire events but not update the GUI window to match
-@@ -5169,20 +5176,24 @@
+@@ -5169,19 +5181,23 @@
  			client_size.Width=clientWidth;
  			client_size.Height=clientHeight;
  
 -			if (moved) {
 -				OnLocationChanged(EventArgs.Empty);
+-
+-				if (!background_color.IsEmpty && background_color.A < byte.MaxValue)
+-					Invalidate ();
 +			if (!m_ignoreUpdates)
 +			{
 +				if (moved) {
- 
--				if (!background_color.IsEmpty && background_color.A < byte.MaxValue)
--					Invalidate ();
--			}
++
 +					OnLocationChanged(EventArgs.Empty);
- 
--			if (resized) {
--				OnSizeInitializedOrChanged ();
--				OnSizeChanged(EventArgs.Empty);
--#if NET_2_0
--				OnClientSizeChanged (EventArgs.Empty);
--#endif
++
 +					if (!background_color.IsEmpty && background_color.A < byte.MaxValue)
 +						Invalidate ();
 +				}
@@ -55,7 +49,13 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
 +					OnClientSizeChanged (EventArgs.Empty);
 +	#endif
  			}
-+			}
+-
+-			if (resized) {
+-				OnSizeInitializedOrChanged ();
+-				OnSizeChanged(EventArgs.Empty);
+-#if NET_2_0
+-				OnClientSizeChanged (EventArgs.Empty);
+-#endif
+ 			}
  		}
  
- 		[EditorBrowsable(EditorBrowsableState.Advanced)]

@@ -2,8 +2,8 @@ Could not identify an FWNX issue for this
 
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(revision 144586)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs	2010-11-09 22:08:53.000000000 -0700
 @@ -351,6 +351,12 @@
  		WM_REFLECT                = WM_USER + 0x1c00,
  		WM_CLOSE_INTERNAL         = WM_USER + 0x1c01,
@@ -19,8 +19,8 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.
  		NIN_BALLOONHIDE           = WM_USER + 0x0003,
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(revision 144586)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs	2010-11-09 22:08:53.000000000 -0700
 @@ -32,6 +32,7 @@
  // 
  using System;
@@ -29,7 +29,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
  using System.Drawing;
  using System.Text;
  using System.Globalization;
-@@ -1015,10 +1016,10 @@
+@@ -1027,10 +1028,10 @@
  
  			public XIMCallbackContext (IntPtr clientWindow)
  			{
@@ -44,7 +44,7 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
  				pStartCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
  				pDoneCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
  				pDrawCB = Marshal.AllocHGlobal (Marshal.SizeOf (typeof (XIMCallback)));
-@@ -1052,27 +1053,29 @@
+@@ -1064,27 +1065,29 @@
  
  			int DoPreeditStart (IntPtr xic, IntPtr clientData, IntPtr callData)
  			{
@@ -82,9 +82,9 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
  
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(revision 144586)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	(working copy)
-@@ -1702,11 +1702,26 @@
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Structs.cs	2010-11-09 22:08:53.000000000 -0700
+@@ -1717,11 +1717,26 @@
  			gch.Free ();
  		}
  	}

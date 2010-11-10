@@ -2,27 +2,27 @@ Could not identify an FWNX for this
 
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(revision 144586)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	(working copy)
-@@ -4395,8 +4395,8 @@
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2010-11-09 22:08:53.000000000 -0700
+@@ -4444,8 +4444,8 @@
  						}
  						goto ProcessNextMessage;
  					}
-+					Keyboard.FocusIn (FocusWindow);
- 					SendMessage(FocusWindow, Msg.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
--					Keyboard.FocusIn (FocusWindow);
+-					SendMessage(FocusWindow, Msg.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
+ 					Keyboard.FocusIn (FocusWindow);
++					SendMessage(FocusWindow, Msg.WM_SETFOCUS, IntPtr.Zero, IntPtr.Zero);
  					goto ProcessNextMessage;
  				}
  
-@@ -5538,9 +5538,9 @@
+@@ -5607,9 +5607,9 @@
  
  			if (prev_focus_window != IntPtr.Zero) {
  				SendMessage(prev_focus_window, Msg.WM_KILLFOCUS, FocusWindow, IntPtr.Zero);
 -			}
+-			SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
 +			}			
-+			Keyboard.FocusIn (FocusWindow);
- 			SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
--			Keyboard.FocusIn (FocusWindow);
+ 			Keyboard.FocusIn (FocusWindow);
++			SendMessage(FocusWindow, Msg.WM_SETFOCUS, prev_focus_window, IntPtr.Zero);
  
  			//XSetInputFocus(DisplayHandle, Hwnd.ObjectFromHandle(handle).client_window, RevertTo.None, IntPtr.Zero);
  		}

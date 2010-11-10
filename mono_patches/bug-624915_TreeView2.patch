@@ -2,8 +2,8 @@ FWNX-426 switching Flex views can cause infrequent ArgumentOutOfRangeException
 
 Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/TreeView.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/TreeView.cs	(revision 152577)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/TreeView.cs	(working copy)
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/TreeView.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/TreeView.cs	2010-11-09 22:08:54.000000000 -0700
 @@ -764,6 +764,11 @@
  			Invalidate ();
  		}

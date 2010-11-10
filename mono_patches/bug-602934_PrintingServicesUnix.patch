@@ -1,10 +1,10 @@
 FWNX-335 Flex printing
 
-diff --git mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-index 1dd23b6..1df8264 100644
---- mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-+++ mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-@@ -245,8 +245,12 @@ namespace System.Drawing.Printing
+Index: mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
+===================================================================
+--- mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs	2010-11-09 22:08:53.000000000 -0700
+@@ -245,8 +245,12 @@
  				options = new NameValueCollection();
  				paper_names = new NameValueCollection();
  				paper_sources = new NameValueCollection();
@@ -19,7 +19,7 @@ index 1dd23b6..1df8264 100644
  				if (settings.paper_sizes == null)
  					settings.paper_sizes = new PrinterSettings.PaperSizeCollection (new PaperSize [] {});
  				else
-@@ -256,18 +260,16 @@ namespace System.Drawing.Printing
+@@ -256,18 +260,16 @@
  					settings.paper_sources = new PrinterSettings.PaperSourceCollection (new PaperSource [] {});
  				else
  					settings.paper_sources.Clear();
@@ -42,7 +42,7 @@ index 1dd23b6..1df8264 100644
  				ClosePrinter (ref ppd_handle);
  			
  				((SysPrn.Printer)installed_printers[printer]).Settings = settings;
-@@ -278,18 +280,21 @@ namespace System.Drawing.Printing
+@@ -278,18 +280,21 @@
  		}
  		
  		/// <summary>
@@ -67,7 +67,7 @@ index 1dd23b6..1df8264 100644
  		{
  			CUPS_OPTIONS cups_options;
  			string option_name, option_value;
-@@ -310,8 +315,8 @@ namespace System.Drawing.Printing
+@@ -310,8 +315,8 @@
  				options = (IntPtr) ((long)options + cups_size);
  			}
  			
@@ -78,7 +78,7 @@ index 1dd23b6..1df8264 100644
  		}
  		
  		/// <summary>
-@@ -344,16 +349,19 @@ namespace System.Drawing.Printing
+@@ -344,16 +349,19 @@
  
  		/// <summary>
  		/// Loads a printer's options (selection of paper sizes, paper sources, etc)
@@ -99,7 +99,7 @@ index 1dd23b6..1df8264 100644
  			
  			ptr = ppdFindOption (ppd, option_name);
  			if (ptr != IntPtr.Zero)
-@@ -362,7 +370,7 @@ namespace System.Drawing.Printing
+@@ -362,7 +370,7 @@
  				#if PrintDebug
  				Console.WriteLine (" OPTION  key:{0} def:{1} text: {2}", ppd_option.keyword, ppd_option.defchoice, ppd_option.text);
  				#endif
@@ -108,7 +108,7 @@ index 1dd23b6..1df8264 100644
  				ptr = ppd_option.choices;
  				for (int c = 0; c < ppd_option.num_choices; c++) {
  					choice = (PPD_CHOICE) Marshal.PtrToStructure (ptr, typeof (PPD_CHOICE));
-@@ -383,8 +391,51 @@ namespace System.Drawing.Printing
+@@ -383,8 +391,51 @@
  		/// <param name="settings">PrinterSettings object to fill</param>
  		internal override void LoadPrinterResolutions (string printer, PrinterSettings settings)
  		{
@@ -162,7 +162,7 @@ index 1dd23b6..1df8264 100644
  		}
  
  		/// <summary>
-@@ -438,6 +489,12 @@ namespace System.Drawing.Printing
+@@ -438,6 +489,12 @@
  			foreach(string source in paper_sources) {
  				switch (source)
  				{
@@ -175,7 +175,7 @@ index 1dd23b6..1df8264 100644
  					case "Tray":
  						kind = PaperSourceKind.AutomaticFeed;
  						break;
-@@ -462,6 +519,37 @@ namespace System.Drawing.Printing
+@@ -462,6 +519,37 @@
  		}
  
  		/// <summary>

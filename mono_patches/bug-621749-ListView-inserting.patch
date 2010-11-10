@@ -1,20 +1,24 @@
 FWNX-313 Flex configure column arrows inapproriately disabling
 
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(revision 160267)
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	(working copy)
-@@ -5698,6 +5698,8 @@
- 				if (is_main_collection || item.ListView != null)
+Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs
+===================================================================
+--- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListView.cs	2010-11-09 22:08:53.000000000 -0700
+@@ -5386,6 +5386,8 @@
+ 				if (is_main_collection || value.ListView != null)
  					CollectionChanged (true);
  
 +				if (value.Selected && owner != null)
 +					owner.OnSelectedIndexChanged (EventArgs.Empty);
  #if NET_2_0
  				//UIA Framework event: Item Added
- 				OnUIACollectionChangedEvent (new CollectionChangeEventArgs (CollectionChangeAction.Add, item));
---- mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(revision 160267)
-+++ mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	(working copy)
-@@ -325,5 +325,25 @@
- 			
+ 				OnUIACollectionChangedEvent (new CollectionChangeEventArgs (CollectionChangeAction.Add, value));
+Index: mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs
+===================================================================
+--- mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs.orig	2010-11-09 22:08:15.000000000 -0700
++++ mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListViewEventTest.cs	2010-11-09 22:08:53.000000000 -0700
+@@ -371,5 +371,25 @@
+ 
  			form.Close ();
  		}
 +
