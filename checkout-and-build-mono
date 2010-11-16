@@ -60,14 +60,14 @@ do
 	)
 done
 
-echo $0: Applying our patches ...
 for DIR in $DIRECTORIES
 do
-	for PATCH in ${DIR}_patches/*.patch
-	do
-		echo $0: Applying patch $PATCH
-		patch -t -N -p0 -i $PATCH
-	done
+	(
+		echo $0: Applying patches in $DIR ...
+		cd $DIR
+		ln -sf ../${DIR}_patches patches
+		quilt push -a
+	)
 done
 
 echo $0: Building mono ...
