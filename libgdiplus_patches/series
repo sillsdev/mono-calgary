@@ -1,1 +1,2 @@
 gdbplus_printing.patch
+bug-606204_gdiplus-AddPathString.patch

@@ -1,0 +1,70 @@
+FWNX-110 fixing editorial check background image
+
+Index: libgdiplus/src/graphics-path.c
+===================================================================
+--- libgdiplus.orig/src/graphics-path.c	2010-11-18 11:44:06.000000000 -0700
++++ libgdiplus/src/graphics-path.c	2010-11-18 13:52:53.000000000 -0700
+@@ -1203,10 +1203,10 @@
+ 		return status;
+ 	}
+ 
++#ifdef USE_PANGO_RENDERING
+ 	if (layoutRect)
+ 		cairo_move_to (cr, layoutRect->X, layoutRect->Y + font->sizeInPixels);
+ 
+-#ifdef USE_PANGO_RENDERING
+ 	{
+ 	GpRectF box;
+ 	PangoLayout* layout; 
+@@ -1222,6 +1222,39 @@
+ 	cairo_set_font_size (cr, font->sizeInPixels);
+ 	/* TODO - deal with layoutRect, format... ideally we would be calling a subset
+ 	   of GdipDrawString that already does everything *and* preserve the whole path */
++
++	cairo_text_extents(cr, utf8, &extents);
++	double deltaX = 0.0;
++	double deltaY = 0.0;
++
++	/* horizontal alignment */
++	switch (format->alignment) {
++		case StringAlignmentNear:
++			break; // do nothing
++		case StringAlignmentCenter:
++			deltaX = (layoutRect->Width - extents.x_advance) / 2.0;
++			break;
++		case StringAlignmentFar:
++			deltaX = layoutRect->Width - extents.x_advance;
++			break;
++	}
++
++	/* vertical alignment */
++	switch (format->lineAlignment) {
++		case StringAlignmentNear:
++			deltaY = font->sizeInPixels;
++			break; // do nothing
++		case StringAlignmentCenter:
++			deltaY = (layoutRect->Height + font->sizeInPixels - extents.y_advance) / 2.0;
++			break;
++		case StringAlignmentFar:
++			deltaY = layoutRect->Height;
++			break;
++	}
++
++	if (layoutRect)
++		cairo_move_to (cr, layoutRect->X + deltaX, layoutRect->Y + deltaY);
++
+ 	cairo_text_path (cr, (const char*)utf8);
+ #endif
+ 
+Index: libgdiplus/src/ChangeLog
+===================================================================
+--- libgdiplus.orig/src/ChangeLog	2010-11-18 11:44:06.000000000 -0700
++++ libgdiplus/src/ChangeLog	2010-11-18 13:52:53.000000000 -0700
+@@ -1,3 +1,7 @@
++2010-07-21 Tom Hindle  <tom_hindle@sil.org>
++	* graphics-path.c : use StringFormat parameter of 
++		GdipAddPathString method. Fixes part of #606204
++
+ 2010-07-20  Sebastien Pouliot  <sebastien@ximian.com>
+ 
+ 	* image.c: Use DPI from source image when creating a Graphics
