@@ -12,7 +12,7 @@ fieldworks-mono (2.7-3) unstable; urgency=low
 fieldworks-mono (2.7-2) unstable; urgency=low
 
   * Depend on libglib2.0-cil, libgtk2.0-cil
-  * Install *-sharp dlls to gac in postinst 
+  * Install *-sharp dlls to gac in postinst
 
  -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 28 May 2010 23:48:29 -0600
 

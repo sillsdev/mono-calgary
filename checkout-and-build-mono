@@ -84,8 +84,8 @@ do
 	(cd $DIR; sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR)
 done
 
-# Some versions of nant expect mono to use the pkg-config name of 'mono', but 
-# new versions of mono use name 'mono-2'. Support both until we upgrade or 
+# Some versions of nant expect mono to use the pkg-config name of 'mono', but
+# new versions of mono use name 'mono-2'. Support both until we upgrade or
 # fix our nant.
 sudo ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
 

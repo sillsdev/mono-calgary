@@ -175,7 +175,7 @@ license.
 
  "Licensed patents" are a contributor's patent claims that read directly on its
  contribution.
- 
+
 2. Grant of Rights
 
 (A) Copyright Grant- Subject to the terms of this license, including the license
@@ -190,7 +190,7 @@ non-exclusive, worldwide, royalty-free license under its licensed patents to
 make, have made, use, sell, offer for sale, import, and/or otherwise dispose of
 its contribution in the software or derivative works of the contribution in the
 software.
- 
+
 3. Conditions and Limitations
 
 (A) No Trademark License- This license does not grant you rights to use any
@@ -345,7 +345,7 @@ can be found in the /usr/share/common-licenses/Apache-2.0 file.
 The MPL v1.1:
 
    The contents of this file are subject to the Mozilla Public License
-   Version 1.1 (the "License"); you may not use this file except in   
+   Version 1.1 (the "License"); you may not use this file except in
    compliance with the License. You may obtain a copy of the License at
    http://www.rabbitmq.com/mpl.html
 
@@ -360,8 +360,8 @@ The MPL v1.1:
    Cohesive Financial Technologies LLC., and Rabbit Technologies Ltd.
 
    Portions created by LShift Ltd., Cohesive Financial Technologies
-   LLC., and Rabbit Technologies Ltd. are Copyright (C) 2007, 2008 
-   LShift Ltd., Cohesive Financial Technologies LLC., and Rabbit   
+   LLC., and Rabbit Technologies Ltd. are Copyright (C) 2007, 2008
+   LShift Ltd., Cohesive Financial Technologies LLC., and Rabbit
    Technologies Ltd.;
 
    All Rights Reserved.
@@ -821,9 +821,9 @@ EXHIBIT A - Mozilla Public License.
      Cohesive Financial Technologies LLC., and Rabbit Technologies Ltd.
 
      Portions created by LShift Ltd., Cohesive Financial
-     Technologies LLC., and Rabbit Technologies Ltd. are Copyright (C) 
-     2007 LShift Ltd., Cohesive Financial Technologies LLC., and Rabbit 
-     Technologies Ltd.; 
+     Technologies LLC., and Rabbit Technologies Ltd. are Copyright (C)
+     2007 LShift Ltd., Cohesive Financial Technologies LLC., and Rabbit
+     Technologies Ltd.;
 
      All Rights Reserved.
 
@@ -857,7 +857,7 @@ license.
 
  "Licensed patents" are a contributor's patent claims that read directly on its
  contribution.
- 
+
 2. Grant of Rights
 
 (A) Copyright Grant- Subject to the terms of this license, including the license
@@ -872,7 +872,7 @@ non-exclusive, worldwide, royalty-free license under its licensed patents to
 make, have made, use, sell, offer for sale, import, and/or otherwise dispose of
 its contribution in the software or derivative works of the contribution in the
 software.
- 
+
 3. Conditions and Limitations
 
 (A) No Trademark License- This license does not grant you rights to use any
