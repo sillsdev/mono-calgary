@@ -1,3 +1,23 @@
+fieldworks-mono (2.8-1) unstable; urgency=low
+
+  * Upgrade to upstream 2.8
+  * Add and remove patches:
+
+    -bug-574696.patch
+    -bug-616432_ListViewPatch2.patch
+    -mcs_workaroundforbug522783.patch
+    -TabTextVertCenter.patch
+    -xmlNode.patch
+    +bug-522783-mcs_workaround_for.patch
+    +bug-602934_PrintingServicesUnix.patch
+    +bug-624915_TreeView2.patch
+    +bug-631810_ModalFormCancel.patch
+    +bug-639939_xlookupstring-fix.patch
+    +bug-641756_ClipboardIdleBug.patch
+    +bug-642227_DeserializeIgnoreUnknownElement.patch
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 19 Nov 2010 12:46:12 -0700
+
 fieldworks-mono (2.7-3) unstable; urgency=low
 
   * Add four new patches:
