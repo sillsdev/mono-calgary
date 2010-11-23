@@ -55,3 +55,4 @@ trap "rm -rf $(readlink -f $PKGDIR/debian/patches)" 0
 
 # Create source package
 dpkg-source -b $PKGDIR 2>&1 | (grep -v '^dpkg-source: warning: ignoring deletion of ' || true)
+(cd $PKGDIR; dpkg-genchanges -S) >${NAME}_${VERSION}.changes
