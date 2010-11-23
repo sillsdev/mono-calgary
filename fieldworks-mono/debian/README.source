@@ -1,7 +1,10 @@
 fieldworks-mono for Debian
 --------------------------
 
-Checked mono and mcs sources out of svn and used make dist in the mono directory to create
-a tarball.
+Check the mono sources out of git and use git archive to create a tarball:
 
- -- Neil Mayhew <neil_mayhew@sil.org>  Thu, 20 May 2010 17:23:40 -0600
+git archive --prefix fieldworks-mono/ $REVISION | gzip >$TARBALL
+
+This is done more conveniently by the make-source-package script.
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 22 Nov 2010 17:43:07 -0700 

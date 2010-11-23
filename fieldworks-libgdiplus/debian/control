@@ -27,5 +27,5 @@ Package: fieldworks-libgdiplus
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A version of libgdiplus specially for FieldWorks
- A specially patched version of libgdiplus from svn trunk, to
- support FieldWorks. Not intended for general use.
+ A specially patched version of libgdiplus from upstream source repos,
+ to support FieldWorks. Not intended for general use.
