@@ -9,8 +9,8 @@ set -e
 DIRECTORIES="libgdiplus mono"
 
 # Revisions can be a commit hash or a remote branch (eg origin/mono-2.8)
-libgdiplus_REVISION=d50e3e6ae
-mono_REVISION=052fd53f21
+libgdiplus_REVISION=2.8
+mono_REVISION=2.8
 
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
 
