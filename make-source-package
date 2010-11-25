@@ -4,18 +4,18 @@
 #
 # Create a new source package from the contents of the relevant git directories:
 #
-#	SRCDIR   libgdiplus or mono
-#	PKGDIR   fieldworks-libgdiplus or fieldworks-mono
-#	PATCHDIR libgdiplus_patches or mono_patches
+#	PROJ     libgdiplus or mono
+#	PKGDIR   libgdiplus or mono
+#	SRCDIR   $PKGDIR/fieldworks-$PROJ
 #
 # $SRCDIR is created by checkout-and-build-mono, so you should have run that first.
 # The state of $SRCDIR (patched, etc.) doesn't matter, but the current revision does.
 # By default, this script uses HEAD as the revision, which is a synonym for the
 # currently checked out revision.
 #
-# Usage: make-source-package DIR [REVISION]
+# Usage: make-source-package PROJ [REVISION]
 #
-# DIR can be either the SRCDIR or the PKGDIR
+# PROJ can be PKGDIR
 # REVISION defaults to HEAD, but could be any tag, branch or hash
 #
 # The debian/changelog should be updated first, using dch-i "" to create a new entry,
@@ -26,33 +26,33 @@
 set -e -o pipefail
 
 # Input parameters, from the command line
-DIR=${1?}
+PROJ=${1?}
 REVISION=${2-HEAD}
 
 # Figure out directory names
-SRCDIR=${DIR#fieldworks-}
-PKGDIR=fieldworks-$DIR
-PATCHDIR=${SRCDIR}_patches
+PROJ=${PROJ#fieldworks-}
+PKGDIR=$PROJ
+SRCDIR=$PKGDIR/fieldworks-$PROJ
 
 # Obtain package name and version
 cd $PKGDIR
 NAME=$(dpkg-parsechangelog | sed -n '/^Source: /s///p')
 VERSION=$(dpkg-parsechangelog | sed -n '/^Version: /s///p')
+UPSTREAM=$(sed 's/-[^-]*$//' <<<$VERSION)
+cd $OLDPWD
+
+# Prepare source
+cd $SRCDIR
+git reset --hard -q
+git clean -dxf -q
+git describe --tags $REVISION >DESCRIPTION
+./autogen.sh
 cd $OLDPWD
 
 # Create original source tarball
-cd $SRCDIR
-DESCRIPTION=$(git describe --tags $REVISION)
-UPSTREAM=$(sed 's/-[^-]*$//' <<<$VERSION)
-TARBALL=../${NAME}_${UPSTREAM}.orig.tar.gz
-git archive --format tar --prefix $PKGDIR-$DESCRIPTION/ $REVISION | gzip --best >$TARBALL
-cd $OLDPWD
-
-# Copy patch directory to package directory
-rm -rf $PKGDIR/debian/patches
-cp -a $PATCHDIR $PKGDIR/debian/patches
-trap "rm -rf $(readlink -f $PKGDIR/debian/patches)" 0
+tar -czf ${NAME}_${UPSTREAM}.orig.tar.gz --exclude-vcs -C $PKGDIR fieldworks-$PROJ
 
 # Create source package
-dpkg-source -b $PKGDIR 2>&1 | (grep -v '^dpkg-source: warning: ignoring deletion of ' || true)
+cp -a $PKGDIR/debian $SRCDIR/debian
+dpkg-source -b $SRCDIR
 (cd $PKGDIR; dpkg-genchanges -S) >${NAME}_${VERSION}.changes

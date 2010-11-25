@@ -6,9 +6,9 @@
 
 set -e
 
-DIRECTORIES="libgdiplus mono"
+PROJECTS="libgdiplus mono"
 
-# Revisions can be a commit hash or a remote branch (eg origin/mono-2.8)
+# Revisions can be a commit hash, a tag or a remote branch (eg origin/mono-2.8)
 libgdiplus_REVISION=2.8
 mono_REVISION=2.8
 
@@ -21,24 +21,27 @@ if [ -e $0.config ]; then
 
 	if [ "$OLD_ARCH" != "$(uname -m)" ]; then
 		echo $0: Switching architecture. Doing a 'make clean'
-		for DIR in $DIRECTORIES
+		for PROJ in $PROJECTS
 		do
+			DIR=$PROJ/fieldworks-$PROJ
 			[ -d $DIR ] && (cd $DIR; make clean)
 		done
 	fi
 fi
 
-for DIR in $DIRECTORIES
+for PROJ in $PROJECTS
 do
-	eval REVISION=\$${DIR}_REVISION
+	DIR=$PROJ/fieldworks-$PROJ
+
+	eval REVISION=\$${PROJ}_REVISION
 
 	if [ ! -d $DIR ]; then
-		echo $0: Cloning $DIR ...
-		git clone -n git://github.com/mono/$DIR.git
+		echo $0: Cloning $PROJ ...
+		git clone -n git://github.com/mono/$PROJ.git $DIR
 	fi
 
+	echo $0: Updating $PROJ ...
 	(
-		echo $0: Updating $DIR ...
 		cd $DIR
 
 		# Fetch latest revisions
@@ -60,28 +63,27 @@ do
 	)
 done
 
-for DIR in $DIRECTORIES
+for PROJ in $PROJECTS
 do
-	(
-		echo $0: Applying patches in $DIR ...
-		cd $DIR
-		ln -sf ../${DIR}_patches patches
-		quilt push -a
-	)
+	DIR=$PROJ/fieldworks-$PROJ
+	echo $0: Applying patches in $PROJ ...
+	(cd $DIR; QUILT_PATCHES=../debian/patches quilt push -a) || exit 1
 done
 
-echo $0: Building mono ...
-for DIR in $DIRECTORIES
+for PROJ in $PROJECTS
 do
+	DIR=$PROJ/fieldworks-$PROJ
+	echo $0: Building $PROJ ...
 	(cd $DIR; ./autogen.sh --prefix=$MONO_PREFIX; make "$@") || exit 1
 done
 
 echo OLD_ARCH=$(uname -m) > $0.config
 
-echo $0: Installing mono ...
-for DIR in $DIRECTORIES
+for PROJ in $PROJECTS
 do
-	(cd $DIR; sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR)
+	DIR=$PROJ/fieldworks-$PROJ
+	echo $0: Installing $PROJ ...
+	(cd $DIR; sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR) || exit 1
 done
 
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but
