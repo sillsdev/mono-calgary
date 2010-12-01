@@ -46,7 +46,7 @@ cd $SRCDIR
 git reset --hard -q
 git clean -dxf -q
 git describe --tags $REVISION >DESCRIPTION
-./autogen.sh
+NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
 # Create original source tarball
