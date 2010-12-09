@@ -98,8 +98,8 @@ do
 done
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script
-	sudo cp $DESTDIR$MONO_PREFIX/bin/mono{,-real}
-	sudo cp $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
+	sudo cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
+	sudo cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
 fi
 
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but 
