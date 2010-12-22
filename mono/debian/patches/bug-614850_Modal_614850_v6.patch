@@ -1,9 +1,9 @@
 FWNX-398 Fixing modal dialogs so parents and children behave correctly
 
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs	2010-11-09 22:08:53.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 @@ -103,6 +103,10 @@
  		private Rectangle		restore_bounds;
  		private bool			autoscale_base_size_set;

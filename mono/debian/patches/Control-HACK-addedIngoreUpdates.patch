@@ -1,9 +1,9 @@
 Could not identify an FWNX for this
 
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs.orig	2010-11-09 22:08:14.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs	2010-11-09 22:08:54.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
 @@ -5142,6 +5142,18 @@
  			UpdateBounds(x, y, width, height, width - (rect.Right - rect.Left), height - (rect.Bottom - rect.Top));
  		}

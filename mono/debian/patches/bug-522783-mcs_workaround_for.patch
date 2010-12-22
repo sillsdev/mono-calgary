@@ -1,7 +1,7 @@
-Index: mono/mcs/class/corlib/System.Resources/ResourceManager.cs
+Index: fieldworks-mono/mcs/class/corlib/System.Resources/ResourceManager.cs
 ===================================================================
---- mono/mcs/class/corlib/System.Resources/ResourceManager.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/corlib/System.Resources/ResourceManager.cs	2010-11-09 22:08:52.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/corlib/System.Resources/ResourceManager.cs
++++ fieldworks-mono/mcs/class/corlib/System.Resources/ResourceManager.cs
 @@ -328,10 +328,14 @@
  
  			ResourceSet set;

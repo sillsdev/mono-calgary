@@ -1,7 +1,7 @@
-Index: mono/mono/metadata/cominterop.c
+Index: fieldworks-mono/mono/metadata/cominterop.c
 ===================================================================
---- mono/mono/metadata/cominterop.c.orig	2010-11-09 22:07:49.000000000 -0700
-+++ mono/mono/metadata/cominterop.c	2010-11-09 22:08:55.000000000 -0700
+--- fieldworks-mono.orig/mono/metadata/cominterop.c
++++ fieldworks-mono/mono/metadata/cominterop.c
 @@ -34,6 +34,7 @@
  #include "mono/utils/mono-counters.h"
  #include <string.h>

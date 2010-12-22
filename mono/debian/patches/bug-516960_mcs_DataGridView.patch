@@ -1,9 +1,9 @@
 FWNX-340 and FWNX-160
 
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs	2010-11-09 22:08:52.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
 @@ -6272,7 +6272,7 @@
  					if (disp_x == Columns.Count - 1)
  						delta_x = horizontalScrollBar.Maximum - horizontalScrollBar.Value;

@@ -1,9 +1,9 @@
 Could not identify an FWNX for this
 
-Index: mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+Index: fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
 ===================================================================
---- mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs	2010-11-09 22:08:53.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
++++ fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
 @@ -157,7 +157,7 @@
  
  		private static string GetMessage (string message, string sourceUri, int lineNumber, int linePosition, XmlSchemaObject sourceObj)

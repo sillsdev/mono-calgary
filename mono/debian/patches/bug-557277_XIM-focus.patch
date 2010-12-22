@@ -1,9 +1,9 @@
 Could not identify an FWNX for this
 
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2010-11-09 22:08:53.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 @@ -4444,8 +4444,8 @@
  						}
  						goto ProcessNextMessage;

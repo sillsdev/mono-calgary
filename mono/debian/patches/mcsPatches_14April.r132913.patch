@@ -1,7 +1,7 @@
-Index: mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+Index: fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
 ===================================================================
---- mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs.orig	2010-11-09 22:08:14.000000000 -0700
-+++ mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs	2010-11-09 22:08:55.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
++++ fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
 @@ -71,6 +71,8 @@
  		public virtual Type GetConfigType (string typeName, bool throwOnError)
  		{
@@ -11,10 +11,10 @@ Index: mono/mcs/class/System.Configuration/System.Configuration/InternalConfigur
  			if (type == null && throwOnError)
  				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
  			return type;
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs.orig	2010-11-09 22:08:14.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs	2010-11-09 22:08:55.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
 @@ -257,6 +257,8 @@
  
  		public virtual void Clear ()
@@ -24,10 +24,10 @@ Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRow
  			int total = list.Count;
  			
  			DataGridView.OnRowsPreRemovedInternal (new DataGridViewRowsRemovedEventArgs (0, total));
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
 ===================================================================
---- mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs.orig	2010-11-09 22:08:14.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs	2010-11-09 22:08:55.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
 @@ -103,6 +103,8 @@
  
  		public virtual void Clear ()

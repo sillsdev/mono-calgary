@@ -1,9 +1,9 @@
 FWNX-512 fix modal form cancel bug
 
-Index: mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 ===================================================================
---- mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs	2010-11-18 14:29:47.000000000 -0700
-+++ mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs	2010-11-18 14:31:04.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 @@ -712,7 +712,8 @@
  							typeof (DialogResult));
  

@@ -1,9 +1,9 @@
 FWNX-335 Flex printing
 
-Index: mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
+Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
 ===================================================================
---- mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs.orig	2010-11-09 22:08:15.000000000 -0700
-+++ mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs	2010-11-09 22:08:53.000000000 -0700
+--- fieldworks-mono.orig/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
++++ fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
 @@ -245,8 +245,12 @@
  				options = new NameValueCollection();
  				paper_names = new NameValueCollection();
