@@ -37,20 +37,12 @@ do
 
 	if [ ! -d $DIR ]; then
 		echo $0: Cloning $PROJ ...
-		git clone -n git://github.com/mono/$PROJ.git $DIR
+		git clone git://github.com/mono/$PROJ.git $DIR
 	fi
 
 	echo $0: Updating $PROJ ...
 	(
 		cd $DIR
-
-		# Fetch latest revisions
-		git fetch origin
-		git checkout -q $REVISION
-
-		# Avoid detached head...
-		git branch -f calgary
-		git checkout -q calgary
 
 		if [ ! "$NOREVERT" ]; then
 			echo $0: Reverting $DIR git working copy ...
@@ -60,6 +52,14 @@ do
 			echo $0: Cleaning $DIR git working copy ...
 			git clean -dxf
 		fi
+
+		# Fetch latest revisions
+		git fetch origin
+		git checkout -q $REVISION
+
+		# Avoid detached head...
+		git branch -f calgary
+		git checkout -q calgary
 	)
 done
 
