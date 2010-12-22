@@ -1,0 +1,54 @@
+FWNX-455
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+@@ -1364,6 +1364,7 @@
+ 					} else {
+ 						Controls.Remove (editingControl);
+ 					}
++					editingControl.Dispose();
+ 				}
+ 				
+ 				
+@@ -3360,6 +3361,17 @@
+ 		}
+ 
+ 		protected override void Dispose (bool disposing) {
++			if (disposing) {
++				foreach (DataGridViewColumn column in Columns)
++					column.Dispose();
++				Columns.Clear();
++				foreach (DataGridViewRow row in Rows)
++					row.Dispose();
++				Rows.Clear();
++			}
++			editingControl = null;
++
++			base.Dispose(disposing);
+ 		}
+ 
+ 		protected override AccessibleObject GetAccessibilityObjectById (int objectId)
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
+@@ -55,7 +55,7 @@
+ 
+ 		~DataGridViewBand ()
+ 		{
+-			Dispose();
++			Dispose(false);
+ 		}
+ 
+ 		[DefaultValue (null)]
+@@ -229,6 +229,8 @@
+ 		//public sealed void Dispose () {
+ 		public void Dispose ()
+ 		{
++			Dispose(true);
++			GC.SuppressFinalize(this);
+ 		}
+ 
+ 		public override string ToString ()
