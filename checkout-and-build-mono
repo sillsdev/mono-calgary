@@ -53,11 +53,15 @@ do
 			git clean -dxf
 		fi
 
-		# Fetch latest revisions
-		git fetch origin
-		git checkout -q $REVISION
+		# Fetch latest revisions, if necessary
+		if ! git rev-parse --verify -q $REVISION >/dev/null
+		then
+			echo "$0: Fetching latest changes for $DIR git working copy ..."
+			git fetch origin
+		fi
 
-		# Avoid detached head...
+		# Create a local branch
+		git checkout -q $REVISION --
 		git branch -f calgary
 		git checkout -q calgary
 	)
