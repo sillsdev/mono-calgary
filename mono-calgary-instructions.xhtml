@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Patch Management in mono-calgary</title>
+    <style type="text/css">
+      body
+      {
+        font-family: sans-serif;
+        font-size: 80%;
+      }
+      table
+      {
+        border-collapse: collapse;
+      }
+      td
+      {
+        padding-right: 1em;
+        vertical-align: baseline;
+        border: 1px solid;
+      }
+      .command
+      {
+        white-space: nowrap;
+      }
+      .command, tt
+      {
+        font-family: monospace;
+        font-size: 115%;
+      }
+    </style>
+    <meta content="Neil Mayhew" name="Author" />
+    <meta content="2010-12-21" name="Date" />
+  </head>
+  <body>
+    <h1>Patch Management in mono-calgary</h1>
+    <p>The directory structure is this:</p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="command">libgdiplus</td>
+          <td>A skeleton package directory containing just a <tt>debian/</tt> subdirectory</td>
+        </tr>
+        <tr>
+          <td class="command">libgdiplus/debian/patches</td>
+          <td>The patches for libgdiplus, also used by the package</td>
+        </tr>
+        <tr>
+          <td class="command">libgdiplus/fieldworks-libgdiplus</td>
+          <td>The clone (checkout) of the upstream libgdiplus repo</td>
+        </tr>
+        <tr>
+          <td class="command">mono</td>
+          <td>A skeleton package directory containing just a <tt>debian/</tt> subdirectory</td>
+        </tr>
+        <tr>
+          <td class="command">mono/debian/patches</td>
+          <td>The patches for mono, also used by the package</td>
+        </tr>
+        <tr>
+          <td class="command">mono/fieldworks-mono</td>
+          <td>The clone (checkout) of the upstream mono repo</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Below, <tt>DIR</tt> is one of libgdiplus or mono. Where I've typed <tt>$DIR</tt> or <tt>${DIR}</tt> you can just use the name directly, or you can set <tt>DIR=</tt>... first and use <tt>$DIR</tt> as shown.</p>
+    <p>These instructions assume you are starting in the <tt>mono-calgary</tt> directory.</p>
+    <h2>Adding a patch</h2>
+    <p><b>Note:</b> Don't put new patches directly into <tt>${DIR}/debian/patches</tt>, because quilt will copy them there. Put them in the top-level dir, and then delete them afterwards.</p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="command">git pull</td>
+          <td>Make sure working directory is up-to-date before making changes</td>
+        </tr>
+        <tr>
+          <td class="command">cd $DIR/fieldworks-$DIR</td>
+          <td>Go to the directory where the upstream repo is checked out</td>
+        </tr>
+        <tr>
+          <td class="command">export QUILT_PATCHES=../debian/patches</td>
+          <td>Tell quilt which patch directory to work with</td>
+        </tr>
+        <tr>
+          <td class="command">quilt pop -a</td>
+          <td>Unapply all patches</td>
+        </tr>
+        <tr>
+          <td class="command">quilt series</td>
+          <td>List the patches currently in the series</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push <i>PATCH</i></td>
+          <td>Apply patches up to and including the one named <tt>PATCH</tt></td>
+        </tr>
+        <tr>
+          <td class="command">lsdiff ../../<i>NEWPATCH</i></td>
+          <td>See what filename convention is used</td>
+        </tr>
+        <tr>
+          <td class="command">quilt import ../../<i>NEWPATCH</i></td>
+          <td>If the filenames don't begin with <tt>$DIR/</tt>, use <tt>quilt import -p0 ../../<i>NEWPATCH</i></tt></td>
+        </tr>
+        <tr>
+          <td class="command">rm <i>../../NEWPATCH</i></td>
+          <td>Remove the imported patch file</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push</td>
+          <td>Apply the patch. You will see messages about offset and fuzz.</td>
+        </tr>
+        <tr>
+          <td class="command">quilt refresh --no-timestamps</td>
+          <td>Regenerate the patch file</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push</td>
+          <td>Apply the following patch</td>
+        </tr>
+        <tr>
+          <td class="command">quilt refresh --no-timestamps</td>
+          <td>Refresh it</td>
+        </tr>
+        <tr>
+          <td class="command">...</td>
+          <td>Repeat push+refresh until quilt says you are at the end of the series and can't push any more</td>
+        </tr>
+        <tr>
+          <td class="command">cd ../..</td>
+          <td>Return to mono-calgary</td>
+        </tr>
+        <tr>
+          <td class="command">git gui</td>
+          <td>Commit the new and modified files using the gui (after you've done both libgdiplus and mono)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><b>Note:</b> lsdiff is in the patchutils package.</p>
+    <p>If the patch is rejected during a push, you will have to adjust it manually. Use -f to force it to push, and some hunks will be rejected. You will then have to make edits yourself, to the file that it's trying to patch, corresponding to the rejected hunks. You can then proceed with quilt refresh. The patch utility (called internally by quilt) may ask you questions during the push, and this may avoid the need to edit things manually. If patch thinks the patch is reversed this may (or may not) mean the changes are already in the file.</p>
+    <p><h2>Deleting a patch</h2></p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="command">git pull</td>
+          <td>Make sure working directory is up-to-date before making changes</td>
+        </tr>
+        <tr>
+          <td class="command">cd $DIR/fieldworks-$DIR</td>
+          <td>Go to the directory where the upstream repo is checked out</td>
+        </tr>
+        <tr>
+          <td class="command">export QUILT_PATCHES=../debian/patches</td>
+          <td>Tell quilt which patch directory to work with</td>
+        </tr>
+        <tr>
+          <td class="command">quilt pop -a</td>
+          <td>Unapply all patches</td>
+        </tr>
+        <tr>
+          <td class="command">quilt series</td>
+          <td>List the patches currently in the series</td>
+        </tr>
+        <tr>
+          <td class="command">quilt delete -r <i>PATCH</i></td>
+          <td>Remove <i><tt>PATCH</tt></i> from the series</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push -a</td>
+          <td>Apply all patches. Look for messages about unclean patches.</td>
+        </tr>
+        <tr>
+          <td class="command">quilt pop <i>UNCLEANPATCH</i></td>
+          <td>Pop patches until <tt><i>UNCLEANPATCH</i></tt> is top of the stack.</td>
+        </tr>
+        <tr>
+          <td class="command">quilt refresh --no-timestamps</td>
+          <td>Regenerate the patch file</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push</td>
+          <td>Apply the following patch</td>
+        </tr>
+        <tr>
+          <td class="command">quilt refresh --no-timestamps</td>
+          <td>Refresh it</td>
+        </tr>
+        <tr>
+          <td class="command">...</td>
+          <td>Repeat push+refresh until quilt says you are at the end of the series and can't push any more</td>
+        </tr>
+        <tr>
+          <td class="command">cd ../..</td>
+          <td>Return to mono-calgary</td>
+        </tr>
+        <tr>
+          <td class="command">git gui</td>
+          <td>Commit the deleted and modified files using the gui (after you've done both libgdiplus and mono)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Moving to a new revision</h2>
+    <p>When moving to a new revision in the mono and libgdiplus repos, you will need to go through the push/refresh cycle for each patch, and add a couple of extra steps. <tt>REVISION</tt> is the commit hash you want to use. You can type or paste it directly, or set <tt>REVISION=</tt>... first.</p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="command">git pull</td>
+          <td>Make sure working directory is up-to-date before making changes</td>
+        </tr>
+        <tr>
+          <td class="command">cd $DIR/fieldworks-$DIR</td>
+          <td>Go to the directory where the upstream repo is checked out</td>
+        </tr>
+        <tr>
+          <td class="command">export QUILT_PATCHES=../debian/patches</td>
+          <td>Tell quilt which patch directory to work with</td>
+        </tr>
+        <tr>
+          <td class="command">git reset --hard</td>
+          <td>Throw away all changes (be careful!)</td>
+        </tr>
+        <tr>
+          <td class="command">git clean -dxf</td>
+          <td>Delete all extraneous files (be careful!))</td>
+        </tr>
+        <tr>
+          <td class="command">git fetch origin</td>
+          <td>Bring in the latest updates from upstream (doesn't touch the working directory)</td>
+        </tr>
+        <tr>
+          <td class="command">get checkout $REVISION</td>
+          <td>Update the working dir to the desired revision</td>
+        </tr>
+        <tr>
+          <td class="command">quilt push</td>
+          <td>Apply the first patch. You will see messages about offset and fuzz.</td>
+        </tr>
+        <tr>
+          <td class="command">quilt refresh --no-timestamps</td>
+          <td>Regenerate the patch file</td>
+        </tr>
+        <tr>
+          <td class="command">...</td>
+          <td>Repeat push+refresh until quilt says you are at the end of the series and can't push any more</td>
+        </tr>
+        <tr>
+          <td class="command">cd ../..</td>
+          <td>Return to mono-calgary</td>
+        </tr>
+        <tr>
+          <td class="command">git gui</td>
+          <td>Commit the modified files using the gui (after you've done both libgdiplus and mono)</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
