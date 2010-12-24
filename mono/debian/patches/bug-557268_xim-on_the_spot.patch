@@ -4,7 +4,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Xpla
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
 +++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIStructs.cs
-@@ -351,6 +351,12 @@
+@@ -376,6 +376,12 @@
  		WM_REFLECT                = WM_USER + 0x1c00,
  		WM_CLOSE_INTERNAL         = WM_USER + 0x1c01,
  

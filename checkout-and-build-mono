@@ -9,8 +9,8 @@ set -e
 PROJECTS="libgdiplus mono"
 
 # Revisions can be a commit hash, a tag or a remote branch (eg origin/mono-2.8)
-libgdiplus_REVISION=2.8
-mono_REVISION=2.8
+libgdiplus_REVISION=2.8.1
+mono_REVISION=2.8.1
 
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
 
