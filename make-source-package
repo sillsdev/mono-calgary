@@ -31,6 +31,7 @@ REVISION=${2-HEAD}
 
 # Figure out directory names
 PROJ=${PROJ#fieldworks-}
+PROJ=${PROJ%/}
 PKGDIR=$PROJ
 SRCDIR=$PKGDIR/fieldworks-$PROJ
 
@@ -45,14 +46,25 @@ cd $OLDPWD
 cd $SRCDIR
 git reset --hard -q
 git clean -dxf -q
+git checkout -q $REVISION
 git describe --tags $REVISION >DESCRIPTION
 NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
 # Create original source tarball
-tar -czf ${NAME}_${UPSTREAM}.orig.tar.gz --exclude-vcs -C $PKGDIR fieldworks-$PROJ
+cd $PKGDIR
+TARBALL=${NAME}_${UPSTREAM}.orig.tar.gz
+if [ ! -e $TARBALL ]
+then
+	echo "Creating $TARBALL"
+	tar -czf $TARBALL --exclude-vcs ${SRCDIR#$PKGDIR/}
+fi
+cd $OLDPWD
+
+# Prepare source package
+cp -a $PKGDIR/debian $SRCDIR/debian
 
 # Create source package
-cp -a $PKGDIR/debian $SRCDIR/debian
-dpkg-source -b $SRCDIR
-(cd $PKGDIR; dpkg-genchanges -S) >${NAME}_${VERSION}_source.changes
+cd $SRCDIR
+debuild -S
+cd $OLDPWD
