@@ -55,4 +55,4 @@ tar -czf ${NAME}_${UPSTREAM}.orig.tar.gz --exclude-vcs -C $PKGDIR fieldworks-$PR
 # Create source package
 cp -a $PKGDIR/debian $SRCDIR/debian
 dpkg-source -b $SRCDIR
-(cd $PKGDIR; dpkg-genchanges -S) >${NAME}_${VERSION}.changes
+(cd $PKGDIR; dpkg-genchanges -S) >${NAME}_${VERSION}_source.changes
