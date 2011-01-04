@@ -1,0 +1,18 @@
+FWNX-579
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+@@ -2335,7 +2335,10 @@
+ 						return true;
+ 					}
+ 					else if (accept_button != null) {
+-						accept_button.PerformClick();
++						// Set ActiveControl to force any Validation to take place.
++						ActiveControl = (accept_button as Control);
++						if (ActiveControl == accept_button) // else Validation failed
++							accept_button.PerformClick();
+ 						return true;
+ 					}
+ 				} else if (keyData == Keys.Escape && cancel_button != null) {
