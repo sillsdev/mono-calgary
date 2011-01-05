@@ -70,8 +70,15 @@ done
 for PROJ in $PROJECTS
 do
 	DIR=$PROJ/fieldworks-$PROJ
+
 	echo $0: Applying patches in $PROJ ...
-	(cd $DIR; QUILT_PATCHES=../debian/patches quilt push -a) || exit 1
+	(
+		cd $DIR
+
+		export QUILT_PATCHES=../debian/patches
+
+		[ ! -s $QUILT_PATCHES/series ] || quilt push -a
+	)
 done
 
 for PROJ in $PROJECTS
