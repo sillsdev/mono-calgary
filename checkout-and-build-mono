@@ -84,8 +84,17 @@ done
 for PROJ in $PROJECTS
 do
 	DIR=$PROJ/fieldworks-$PROJ
+
 	echo $0: Building $PROJ ...
-	(cd $DIR; ./autogen.sh --prefix=$MONO_PREFIX; make "$@") || exit 1
+	(
+		cd $DIR
+
+		[ -e configure ] || NOCONFIGURE=1 ./autogen.sh
+
+		./configure --prefix=$MONO_PREFIX
+
+		make "$@"
+	)
 done
 
 echo OLD_ARCH=$(uname -m) > $0.config
@@ -100,8 +109,13 @@ fi
 for PROJ in $PROJECTS
 do
 	DIR=$PROJ/fieldworks-$PROJ
+
 	echo $0: Installing $PROJ ...
-	(cd $DIR; sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR) || exit 1
+	(
+		cd $DIR
+
+		sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR
+	)
 done
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script

@@ -48,7 +48,7 @@ git reset --hard -q
 git clean -dxf -q
 git checkout -q $REVISION
 git describe --tags $REVISION >DESCRIPTION
-NOCONFIGURE=1 ./autogen.sh
+[ -e configure ] || NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
 # Create original source tarball
