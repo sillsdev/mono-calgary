@@ -1,0 +1,10 @@
+fieldworks-mono-basic for Debian
+--------------------------------
+
+Check the mono-basic sources out of git and use git archive to create a tarball:
+
+git archive --prefix fieldworks-mono-basic/ $REVISION | gzip >$TARBALL
+
+This is done more conveniently by the make-source-package script.
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 04 Jan 2011 17:04:11 -0700

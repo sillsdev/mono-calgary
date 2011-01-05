@@ -1,0 +1,17 @@
+Source: fieldworks-mono-basic
+Section: cli-mono
+Priority: extra
+Maintainer: Neil Mayhew <neil_mayhew@sil.org>
+Build-Depends: cdbs, debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
+ lsb-release,
+ cli-common-dev (>= 0.4.4),
+ libmono-cil-dev
+Standards-Version: 3.9.1
+Homepage: http://www.mono-project.com/
+
+Package: fieldworks-mono-basic
+Architecture: all
+Depends: ${cli:Depends}
+Description: A version of mono-basic specially for FieldWorks
+ A specially patched version of mono-basic from upstream source repos,
+ to support FieldWorks. Not intended for general use.

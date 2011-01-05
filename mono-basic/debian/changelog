@@ -1,0 +1,5 @@
+fieldworks-mono-basic (2.8-1) unstable; urgency=low
+
+  * Initial release (from git tag 2.8)
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 04 Jan 2011 16:44:32 -0700
