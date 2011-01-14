@@ -1,0 +1,19 @@
+FWNX-485
+
+FWNX-485
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+@@ -727,6 +727,10 @@
+ 		protected override void Dispose (bool disposing)
+ 		{
+ 			if (!IsDisposed) {
++
++				// Event Handler must be stopped before disposing Items.
++				Events.Dispose();
++
+ 				CloseToolTip (null);
+ 				// ToolStripItem.Dispose modifes the collection,
+ 				// so we iterate it in reverse order
