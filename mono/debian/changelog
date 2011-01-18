@@ -2,17 +2,18 @@ fieldworks-mono (2.8.1-1) unstable; urgency=low
 
   * Upgrade to upstream 2.8.1
   * Add new patches:
+    +bug-658945_ImproveVerticalPositioning_607548.patch
+    +bug-660986_DataGridViewDisposeColumns.patch
+    +bug-660860_DoValidationOnAcceptButton.patch
+    +bug-664695_ToolStripDisposeEventsFirst.patch
+    +bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
 
-    - bug-658945_ImproveVerticalPositioning_607548.patch
-    - bug-660986_DataGridViewDisposeColumns.patch
-
- -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 24 Dec 2010 12:43:55 -0700
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 18 Jan 2011 15:22:56 -0700
 
 fieldworks-mono (2.8-1) unstable; urgency=low
 
   * Upgrade to upstream 2.8
   * Add and remove patches:
-
     -bug-574696.patch
     -bug-616432_ListViewPatch2.patch
     -mcs_workaroundforbug522783.patch
@@ -31,11 +32,10 @@ fieldworks-mono (2.8-1) unstable; urgency=low
 fieldworks-mono (2.7-3) unstable; urgency=low
 
   * Add four new patches:
-
-    bug-614850_Modal_614850_v6
-    bug-616432_ListViewPatch2
-    bug-621749-ListView-inserting
-    Control-HACK-addedIngoreUpdates
+    +bug-614850_Modal_614850_v6
+    +bug-616432_ListViewPatch2
+    +bug-621749-ListView-inserting
+    +Control-HACK-addedIngoreUpdates
 
  -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 16 Aug 2010 17:29:15 -0600
 
