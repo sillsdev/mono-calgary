@@ -17,7 +17,6 @@ bug-658945_ImproveVerticalPositioning_607548.patch
 bug-660860_DoValidationOnAcceptButton.patch
 bug-660986_DataGridViewDisposeColumns.patch
 bug-664695_ToolStripDisposeEventsFirst.patch
-bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
 Control-HACK-addedIngoreUpdates.patch
 FWNX-161-improve-setting-controlInstance.Cursor.patch
 FWNX-161-improve-setting-Cursor.Current.patch
