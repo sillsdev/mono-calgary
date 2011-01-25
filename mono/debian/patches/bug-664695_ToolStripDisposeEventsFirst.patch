@@ -1,7 +1,5 @@
 FWNX-485
 
-FWNX-485
-
 Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
