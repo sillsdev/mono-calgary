@@ -24,3 +24,4 @@ FWNX-161-improve-setting-Cursor.Current.patch
 mcsPatches_14April.r132913.patch
 mono-visualstyles-colorscheme.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
+bug-654433_XPathSelectElements.patch
