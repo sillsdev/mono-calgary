@@ -91,8 +91,8 @@
           <td>List the patches currently in the series</td>
         </tr>
         <tr>
-          <td class="command">quilt push <i>PATCH</i></td>
-          <td>Apply patches up to and including the one named <tt>PATCH</tt></td>
+          <td class="command">quilt push -a</td>
+          <td>Apply all the patches in the series. Or use quilt push <tt>PATCH</tt> to apply patches up to and including the one named <tt>PATCH</tt></td>
         </tr>
         <tr>
           <td class="command">lsdiff ../../<i>NEWPATCH</i></td>
@@ -100,7 +100,7 @@
         </tr>
         <tr>
           <td class="command">quilt import ../../<i>NEWPATCH</i></td>
-          <td>If the filenames don't begin with <tt>$DIR/</tt>, use <tt>quilt import -p0 ../../<i>NEWPATCH</i></tt></td>
+          <td>If the filenames don't begin with <tt>$DIR/</tt>, use "<tt>quilt import -p0 ../../<i>NEWPATCH</i></tt>". Make sure you don't already have the patch's changes in your tree.</td>
         </tr>
         <tr>
           <td class="command">rm <i>../../NEWPATCH</i></td>
