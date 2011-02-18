@@ -1,0 +1,35 @@
+FWNX-434
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
+@@ -46,6 +46,19 @@
+ 
+ namespace System.Windows.Forms
+ {
++	class IdleComObjectRelease : System.IComObjectReleaser
++	{
++		public void Add(IntPtr pUnk)
++		{
++			if (pUnk == IntPtr.Zero)
++				return;			
++			EventHandler idleHandler = null;
++			idleHandler = (sender, eventArgs) => { Marshal.Release(pUnk); Application.Idle -= idleHandler; };			
++			Application.Idle += idleHandler;
++		}
++	}
++
++
+ 	public sealed class Application
+ 	{
+ 		internal class MWFThread
+@@ -753,6 +766,8 @@
+ 
+ 		public static void Run (ApplicationContext context)
+ 		{
++			__ComObjectReleaser.Register(new IdleComObjectRelease());
++
+ #if NET_2_0
+ 			// If a sync context hasn't been created by now, create
+ 			// a default one
