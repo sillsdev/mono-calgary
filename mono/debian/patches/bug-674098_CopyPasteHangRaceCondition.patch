@@ -1,0 +1,21 @@
+FWNX-637
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -2681,9 +2681,14 @@
+ 			while (f != null) {
+ 				XConvertSelection(DisplayHandle, CLIPBOARD, (IntPtr)f.Id, (IntPtr)f.Id, FosterParent, IntPtr.Zero);
+ 
++				var timeToWaitForSelectionFormats = TimeSpan.FromSeconds(4);
++				var startTime = DateTime.Now;
+ 				Clipboard.Enumerating = true;
+ 				while (Clipboard.Enumerating) {
+ 					UpdateMessageQueue(null, false);
++
++					if (DateTime.Now - startTime > timeToWaitForSelectionFormats)
++						break;
+ 				}
+ 				f = f.Next;
+ 			}
