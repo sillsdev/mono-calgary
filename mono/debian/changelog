@@ -1,12 +1,19 @@
-fieldworks-mono (2.8.1-2) maverick; urgency=low
+fieldworks-mono (2.8.1-3) maverick; urgency=low
 
-  * Add new patches
-    +bug-654433_XPathSelectElements.patch
-    +bug-672879_ComObjectRelease.patch
+  * Add new patches:
     +bug-674098_CopyPasteHangRaceCondition.patch
-    +WinFormsComReleasePatch_FWNX-434.patch
 
  -- Sue Newland <sue_newland@sil.org>  Mon, 07 Mar 2011 14:22:00 -0700
+
+fieldworks-mono (2.8.1-2) unstable; urgency=low
+
+  * Add new patches:
+    +WinFormsComReleasePatch_FWNX-434.patch
+    +bug-654433_XPathSelectElements.patch
+    +bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
+    +bug-672879_ComObjectRelease.patch
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 18 Feb 2011 17:37:12 -0700
 
 fieldworks-mono (2.8.1-1) unstable; urgency=low
 
