@@ -1,14 +1,2 @@
 *~
-/libgdiplus/fieldworks-libgdiplus/
-/mono/fieldworks-mono/
 /checkout-and-build-mono.config
-/fieldworks-libgdiplus_*.orig.tar.gz
-/fieldworks-libgdiplus_*.debian.tar.gz
-/fieldworks-libgdiplus_*.dsc
-/fieldworks-libgdiplus_*.changes
-/fieldworks-libgdiplus_*.upload
-/fieldworks-mono_*.orig.tar.gz
-/fieldworks-mono_*.debian.tar.gz
-/fieldworks-mono_*.dsc
-/fieldworks-mono_*.changes
-/fieldworks-mono_*.upload
