@@ -1,0 +1,16 @@
+FWNX-663
+
+Index: fieldworks-mono/mcs/class/System.Xml.Linq/System.Xml.Linq/XDocument.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.Xml.Linq/System.Xml.Linq/XDocument.cs
++++ fieldworks-mono/mcs/class/System.Xml.Linq/System.Xml.Linq/XDocument.cs
+@@ -95,6 +95,9 @@
+ 		public static XDocument Load (string uri, LoadOptions options)
+ 		{
+ 			XmlReaderSettings s = new XmlReaderSettings ();
++#if !MOONLIGHT
++      			s.ProhibitDtd = false; // see XNodeNavigatorTest.MoveToId().
++#endif
+ 			s.IgnoreWhitespace = (options & LoadOptions.PreserveWhitespace) == 0;
+ 			using (XmlReader r = XmlReader.Create (uri, s)) {
+ 				return LoadCore (r, options);

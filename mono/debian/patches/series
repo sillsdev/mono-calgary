@@ -21,6 +21,7 @@ bug-664695_ToolStripDisposeEventsFirst.patch
 bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
 bug-672879_ComObjectRelease.patch
 bug-674098_CopyPasteHangRaceCondition.patch
+bug-676009-DTDprohibted_inXML.patch
 Control-HACK-addedIngoreUpdates.patch
 FWNX-161-improve-setting-controlInstance.Cursor.patch
 FWNX-161-improve-setting-Cursor.Current.patch
