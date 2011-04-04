@@ -1,3 +1,10 @@
+fieldworks-libgdiplus (2.8.1-2) maverick; urgency=low
+
+  * Add patch
+    +missing-glib-2.0
+
+ -- Sue Newland <sue_newland@sil.org>  Mon, 04 Apr 2011 11:26:14 -0600
+
 fieldworks-libgdiplus (2.8.1-1) unstable; urgency=low
 
   * Upgrade to upstream 2.8.1
