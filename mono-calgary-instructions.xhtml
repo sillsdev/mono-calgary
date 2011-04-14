@@ -67,6 +67,23 @@
     <p>Below, <tt>DIR</tt> is one of libgdiplus or mono. Where I've typed <tt>$DIR</tt> or <tt>${DIR}</tt> you can just use the name directly, or you can set <tt>DIR=</tt>... first and use <tt>$DIR</tt> as shown.</p>
     <p>These instructions assume you are starting in the <tt>mono-calgary</tt> directory.</p>
     <h2>Adding a patch</h2>
+    <h3>Creating a patch</h3>
+    <p><ol>
+      <li>In your mono-calgary tree, you previously ran <span class="command">checkout-and-build-mono</span></li>
+      <li>Before editing mono code, commit the mono-calgary-patched mono code into your sub-repositories to make diffing easier.<br />
+        <span class="command">mono-calgary$ cd mono/fieldworks-mono<br />
+        mono-calgary/mono/fieldworks-mono$ git commit -am 'patches'<br />
+        mono-calgary/mono/fieldworks-mono$ cd ../../libgdiplus/fieldworks-libgdiplus<br />
+        mono-calgary/libgdiplus/fieldworks-libgdiplus$ git commit -am 'patches'</span>
+      </li>
+      <li>Edit mono code.</li>
+      <li>Create patch.<br />
+        <span class="command">mono-calgary/mono/fieldworks-mono$ git diff > ../../my.patch</span></li>
+      <li>Undo your patch by resetting the sub-repository to just have existing mono-calgary patches applied.<br/>
+        <span class="command">mono-calgary/mono/fieldworks-mono$ git reset --hard HEAD</span></li>
+      <li><span class="command">mono-calgary/mono/fieldworks-mono$ cd ../..</span></li>
+    </ol></p>
+    <h3>Add patch</h3>
     <p><b>Note:</b> Don't put new patches directly into <tt>${DIR}/debian/patches</tt>, because quilt will copy them there. Put them in the top-level dir, and then delete them afterwards.</p>
     <table>
       <tbody>
@@ -100,7 +117,7 @@
         </tr>
         <tr>
           <td class="command">quilt import ../../<i>NEWPATCH</i></td>
-          <td>If the filenames don't begin with <tt>$DIR/</tt>, use "<tt>quilt import -p0 ../../<i>NEWPATCH</i></tt>". Make sure you don't already have the patch's changes in your tree.</td>
+          <td>If the filenames don't begin with <tt>$DIR/</tt> or a dummy prefix such as <tt>a/</tt>, use "<tt>quilt import -p0 ../../<i>NEWPATCH</i></tt>". Make sure you don't already have the patch's changes in your tree.</td>
         </tr>
         <tr>
           <td class="command">rm <i>../../NEWPATCH</i></td>
