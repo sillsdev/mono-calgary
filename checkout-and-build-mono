@@ -100,11 +100,19 @@ done
 
 echo OLD_ARCH=$(uname -m) > $0.config
 
+# Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
+# caller should set MONO_PREFIX or DESTDIR prior to calling this script)
+if [ $(sudo -l > /dev/null ; echo $?) -eq 0 ]; then
+	SUDOCMD=sudo
+else
+	SUDOCMD=
+fi
+
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-real ]; then
 	# Because mono-real exists it is very likely that mono is a wrapper script used for
 	# debugging. Save it and restore it later.
 	if [ ! -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
-		sudo cp $DESTDIR$MONO_PREFIX/bin/mono $DESTDIR$MONO_PREFIX/bin/mono-fw
+		$SUDOCMD cp $DESTDIR$MONO_PREFIX/bin/mono $DESTDIR$MONO_PREFIX/bin/mono-fw
 	fi
 fi
 for PROJ in $PROJECTS
@@ -115,18 +123,19 @@ do
 	(
 		cd $DIR
 
-		sudo make install ${DESTDIR:+DESTDIR=}$DESTDIR
+		$SUDOCMD make install ${DESTDIR:+DESTDIR=}$DESTDIR
 	)
 done
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script
-	sudo cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
-	sudo cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
+	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
+	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
 fi
 
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but 
 # new versions of mono use name 'mono-2'. Support both until we upgrade or 
 # fix our nant.
-sudo ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
+$SUDOCMD ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
 
 echo $0: Finished successfully.
+
