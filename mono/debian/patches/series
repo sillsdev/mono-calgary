@@ -29,3 +29,4 @@ mcsPatches_14April.r132913.patch
 mono-visualstyles-colorscheme.patch
 WinFormsComReleasePatch_FWNX-434.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
+PipeException.patch
