@@ -30,3 +30,4 @@ mono-visualstyles-colorscheme.patch
 WinFormsComReleasePatch_FWNX-434.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
 bug-692987_PipeException.patch
+bug-694908_greenscreen.patch
