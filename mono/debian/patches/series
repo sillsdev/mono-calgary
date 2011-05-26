@@ -4,6 +4,7 @@ bug-519648.patch
 bug-522783-mcs_workaround_for.patch
 bug-557268_xim-on_the_spot.patch
 bug-557277_XIM-focus.patch
+bug-594490_XmlAttribute-serialization.patch
 bug-599689_mcs_System.Xml.ScemaException.patch
 bug-602934_PrintingServicesUnix.patch
 bug-614850_Modal_614850_v6.patch

@@ -1,0 +1,28 @@
+From 6981fad7df623519efc2fc3a6e0f0c454182918f Mon Sep 17 00:00:00 2001
+From: Neil Mayhew <neil_mayhew@sil.org>
+Date: Thu, 26 May 2011 15:53:59 -0600
+Subject: [PATCH 1/1] Allow qualified names in XmlAttribute serialization
+
+This fixes Mono bug #594490 (FWNX-705)
+
+Reviewed by: Brent McCarthy
+---
+ .../XmlReflectionImporter.cs                       |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs b/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
+index 50c430a..062a1b5 100644
+--- a/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
++++ b/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
+@@ -831,7 +831,7 @@ namespace System.Xml.Serialization {
+ 				else 
+ 					mapAttribute.AttributeName = atts.XmlAttribute.AttributeName;
+ 
+-				mapAttribute.AttributeName = XmlConvert.EncodeLocalName (mapAttribute.AttributeName);
++				mapAttribute.AttributeName = XmlConvert.EncodeName (mapAttribute.AttributeName);
+ 
+ 				if (typeData.IsComplexType)
+ 					mapAttribute.MappedType = ImportTypeMapping (typeData.Type, null, defaultNamespace);
+-- 
+1.7.4.4
+
