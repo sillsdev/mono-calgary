@@ -1,4 +1,4 @@
-FWNX-335 Flex printing
+    FWNX-335 Flex printing
 
 Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
 ===================================================================
@@ -162,7 +162,31 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  		}
  
  		/// <summary>
-@@ -438,6 +489,12 @@
+@@ -403,7 +454,7 @@
+ 			PPD_SIZE size;
+ 			PaperSize ps;
+ 
+-			PaperSize defsize = null;
++			PaperSize defsize = new PaperSize("A4", 827, 1169, GetPaperKind(827, 1169), true);
+ 			ppd = (PPD_FILE) Marshal.PtrToStructure (ppd_handle, typeof (PPD_FILE));
+ 			ptr = ppd.sizes;
+ 			float w, h;
+@@ -412,10 +463,11 @@
+ 				real_name = paper_names[size.name];
+ 				w = size.width * 100 / 72;
+ 				h = size.length * 100 / 72;
+-				ps = new PaperSize (real_name, (int) w, (int) h, GetPaperKind ((int) w, (int) h), def_size == real_name);
+-				if (def_size == real_name)
++				PaperKind kind = GetPaperKind ((int) w, (int) h);
++				ps = new PaperSize (real_name, (int) w, (int) h, kind, def_size == kind.ToString());
++				ps.SetKind (kind);
++				if (def_size == ps.Kind.ToString())
+ 					defsize = ps;
+-				ps.SetKind (GetPaperKind ((int) w, (int) h));
+ 				settings.paper_sizes.Add (ps);
+ 				ptr = (IntPtr) ((long)ptr + Marshal.SizeOf (size));
+ 			}
+@@ -438,6 +490,12 @@
  			foreach(string source in paper_sources) {
  				switch (source)
  				{
@@ -175,7 +199,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  					case "Tray":
  						kind = PaperSourceKind.AutomaticFeed;
  						break;
-@@ -462,6 +519,37 @@
+@@ -462,6 +520,37 @@
  		}
  
  		/// <summary>
