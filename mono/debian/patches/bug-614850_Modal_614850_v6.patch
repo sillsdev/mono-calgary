@@ -1,4 +1,4 @@
-FWNX-398 Fixing modal dialogs so parents and children behave correctly
+    FWNX-398 Fixing modal dialogs so parents and children behave correctly
 
 Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 ===================================================================
@@ -15,24 +15,23 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
  		#endregion	// Local Variables
  
  		#region Private & Internal Methods
-@@ -1787,6 +1791,16 @@
+@@ -1787,6 +1791,15 @@
  				XplatUI.UngrabWindow(capture_window);
  			}
  
-+			foreach (Form form in Application.OpenForms)
-+			{
-+				if (form.Enabled == true)
-+				{
-+					disabled_by_showdialog.Add(form);
-+					form.Enabled = false;
-+				}
++			lock (Application.OpenForms) {
++				foreach (Form form in Application.OpenForms)
++					if (form.Enabled == true)
++						disabled_by_showdialog.Add(form);
 +			}
++			foreach (Form form in disabled_by_showdialog)
++				form.Enabled = false;
 +			modal_dialogs.Add(this);
 +
  #if not
  			// Commented out; we instead let the Visible=true inside the runloop create the control
  			// otherwise setting DialogResult inside any of the events that are triggered by the
-@@ -2075,6 +2089,9 @@
+@@ -2075,6 +2088,9 @@
  		[EditorBrowsable(EditorBrowsableState.Advanced)]
  		protected virtual void OnActivated(EventArgs e)
  		{
@@ -42,7 +41,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
  			EventHandler eh = (EventHandler)(Events [ActivatedEvent]);
  			if (eh != null)
  				eh (this, e);
-@@ -2660,6 +2677,9 @@
+@@ -2660,6 +2676,9 @@
  
  		private void WmClose (ref Message m)
  		{
@@ -52,7 +51,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
  			Form act = Form.ActiveForm;
  			// Don't close this form if there's another modal form visible.
  			if (act != null && act != this && act.Modal == true) {
-@@ -2744,6 +2764,12 @@
+@@ -2744,6 +2763,12 @@
  #endif	
  		private void WmActivate (ref Message m)
  		{
@@ -65,7 +64,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
  			if (m.WParam != (IntPtr)WindowActiveFlags.WA_INACTIVE) {
  				if (is_loaded) {
  					SelectActiveControl ();
-@@ -3241,6 +3267,14 @@
+@@ -3241,6 +3266,14 @@
  			FormClosedEventHandler eh = (FormClosedEventHandler)(Events[FormClosedEvent]);
  			if (eh != null)
  				eh (this, e);
