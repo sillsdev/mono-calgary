@@ -33,3 +33,4 @@ mono-visualstyles-colorscheme.patch
 WinFormsComReleasePatch_FWNX-434.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
 bug-692206_umlautCharacters.patch
+bug-702064_deadKeys.patch
