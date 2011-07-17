@@ -1,0 +1,31 @@
+From d3c7ec1ada2b9174f51fb38bfa5dd276def8ec31 Mon Sep 17 00:00:00 2001
+From: Zoltan Varga <vargaz@gmail.com>
+Date: Sat, 11 Sep 2010 21:16:05 +0200
+Subject: [PATCH] Remove -Werror from the eglib tests too.
+
+(cherry picked from commit 06ffc32e734f75a9fffad5bd79f5aec47d742580)
+
+This causes build failures with gcc 4.6.1 (eg on Debian) due to warnings about
+unused variables.
+
+Mono bug 638722
+---
+ eglib/test/Makefile.am |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/eglib/test/Makefile.am b/eglib/test/Makefile.am
+index 3411ef9..0f4f07a 100644
+--- a/eglib/test/Makefile.am
++++ b/eglib/test/Makefile.am
+@@ -29,7 +29,7 @@ SOURCES = \
+ 
+ test_eglib_SOURCES = $(SOURCES)
+ 
+-test_eglib_CFLAGS = -Wall -Werror -D_FORTIFY_SOURCE=2 -I$(srcdir)/../src -I../src -DDRIVER_NAME=\"EGlib\"
++test_eglib_CFLAGS = -Wall -D_FORTIFY_SOURCE=2 -I$(srcdir)/../src -I../src -DDRIVER_NAME=\"EGlib\"
+ test_eglib_LDADD = ../src/libeglib.la
+ 
+ run-eglib: all
+-- 
+1.7.5.4
+

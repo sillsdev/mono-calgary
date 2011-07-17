@@ -11,6 +11,7 @@ bug-614850_Modal_614850_v6.patch
 bug-621749-ListView-inserting.patch
 bug-624915_TreeView2.patch
 bug-631810_ModalFormCancel.patch
+bug-638722_Remove-Werror-from-the-eglib-tests-too.patch
 bug-639939_xlookupstring-fix.patch
 bug-641756_ClipboardIdleBug.patch
 bug-642227_DeserializeIgnoreUnknownElement.patch
