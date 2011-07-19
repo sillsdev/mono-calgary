@@ -2,7 +2,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Xpla
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
 +++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -4958,6 +4958,23 @@
+@@ -4957,6 +4957,23 @@
  			}
  
  			OverrideCursorHandle = cursor;

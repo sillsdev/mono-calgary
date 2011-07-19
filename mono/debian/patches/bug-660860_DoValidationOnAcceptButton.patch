@@ -4,7 +4,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
 +++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
-@@ -2335,7 +2335,10 @@
+@@ -2334,7 +2334,10 @@
  						return true;
  					}
  					else if (accept_button != null) {

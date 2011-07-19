@@ -24,8 +24,10 @@ bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
 bug-672879_ComObjectRelease.patch
 bug-674098_CopyPasteHangRaceCondition.patch
 bug-676009-DTDprohibted_inXML.patch
+bug-692206_umlautCharacters.patch
 bug-692987_PipeException.patch
 bug-694908_greenscreen.patch
+bug-702064_deadKeys.patch
 Control-HACK-addedIngoreUpdates.patch
 FWNX-161-improve-setting-controlInstance.Cursor.patch
 FWNX-161-improve-setting-Cursor.Current.patch
@@ -33,5 +35,3 @@ mcsPatches_14April.r132913.patch
 mono-visualstyles-colorscheme.patch
 WinFormsComReleasePatch_FWNX-434.patch
 WORK_AROUND_BAD_NATIVE_CODE.patch
-bug-692206_umlautCharacters.patch
-bug-702064_deadKeys.patch
