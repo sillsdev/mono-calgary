@@ -78,7 +78,7 @@ do
 
 		export QUILT_PATCHES=../debian/patches
 
-		[ ! -s $QUILT_PATCHES/series ] || quilt push -a
+		[ ! -s $QUILT_PATCHES/series ] || git quiltimport --author "Quilt patch <unknown@unknown.com>" --patches $QUILT_PATCHES
 	)
 done
 
