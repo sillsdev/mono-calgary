@@ -1,10 +1,18 @@
-FWNX-485
+From 5ea2cd340147a116502ec65ff166d19be130be6f Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:36 +0200
+Subject: [PATCH] bug-664695_ToolStripDisposeEventsFirst
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-@@ -727,6 +727,10 @@
+FWNX-485
+---
+ .../System.Windows.Forms/ToolStrip.cs              |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+index ba013b0..7dfec62 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+@@ -727,6 +727,10 @@ namespace System.Windows.Forms
  		protected override void Dispose (bool disposing)
  		{
  			if (!IsDisposed) {
@@ -15,3 +23,6 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Tool
  				CloseToolTip (null);
  				// ToolStripItem.Dispose modifes the collection,
  				// so we iterate it in reverse order
+-- 
+1.7.4.1
+

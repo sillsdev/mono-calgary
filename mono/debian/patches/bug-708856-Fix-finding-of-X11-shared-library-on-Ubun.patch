@@ -1,7 +1,7 @@
-From f69f131a7dab04533fa564062fe8095b169a36a5 Mon Sep 17 00:00:00 2001
+From fe11c61581cb6e2dfbd2d0d44740b0fca219bb02 Mon Sep 17 00:00:00 2001
 From: Eberhard Beilharz <eb1@sil.org>
 Date: Thu, 28 Jul 2011 12:00:46 +0200
-Subject: [PATCH] Fix finding of X11 shared library on Ubuntu
+Subject: [PATCH] bug-708856: Fix finding of X11 shared library on Ubuntu
 
 Use dynamic search path instead of hard coded directories when
 searching for libX11.so.*. This fixes bug 708856.
@@ -9,11 +9,11 @@ searching for libX11.so.*. This fixes bug 708856.
  configure.in |    3 ++-
  1 files changed, 2 insertions(+), 1 deletions(-)
 
-Index: fieldworks-mono/configure.in
-===================================================================
---- fieldworks-mono.orig/configure.in
-+++ fieldworks-mono/configure.in
-@@ -2428,8 +2428,9 @@
+diff --git a/configure.in b/configure.in
+index a771d1e..56a6bf9 100644
+--- a/configure.in
++++ b/configure.in
+@@ -2569,8 +2569,9 @@ case "$host" in
  	;;
      *-*-*linux*)
  	AC_PATH_X
@@ -24,3 +24,6 @@ Index: fieldworks-mono/configure.in
  		for r in 4 5 6; do
  			if test -f $i/libX11.so.$r; then
  				X11=libX11.so.$r
+-- 
+1.7.4.1
+

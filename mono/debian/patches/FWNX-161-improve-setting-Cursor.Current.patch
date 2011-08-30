@@ -1,8 +1,17 @@
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -4957,6 +4957,23 @@
+From 96caf2ac474aacf9851637847ac365a9433ace20 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:38 +0200
+Subject: [PATCH] FWNX-161-improve-setting-Cursor.Current
+
+---
+ .../System.Windows.Forms/XplatUIX11.cs             |   17 +++++++++++++++++
+ 1 files changed, 17 insertions(+), 0 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+index 63f4b87..b28a0d5 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -4986,6 +4986,23 @@ namespace System.Windows.Forms {
  			}
  
  			OverrideCursorHandle = cursor;
@@ -25,4 +34,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Xpla
 +			}
  		}
  
- 		internal override PaintEventArgs PaintEventStart(ref Message msg, IntPtr handle, bool client) {
+ 		internal override PaintEventArgs PaintEventStart(ref Message msg, IntPtr handle, bool client)
+-- 
+1.7.4.1
+

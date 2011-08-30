@@ -1,10 +1,18 @@
-FWNX-579
+From 3897d2dd45f6425ab7192b1ae5d2aca238c3a425 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:36 +0200
+Subject: [PATCH] bug-660860_DoValidationOnAcceptButton
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
-@@ -2334,7 +2334,10 @@
+FWNX-579
+---
+ .../System.Windows.Forms/Form.cs                   |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+index c41b920..95b047d 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form.cs
+@@ -2335,7 +2335,10 @@ namespace System.Windows.Forms {
  						return true;
  					}
  					else if (accept_button != null) {
@@ -16,3 +24,6 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Form
  						return true;
  					}
  				} else if (keyData == Keys.Escape && cancel_button != null) {
+-- 
+1.7.4.1
+

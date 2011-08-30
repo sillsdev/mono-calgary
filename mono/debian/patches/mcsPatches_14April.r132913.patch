@@ -1,34 +1,19 @@
-Index: fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-+++ fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-@@ -71,6 +71,8 @@
- 		public virtual Type GetConfigType (string typeName, bool throwOnError)
- 		{
- 			Type type = Type.GetType (typeName);
-+			if (type == null && typeName.Split(',').Length == 1) // try System.dll if nothing else specified
-+				type = Type.GetType (typeName + ",System");
- 			if (type == null && throwOnError)
- 				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
- 			return type;
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-@@ -257,6 +257,8 @@
- 
- 		public virtual void Clear ()
- 		{
-+			dataGridView.CurrentCell = null;
-+
- 			int total = list.Count;
- 			
- 			DataGridView.OnRowsPreRemovedInternal (new DataGridViewRowsRemovedEventArgs (0, total));
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-@@ -103,6 +103,8 @@
+From 0bd114ee4fcaeb55bbf060bd89e4a3de4619e58f Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:38 +0200
+Subject: [PATCH] mcsPatches_14April.r132913
+
+---
+ .../DataGridViewColumnCollection.cs                |    2 ++
+ .../DataGridViewRowCollection.cs                   |    2 ++
+ .../InternalConfigurationHost.cs                   |    2 ++
+ 3 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+index 74a7b27..1fb2a3a 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+@@ -101,6 +101,8 @@ namespace System.Windows.Forms
  
  		public virtual void Clear ()
  		{
@@ -37,3 +22,32 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Data
  			base.List.Clear ();
  			
  			// When we clear the column collection, all rows get deleted
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+index 87580ef..c763ce4 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+@@ -255,6 +255,8 @@ namespace System.Windows.Forms
+ 
+ 		public virtual void Clear ()
+ 		{
++			dataGridView.CurrentCell = null;
++
+ 			int total = list.Count;
+ 			
+ 			DataGridView.OnRowsPreRemovedInternal (new DataGridViewRowsRemovedEventArgs (0, total));
+diff --git a/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs b/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+index 1219fcd..37f09ce 100644
+--- a/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
++++ b/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+@@ -71,6 +71,8 @@ namespace System.Configuration
+ 		public virtual Type GetConfigType (string typeName, bool throwOnError)
+ 		{
+ 			Type type = Type.GetType (typeName);
++			if (type == null && typeName.Split(',').Length == 1) // try System.dll if nothing else specified
++				type = Type.GetType (typeName + ",System");
+ 			if (type == null && throwOnError)
+ 				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
+ 			return type;
+-- 
+1.7.4.1
+

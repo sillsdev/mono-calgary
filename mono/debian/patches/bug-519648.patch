@@ -1,10 +1,18 @@
-Could not identify an FWNX for this
+From 58e2681c0e9c76a49e0d893748af88736050a3a0 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:34 +0200
+Subject: [PATCH] bug-519648
 
-Index: fieldworks-mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-+++ fieldworks-mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-@@ -52,7 +52,13 @@
+Could not identify an FWNX for this
+---
+ .../System.Data.Common/DataContainer.cs            |    8 +++++++-
+ 1 files changed, 7 insertions(+), 1 deletions(-)
+
+diff --git a/mcs/class/System.Data/System.Data.Common/DataContainer.cs b/mcs/class/System.Data/System.Data.Common/DataContainer.cs
+index 321620f..72e46d1 100644
+--- a/mcs/class/System.Data/System.Data.Common/DataContainer.cs
++++ b/mcs/class/System.Data/System.Data.Common/DataContainer.cs
+@@ -52,7 +52,13 @@ namespace System.Data.Common
  			get { return IsNull (index) ? DBNull.Value : GetValue (index); }
  			set {
  				if (value == null) {
@@ -19,3 +27,6 @@ Index: fieldworks-mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs
  					return;
  				}
  
+-- 
+1.7.4.1
+

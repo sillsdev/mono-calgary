@@ -1,0 +1,38 @@
+From d2c01e0b5509c173844c51b45ec8db4b2bf08096 Mon Sep 17 00:00:00 2001
+From: Tom Hindle <tom_hindle@sil.org>
+Date: Wed, 7 Sep 2011 14:43:43 +0200
+Subject: [PATCH] bug-522783: workaround
+
+---
+ .../corlib/System.Resources/ResourceManager.cs     |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/mcs/class/corlib/System.Resources/ResourceManager.cs b/mcs/class/corlib/System.Resources/ResourceManager.cs
+index 8f2305a..dcf760a 100644
+--- a/mcs/class/corlib/System.Resources/ResourceManager.cs
++++ b/mcs/class/corlib/System.Resources/ResourceManager.cs
+@@ -331,7 +331,10 @@ namespace System.Resources
+ 				throw new ArgumentNullException ("key"); // 'key' instead of 'culture' to make a test pass
+ 
+ 			ResourceSet set = null;
+-			
++
++#if false
++			//workaround for bug 522783
++
+ 			/* if we already have this resource set, return it */
+ 			set = (ResourceSet) ResourceSets [culture];
+ 			if (set != null) {
+@@ -347,7 +350,8 @@ namespace System.Resources
+ 					NonExistent.Remove (culture);
+ 				set = null;
+ 			}
+-			
++#endif
++
+ 			if (NonExistent.Contains (culture))
+ 				return null;
+ 
+-- 
+1.7.4.1
+

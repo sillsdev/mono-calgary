@@ -1,10 +1,18 @@
-FWNX-597
+From f952af2db2e07e03896d0b141d448fbd428428f5 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:36 +0200
+Subject: [PATCH] bug-665233_FixToolStripNotReleasingKeyboardCapture
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
-@@ -934,6 +934,14 @@
+FWNX-597
+---
+ .../System.Windows.Forms/ToolStripDropDown.cs      |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
+index 12fb4ae..eb8080f 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStripDropDown.cs
+@@ -934,6 +934,14 @@ namespace System.Windows.Forms
  		{
  			this.Close (reason);
  			base.Dismiss (reason);
@@ -19,3 +27,6 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Tool
  		}
  
  		internal override ToolStrip GetTopLevelToolStrip ()
+-- 
+1.7.4.1
+

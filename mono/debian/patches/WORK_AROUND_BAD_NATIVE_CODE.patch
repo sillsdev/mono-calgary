@@ -1,7 +1,16 @@
-Index: fieldworks-mono/mono/metadata/cominterop.c
-===================================================================
---- fieldworks-mono.orig/mono/metadata/cominterop.c
-+++ fieldworks-mono/mono/metadata/cominterop.c
+From da0c0605fb25950173b93c735b24477cd9daf778 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:38 +0200
+Subject: [PATCH] WORK_AROUND_BAD_NATIVE_CODE
+
+---
+ mono/metadata/cominterop.c |   13 +++++++++++++
+ 1 files changed, 13 insertions(+), 0 deletions(-)
+
+diff --git a/mono/metadata/cominterop.c b/mono/metadata/cominterop.c
+index cc0e256..0cad937 100644
+--- a/mono/metadata/cominterop.c
++++ b/mono/metadata/cominterop.c
 @@ -34,6 +34,7 @@
  #include "mono/utils/mono-counters.h"
  #include <string.h>
@@ -10,7 +19,7 @@ Index: fieldworks-mono/mono/metadata/cominterop.c
  
  #ifndef DISABLE_COM
  
-@@ -1664,6 +1665,11 @@
+@@ -1664,6 +1665,11 @@ cominterop_rcw_finalizer (gpointer key, gpointer value, gpointer user_data)
  	return TRUE;
  }
  
@@ -22,7 +31,7 @@ Index: fieldworks-mono/mono/metadata/cominterop.c
  void
  cominterop_release_all_rcws (void)
  {
-@@ -1671,11 +1677,18 @@
+@@ -1671,11 +1677,18 @@ cominterop_release_all_rcws (void)
  		return;
  
  	mono_cominterop_lock ();
@@ -41,3 +50,6 @@ Index: fieldworks-mono/mono/metadata/cominterop.c
  	mono_cominterop_unlock ();
  }
  
+-- 
+1.7.4.1
+

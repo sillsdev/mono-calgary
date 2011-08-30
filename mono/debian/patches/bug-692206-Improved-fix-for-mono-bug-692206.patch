@@ -1,7 +1,7 @@
-From da795e840fcccc05f59edf54a3e1bf6c27e2cf59 Mon Sep 17 00:00:00 2001
+From bb0cc82f7f8394c1b7b50e2d8926e9c6fddaec7c Mon Sep 17 00:00:00 2001
 From: Eberhard Beilharz <eb1@sil.org>
 Date: Fri, 24 Jun 2011 11:32:29 +0200
-Subject: [PATCH 1/3] Improved fix for mono bug #692206
+Subject: [PATCH] bug-692206: Improved fix for mono bug #692206
 
 In contrast to Xutf8LookupString, XLookupString returns the number
 of characters stored in the buffer instead of a status. If the buffer
@@ -18,11 +18,11 @@ Fix a few problems encountered debugging this problem.
  .../System.Windows.Forms/X11Keyboard.cs            |   33 +++++++++++--------
  1 files changed, 19 insertions(+), 14 deletions(-)
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-@@ -61,6 +61,7 @@
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+index fc0c7fe..07f5817 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+@@ -61,6 +61,7 @@ namespace System.Windows.Forms {
  		private bool num_state, cap_state;
  		private bool initialized;
  		private bool menu_state = false;
@@ -30,7 +30,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  
  		private int NumLockMask;
  		private int AltGrMask;
-@@ -72,6 +73,16 @@
+@@ -72,6 +73,16 @@ namespace System.Windows.Forms {
  			EnsureLayoutInitialized ();
  		}
  
@@ -47,7 +47,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  		public IntPtr ClientWindow {
  			get { return client_window; }
  		}
-@@ -197,10 +208,10 @@
+@@ -197,10 +208,10 @@ namespace System.Windows.Forms {
  
  		public void FocusIn (IntPtr window)
  		{
@@ -59,7 +59,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  			if (!xic_table.ContainsKey ((long) window))
  				CreateXicForWindow (window);
  			IntPtr xic = GetXic (window);
-@@ -210,10 +221,10 @@
+@@ -210,10 +221,10 @@ namespace System.Windows.Forms {
  
  		public void FocusOut (IntPtr window)
  		{
@@ -71,7 +71,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  			IntPtr xic = GetXic (window);
  			if (xic != IntPtr.Zero) {
  				Xutf8ResetIC (xic);
-@@ -451,8 +462,7 @@
+@@ -451,8 +462,7 @@ namespace System.Windows.Forms {
  				if (dead_char != 0) {
  					byte [] bytes = new byte [1];
  					bytes [0] = (byte) dead_char;
@@ -81,7 +81,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  					res = -1;
  				}
  			} else {
-@@ -973,6 +983,7 @@
+@@ -973,6 +983,7 @@ namespace System.Windows.Forms {
  				xic = XCreateIC (xim,
  					XNames.XNInputStyle, styleRoot,
  					XNames.XNClientWindow, window,
@@ -89,7 +89,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  					IntPtr.Zero);
  			}
  			return xic;
-@@ -1180,7 +1191,7 @@
+@@ -1180,7 +1191,7 @@ namespace System.Windows.Forms {
  
  			status = IntPtr.Zero;
  			IntPtr xic = GetXic (client_window);
@@ -98,7 +98,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  				do {
  					res = Xutf8LookupString (xic, ref xevent, lookup_byte_buffer, 100, out keysym_res,  out status);
  					if ((int) status != -1) // XLookupBufferOverflow
-@@ -1193,15 +1204,9 @@
+@@ -1193,15 +1204,9 @@ namespace System.Windows.Forms {
  				keysym = (XKeySym) keysym_res.ToInt32 ();
  				return s.Length;
  			} else {
@@ -116,7 +116,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  				keysym = (XKeySym) keysym_res.ToInt32 ();
  				return res;
  			}
-@@ -1267,7 +1272,7 @@
+@@ -1267,7 +1272,7 @@ namespace System.Windows.Forms {
  		private static extern bool XSetLocaleModifiers (string mods);
  
  		[DllImport ("libX11")]
@@ -125,3 +125,6 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11K
  		[DllImport ("libX11")]
  		internal extern static int Xutf8LookupString(IntPtr xic, ref XEvent xevent, byte [] buffer, int num_bytes, out IntPtr keysym, out IntPtr status);
  
+-- 
+1.7.4.1
+

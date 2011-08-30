@@ -1,10 +1,18 @@
-    FWNX-335 Flex printing
+From 5dec6eafd10207638a38d704133d9add32bbee4d Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:35 +0200
+Subject: [PATCH] bug-602934_PrintingServicesUnix
 
-Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-+++ fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
-@@ -245,8 +245,12 @@
+FWNX-335 Flex printing
+---
+ .../PrintingServicesUnix.cs                        |  131 ++++++++++++++++---
+ 1 files changed, 110 insertions(+), 21 deletions(-)
+
+diff --git a/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs b/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
+index 1dd23b6..d12b184 100644
+--- a/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
++++ b/mcs/class/System.Drawing/System.Drawing.Printing/PrintingServicesUnix.cs
+@@ -245,8 +245,12 @@ namespace System.Drawing.Printing
  				options = new NameValueCollection();
  				paper_names = new NameValueCollection();
  				paper_sources = new NameValueCollection();
@@ -19,7 +27,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  				if (settings.paper_sizes == null)
  					settings.paper_sizes = new PrinterSettings.PaperSizeCollection (new PaperSize [] {});
  				else
-@@ -256,18 +260,16 @@
+@@ -256,18 +260,16 @@ namespace System.Drawing.Printing
  					settings.paper_sources = new PrinterSettings.PaperSourceCollection (new PaperSource [] {});
  				else
  					settings.paper_sources.Clear();
@@ -42,7 +50,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  				ClosePrinter (ref ppd_handle);
  			
  				((SysPrn.Printer)installed_printers[printer]).Settings = settings;
-@@ -278,18 +280,21 @@
+@@ -278,18 +280,21 @@ namespace System.Drawing.Printing
  		}
  		
  		/// <summary>
@@ -67,7 +75,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  		{
  			CUPS_OPTIONS cups_options;
  			string option_name, option_value;
-@@ -310,8 +315,8 @@
+@@ -310,8 +315,8 @@ namespace System.Drawing.Printing
  				options = (IntPtr) ((long)options + cups_size);
  			}
  			
@@ -78,7 +86,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  		}
  		
  		/// <summary>
-@@ -344,16 +349,19 @@
+@@ -344,16 +349,19 @@ namespace System.Drawing.Printing
  
  		/// <summary>
  		/// Loads a printer's options (selection of paper sizes, paper sources, etc)
@@ -99,7 +107,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  			
  			ptr = ppdFindOption (ppd, option_name);
  			if (ptr != IntPtr.Zero)
-@@ -362,7 +370,7 @@
+@@ -362,7 +370,7 @@ namespace System.Drawing.Printing
  				#if PrintDebug
  				Console.WriteLine (" OPTION  key:{0} def:{1} text: {2}", ppd_option.keyword, ppd_option.defchoice, ppd_option.text);
  				#endif
@@ -108,7 +116,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  				ptr = ppd_option.choices;
  				for (int c = 0; c < ppd_option.num_choices; c++) {
  					choice = (PPD_CHOICE) Marshal.PtrToStructure (ptr, typeof (PPD_CHOICE));
-@@ -383,8 +391,51 @@
+@@ -383,8 +391,51 @@ namespace System.Drawing.Printing
  		/// <param name="settings">PrinterSettings object to fill</param>
  		internal override void LoadPrinterResolutions (string printer, PrinterSettings settings)
  		{
@@ -162,7 +170,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  		}
  
  		/// <summary>
-@@ -403,7 +454,7 @@
+@@ -403,7 +454,7 @@ namespace System.Drawing.Printing
  			PPD_SIZE size;
  			PaperSize ps;
  
@@ -171,7 +179,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  			ppd = (PPD_FILE) Marshal.PtrToStructure (ppd_handle, typeof (PPD_FILE));
  			ptr = ppd.sizes;
  			float w, h;
-@@ -412,10 +463,11 @@
+@@ -412,10 +463,11 @@ namespace System.Drawing.Printing
  				real_name = paper_names[size.name];
  				w = size.width * 100 / 72;
  				h = size.length * 100 / 72;
@@ -186,7 +194,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  				settings.paper_sizes.Add (ps);
  				ptr = (IntPtr) ((long)ptr + Marshal.SizeOf (size));
  			}
-@@ -438,6 +490,12 @@
+@@ -438,6 +490,12 @@ namespace System.Drawing.Printing
  			foreach(string source in paper_sources) {
  				switch (source)
  				{
@@ -199,7 +207,7 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  					case "Tray":
  						kind = PaperSourceKind.AutomaticFeed;
  						break;
-@@ -462,6 +520,37 @@
+@@ -462,6 +520,37 @@ namespace System.Drawing.Printing
  		}
  
  		/// <summary>
@@ -237,3 +245,6 @@ Index: fieldworks-mono/mcs/class/System.Drawing/System.Drawing.Printing/Printing
  		/// </summary>
  		/// <param name="load"></param>
  		/// <param name="def_printer"></param>
+-- 
+1.7.4.1
+

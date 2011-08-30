@@ -1,10 +1,18 @@
-FWNX-434
+From 1d1a1f451f66bf90dbb0d726111fdf4cec308207 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:38 +0200
+Subject: [PATCH] WinFormsComReleasePatch_FWNX-434
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
-@@ -46,6 +46,19 @@
+FWNX-434
+---
+ .../System.Windows.Forms/Application.cs            |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
+index 6ec93c8..940220a 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
+@@ -44,6 +44,19 @@ using System.Windows.Forms.VisualStyles;
  
  namespace System.Windows.Forms
  {
@@ -24,12 +32,14 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Appl
  	public sealed class Application
  	{
  		internal class MWFThread
-@@ -753,6 +766,8 @@
+@@ -716,6 +729,7 @@ namespace System.Windows.Forms
  
  		public static void Run (ApplicationContext context)
  		{
 +			__ComObjectReleaser.Register(new IdleComObjectRelease());
-+
- #if NET_2_0
  			// If a sync context hasn't been created by now, create
  			// a default one
+ 			if (SynchronizationContext.Current == null)
+-- 
+1.7.4.1
+

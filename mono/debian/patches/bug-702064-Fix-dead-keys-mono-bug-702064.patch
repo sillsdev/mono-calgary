@@ -1,7 +1,7 @@
-From 7c9bd95a5169d586b07e2333f684d94a360448f2 Mon Sep 17 00:00:00 2001
+From 26c21412c8dfa33e48ac382cac5831cc3cc453ee Mon Sep 17 00:00:00 2001
 From: Eberhard Beilharz <eb1@sil.org>
 Date: Fri, 24 Jun 2011 17:33:09 +0200
-Subject: [PATCH 3/3] Fix dead keys (mono bug #702064)
+Subject: [PATCH] bug-702064: Fix dead keys (mono bug #702064)
 
 Window events need to be routed to the correct window
 (client window), otherwise it only works when the mouse
@@ -10,11 +10,11 @@ pointer is inside of the text box.
  .../System.Windows.Forms/XplatUIX11.cs             |   11 +++++------
  1 files changed, 5 insertions(+), 6 deletions(-)
 
-Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-+++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -1722,16 +1722,15 @@
+diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+index 7dbb0d6..63f4b87 100644
+--- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -1728,16 +1728,15 @@ namespace System.Windows.Forms {
  
  					if (xevent.AnyEvent.type == XEventName.KeyPress ||
  					    xevent.AnyEvent.type == XEventName.KeyRelease) {
@@ -36,3 +36,6 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Xpla
  				}
  
  				hwnd = Hwnd.GetObjectFromWindow(xevent.AnyEvent.window);
+-- 
+1.7.4.1
+

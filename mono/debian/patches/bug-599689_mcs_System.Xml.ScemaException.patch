@@ -1,10 +1,18 @@
-Could not identify an FWNX for this
+From 813e0b982458ea2d33639e6e0c5154024e55b762 Mon Sep 17 00:00:00 2001
+From: Quilt patch <unknown@unknown.com>
+Date: Tue, 30 Aug 2011 16:56:35 +0200
+Subject: [PATCH] bug-599689_mcs_System.Xml.ScemaException
 
-Index: fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-+++ fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-@@ -157,7 +157,7 @@
+Could not identify an FWNX for this
+---
+ .../System.Xml.Schema/XmlSchemaException.cs        |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs b/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+index 649df76..c18c753 100644
+--- a/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
++++ b/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+@@ -157,7 +157,7 @@ namespace System.Xml.Schema
  
  		private static string GetMessage (string message, string sourceUri, int lineNumber, int linePosition, XmlSchemaObject sourceObj)
  		{
@@ -13,3 +21,6 @@ Index: fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException
  			if (lineNumber > 0)
  				msg += String.Format (CultureInfo.InvariantCulture, " XML {0} Line {1}, Position {2}.",
  					(sourceUri != null && sourceUri != "") ? "URI: " + sourceUri + " ." : "",
+-- 
+1.7.4.1
+
