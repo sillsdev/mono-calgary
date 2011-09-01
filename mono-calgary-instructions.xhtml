@@ -29,6 +29,12 @@
         font-family: monospace;
         font-size: 115%;
       }
+      .path
+      {
+        white-space: nowrap;
+        font-family: monospace;
+        font-size: 115%;
+      }
     </style>
     <meta content="Neil Mayhew" name="Author" />
     <meta content="2010-12-21" name="Date" />
@@ -68,20 +74,22 @@
     <p>These instructions assume you are starting in the <tt>mono-calgary</tt> directory.</p>
     <h2>Adding a patch</h2>
     <h3>Creating a patch</h3>
+    <p>Warning: When working on code in <span class="path">mono-calgary/mono/fieldworks-mono</span> or <span class="path">mono-calgary/libgdiplus/fieldworks-libgdiplus</span>, if you run the <span class="command">checkout-and-build-mono</span> script it may delete your work.</p>
     <p><ol>
-      <li>In your mono-calgary tree, you previously ran <span class="command">checkout-and-build-mono</span></li>
-      <li>Before editing mono code, commit the mono-calgary-patched mono code into your sub-repositories to make diffing easier.<br />
-        <span class="command">mono-calgary$ cd mono/fieldworks-mono<br />
-        mono-calgary/mono/fieldworks-mono$ git commit -am 'patches'<br />
-        mono-calgary/mono/fieldworks-mono$ cd ../../libgdiplus/fieldworks-libgdiplus<br />
-        mono-calgary/libgdiplus/fieldworks-libgdiplus$ git commit -am 'patches'</span>
+      <li>In your mono-calgary tree, you previously ran <span class="command">checkout-and-build-mono</span>, which created git commits in <span class="path">foo/fieldworks-foo</span> of the mono-calgary patches.</li>
+      <li>Edit mono code in <span class="path">foo/fieldworks-foo</span>.</li>
+      <li>Locally commit in <span class="path">foo/fieldworks-foo</span>:<br />
+        <span class="command">mono-calgary/mono/fieldworks-mono$ git commit -am "Fix Xamarin bug 1234: XML processing"</span>
       </li>
-      <li>Edit mono code.</li>
-      <li>Create patch.<br />
-        <span class="command">mono-calgary/mono/fieldworks-mono$ git diff > ../../my.patch</span></li>
-      <li>Undo your patch by resetting the sub-repository to just have existing mono-calgary patches applied.<br/>
-        <span class="command">mono-calgary/mono/fieldworks-mono$ git reset --hard HEAD</span></li>
-      <li><span class="command">mono-calgary/mono/fieldworks-mono$ cd ../..</span></li>
+      <li>Create mono-calgary patch:<br />
+        <span class="command">mono-calgary/mono/fieldworks-mono$ git format-patch HEAD^</span><br />
+        Rename and move patch:<br />
+        <span class="command">mono-calgary/mono/fieldworks-mono$ mv 0001-Fix-Xamarin-bug-1234-XML-processing.patch ~/mono-calgary/bug-1234_XML-processing.patch</span>
+      </li>
+      <li>Send patch to team for review.</li>
+      <li>Undo your commit so only mono-calgary patches are applied:<br/>
+        <span class="command">mono-calgary/mono/fieldworks-mono$ git reset --hard HEAD^</span></li>
+      <li><span class="command">mono-calgary/mono/fieldworks-mono$ cd ~/mono-calgary</span></li>
     </ol></p>
     <h3>Add patch</h3>
     <p><b>Note:</b> Don't put new patches directly into <tt>${DIR}/debian/patches</tt>, because quilt will copy them there. Put them in the top-level dir, and then delete them afterwards.</p>
@@ -144,12 +152,16 @@
           <td>Repeat push+refresh until quilt says you are at the end of the series and can't push any more</td>
         </tr>
         <tr>
+          <td class="command">git commit -am "Latest patches"</td>
+          <td>Import patch into $DIR/fieldworks-$DIR git repository.</td>
+        </tr>
+        <tr>
           <td class="command">cd ../..</td>
           <td>Return to mono-calgary</td>
         </tr>
         <tr>
           <td class="command">git gui</td>
-          <td>Commit the new and modified files using the gui (after you've done both libgdiplus and mono)</td>
+          <td>Commit the new and modified files using the gui (after you've done both libgdiplus and mono). Specifically the $DIR/debian/patches/series and $DIR/debian/patches/foo.patch files.</td>
         </tr>
       </tbody>
     </table>
