@@ -1,21 +1,15 @@
-From 3bd881683540cf85cabd5a1f60c6438990895ed6 Mon Sep 17 00:00:00 2001
-From: Quilt patch <unknown@unknown.com>
-Date: Tue, 30 Aug 2011 16:56:36 +0200
-Subject: [PATCH] bug-642227_DeserializeIgnoreUnknownElement
-
 FWNX-450 fix backuprestore tests
----
- .../XmlObjectSerializerTest.cs                     |   11 +++++++++++
- 1 files changed, 11 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs b/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
-index 7052336..0c315c1 100755
---- a/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
-+++ b/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
-@@ -1584,6 +1584,17 @@ namespace MonoTests.System.Runtime.Serialization
- 			string xml = "<ArrayOfguid xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.microsoft.com/2003/10/Serialization/Arrays'><guid>00000000-0000-0000-0000-000000000000</guid></ArrayOfguid>".Replace ('\'', '"');
- 			Assert.AreEqual (xml, sw.ToString (), "#1");
+Index: fieldworks-mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
++++ fieldworks-mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
+@@ -1498,5 +1498,17 @@
+ 			
+ 			var ds = (DataSet) x.ReadObject (r);
  		}
++
++		[Test]
 +		public void Bug642227_IgnoreUnknownElement()
 +		{
 +			string xml = @"
@@ -26,10 +20,5 @@ index 7052336..0c315c1 100755
 +			new DataContractSerializer (typeof (Sample1))
 +				.ReadObject (XmlReader.Create (new StringReader (xml)));
 +		}
-+
- 	}
- 	
- 	[DataContract]
--- 
-1.7.4.1
-
+ 
+ 		[Test]
