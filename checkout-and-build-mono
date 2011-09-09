@@ -78,7 +78,15 @@ do
 
 		export QUILT_PATCHES=../debian/patches
 
-		[ ! -s $QUILT_PATCHES/series ] || git quiltimport --author "Quilt patch <unknown@unknown.com>" --patches $QUILT_PATCHES
+		[ ! -s $QUILT_PATCHES/series ] ||
+		(
+			git quiltimport --author "Quilt patch <unknown@unknown.com>" --patches $QUILT_PATCHES &>/dev/null
+			# Undo import in working tree
+			for patch in $(tac "$QUILT_PATCHES/series"); do patch -p1 -sRi "$QUILT_PATCHES/$patch" ; done
+			quilt push -aq
+			# Refresh
+			git status &>/dev/null
+		)
 	)
 done
 
