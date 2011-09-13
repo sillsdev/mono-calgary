@@ -7,10 +7,10 @@ Subject: [PATCH] WORK_AROUND_BAD_NATIVE_CODE
  mono/metadata/cominterop.c |   13 +++++++++++++
  1 files changed, 13 insertions(+), 0 deletions(-)
 
-diff --git a/mono/metadata/cominterop.c b/mono/metadata/cominterop.c
-index cc0e256..0cad937 100644
---- a/mono/metadata/cominterop.c
-+++ b/mono/metadata/cominterop.c
+Index: fieldworks-mono/mono/metadata/cominterop.c
+===================================================================
+--- fieldworks-mono.orig/mono/metadata/cominterop.c
++++ fieldworks-mono/mono/metadata/cominterop.c
 @@ -34,6 +34,7 @@
  #include "mono/utils/mono-counters.h"
  #include <string.h>
@@ -19,7 +19,7 @@ index cc0e256..0cad937 100644
  
  #ifndef DISABLE_COM
  
-@@ -1664,6 +1665,11 @@ cominterop_rcw_finalizer (gpointer key, gpointer value, gpointer user_data)
+@@ -1664,6 +1665,11 @@
  	return TRUE;
  }
  
@@ -31,7 +31,7 @@ index cc0e256..0cad937 100644
  void
  cominterop_release_all_rcws (void)
  {
-@@ -1671,11 +1677,18 @@ cominterop_release_all_rcws (void)
+@@ -1671,11 +1677,18 @@
  		return;
  
  	mono_cominterop_lock ();
@@ -50,6 +50,3 @@ index cc0e256..0cad937 100644
  	mono_cominterop_unlock ();
  }
  
--- 
-1.7.4.1
-

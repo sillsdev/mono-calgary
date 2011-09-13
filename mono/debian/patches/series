@@ -16,6 +16,7 @@ bug-694908-Fix-for-bug-694908.patch
 bug-702064-Fix-dead-keys-mono-bug-702064.patch
 bug-708856-Fix-finding-of-X11-shared-library-on-Ubun.patch
 bug-xamarin586_ToolStripItem-HandleClick_FWNX-728.patch
+bug-xamarin677_DataGridViewBugs.patch
 Control-HACK-addedIngoreUpdates.patch
 FWNX-161-improve-setting-controlInstance.Cursor.patch
 FWNX-161-improve-setting-Cursor.Current.patch

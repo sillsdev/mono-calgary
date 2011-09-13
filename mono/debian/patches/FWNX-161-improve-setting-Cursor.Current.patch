@@ -7,11 +7,11 @@ Subject: [PATCH] FWNX-161-improve-setting-Cursor.Current
  .../System.Windows.Forms/XplatUIX11.cs             |   17 +++++++++++++++++
  1 files changed, 17 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-index 63f4b87..b28a0d5 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -4986,6 +4986,23 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -4986,6 +4986,23 @@
  			}
  
  			OverrideCursorHandle = cursor;
@@ -35,6 +35,3 @@ index 63f4b87..b28a0d5 100644
  		}
  
  		internal override PaintEventArgs PaintEventStart(ref Message msg, IntPtr handle, bool client)
--- 
-1.7.4.1
-

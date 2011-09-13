@@ -4,7 +4,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Appl
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
 +++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Application.cs
-@@ -46,6 +46,19 @@
+@@ -44,6 +44,19 @@
  
  namespace System.Windows.Forms
  {
@@ -24,7 +24,7 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Appl
  	public sealed class Application
  	{
  		internal class MWFThread
-@@ -753,5 +766,7 @@
+@@ -716,6 +729,8 @@
  
  		public static void Run (ApplicationContext context)
  		{
@@ -32,3 +32,4 @@ Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Appl
 +
  			// If a sync context hasn't been created by now, create
  			// a default one
+ 			if (SynchronizationContext.Current == null)

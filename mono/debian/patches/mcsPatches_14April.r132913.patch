@@ -9,11 +9,11 @@ Subject: [PATCH] mcsPatches_14April.r132913
  .../InternalConfigurationHost.cs                   |    2 ++
  3 files changed, 6 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-index 74a7b27..1fb2a3a 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
-@@ -101,6 +101,8 @@ namespace System.Windows.Forms
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewColumnCollection.cs
+@@ -101,6 +101,8 @@
  
  		public virtual void Clear ()
  		{
@@ -22,11 +22,11 @@ index 74a7b27..1fb2a3a 100644
  			base.List.Clear ();
  			
  			// When we clear the column collection, all rows get deleted
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-index 87580ef..c763ce4 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
-@@ -255,6 +255,8 @@ namespace System.Windows.Forms
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewRowCollection.cs
+@@ -255,6 +255,8 @@
  
  		public virtual void Clear ()
  		{
@@ -35,11 +35,11 @@ index 87580ef..c763ce4 100644
  			int total = list.Count;
  			
  			DataGridView.OnRowsPreRemovedInternal (new DataGridViewRowsRemovedEventArgs (0, total));
-diff --git a/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs b/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-index 1219fcd..37f09ce 100644
---- a/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-+++ b/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
-@@ -71,6 +71,8 @@ namespace System.Configuration
+Index: fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
++++ fieldworks-mono/mcs/class/System.Configuration/System.Configuration/InternalConfigurationHost.cs
+@@ -71,6 +71,8 @@
  		public virtual Type GetConfigType (string typeName, bool throwOnError)
  		{
  			Type type = Type.GetType (typeName);
@@ -48,6 +48,3 @@ index 1219fcd..37f09ce 100644
  			if (type == null && throwOnError)
  				throw new ConfigurationErrorsException ("Type '" + typeName + "' not found.");
  			return type;
--- 
-1.7.4.1
-

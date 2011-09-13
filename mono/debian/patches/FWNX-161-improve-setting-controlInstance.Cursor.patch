@@ -7,11 +7,11 @@ Subject: [PATCH] FWNX-161-improve-setting-controlInstance.Cursor
  .../System.Windows.Forms/Control.cs                |    5 -----
  1 files changed, 0 insertions(+), 5 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
-index e99e967..13aa83e 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
-@@ -1813,11 +1813,6 @@ namespace System.Windows.Forms
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/Control.cs
+@@ -1813,11 +1813,6 @@
  				return;
  			}
  
@@ -23,6 +23,3 @@ index e99e967..13aa83e 100644
  			if (cursor != null || use_wait_cursor) {
  				XplatUI.SetCursor (window.Handle, Cursor.handle);
  			} else {
--- 
-1.7.4.1
-

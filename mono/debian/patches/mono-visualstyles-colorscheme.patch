@@ -7,11 +7,11 @@ Subject: [PATCH] mono-visualstyles-colorscheme
  .../VisualStylesGtkPlus.cs                         |    4 ++--
  1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
-index 10e5c95..0e24251 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
-@@ -1100,7 +1100,7 @@ namespace System.Windows.Forms.VisualStyles
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms.VisualStyles/VisualStylesGtkPlus.cs
+@@ -1100,7 +1100,7 @@
  		}
  		public string VisualStyleInformationColorScheme {
  			get {
@@ -20,7 +20,7 @@ index 10e5c95..0e24251 100644
  			}
  		}
  		public string VisualStyleInformationCompany {
-@@ -1130,7 +1130,7 @@ namespace System.Windows.Forms.VisualStyles
+@@ -1130,7 +1130,7 @@
  		}
  		public string VisualStyleInformationFileName {
  			get {
@@ -29,6 +29,3 @@ index 10e5c95..0e24251 100644
  			}
  		}
  		public bool VisualStyleInformationIsSupportedByOS
--- 
-1.7.4.1
-
