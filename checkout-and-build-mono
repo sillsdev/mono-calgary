@@ -102,7 +102,7 @@ do
 
 		./configure --prefix=$MONO_PREFIX
 
-		make "$@"
+		make $MAKE_PARAMS "$@"
 	)
 done
 
