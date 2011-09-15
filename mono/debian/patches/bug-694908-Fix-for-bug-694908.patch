@@ -7,11 +7,11 @@ Subject: [PATCH] bug-694908: Fix for bug 694908
  .../System.Windows.Forms/NativeWindow.cs           |   35 +++++++++++++++++++-
  1 files changed, 34 insertions(+), 1 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
-index 9dda4d6..0df7225 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
-@@ -35,6 +35,7 @@ using System.Runtime.CompilerServices;
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/NativeWindow.cs
+@@ -35,6 +35,7 @@
  using System.Threading;
  using System.Collections;
  using System.Diagnostics;
@@ -19,7 +19,7 @@ index 9dda4d6..0df7225 100644
  
  namespace System.Windows.Forms
  {
-@@ -260,8 +261,19 @@ namespace System.Windows.Forms
+@@ -260,8 +261,19 @@
  			}
  			catch (Exception ex) {
  #if !ExternalExceptionHandler
@@ -40,7 +40,7 @@ index 9dda4d6..0df7225 100644
  #else
  				throw;
  #endif
-@@ -273,6 +285,27 @@ namespace System.Windows.Forms
+@@ -273,6 +285,27 @@
  			return result;
  		}
  
@@ -68,6 +68,3 @@ index 9dda4d6..0df7225 100644
  		private static NativeWindow EnsureCreated (NativeWindow window, IntPtr hWnd)
  		{
  			// we need to do this AssignHandle here instead of relying on
--- 
-1.7.4.1
-

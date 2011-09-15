@@ -8,11 +8,11 @@ FWNX-637
  .../System.Windows.Forms/XplatUIX11.cs             |    5 +++++
  1 files changed, 5 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-index 2890de6..7dbb0d6 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -2687,9 +2687,14 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -2687,9 +2687,14 @@
  			while (f != null) {
  				XConvertSelection(DisplayHandle, CLIPBOARD, (IntPtr)f.Id, (IntPtr)f.Id, FosterParent, IntPtr.Zero);
  
@@ -27,6 +27,3 @@ index 2890de6..7dbb0d6 100644
  				}
  				f = f.Next;
  			}
--- 
-1.7.4.1
-

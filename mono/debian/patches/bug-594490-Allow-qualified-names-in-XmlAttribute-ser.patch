@@ -10,11 +10,11 @@ Reviewed by: Brent McCarthy
  .../XmlReflectionImporter.cs                       |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs b/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
-index be282f1..52cc1d8 100644
---- a/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
-+++ b/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
-@@ -854,7 +854,7 @@ namespace System.Xml.Serialization {
+Index: fieldworks-mono/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
++++ fieldworks-mono/mcs/class/System.XML/System.Xml.Serialization/XmlReflectionImporter.cs
+@@ -854,7 +854,7 @@
  				else 
  					mapAttribute.AttributeName = atts.XmlAttribute.AttributeName;
  
@@ -23,6 +23,3 @@ index be282f1..52cc1d8 100644
  
  				if (typeData.IsComplexType)
  					mapAttribute.MappedType = ImportTypeMapping (typeData.Type, null, defaultNamespace);
--- 
-1.7.4.1
-

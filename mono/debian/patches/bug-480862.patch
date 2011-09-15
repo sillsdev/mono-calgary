@@ -8,11 +8,11 @@ Could not identify an FWN issue for this
  mcs/mcs/doc.cs |    5 +++++
  1 files changed, 5 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/mcs/doc.cs b/mcs/mcs/doc.cs
-index aff97d8..834bd16 100644
---- a/mcs/mcs/doc.cs
-+++ b/mcs/mcs/doc.cs
-@@ -516,6 +516,11 @@ namespace Mono.CSharp {
+Index: fieldworks-mono/mcs/mcs/doc.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/mcs/doc.cs
++++ fieldworks-mono/mcs/mcs/doc.cs
+@@ -516,6 +516,11 @@
  				name = signature.Substring (0, brace_pos).Trim (wsChars);
  				parameters = signature.Substring (brace_pos + 1, signature.Length - brace_pos - 2).Trim (wsChars);
  			}
@@ -24,6 +24,3 @@ index aff97d8..834bd16 100644
  			else {
  				name = signature;
  				parameters = null;
--- 
-1.7.4.1
-

@@ -8,11 +8,11 @@ Could not identify an FWNX for this
  .../System.Data.Common/DataContainer.cs            |    8 +++++++-
  1 files changed, 7 insertions(+), 1 deletions(-)
 
-diff --git a/mcs/class/System.Data/System.Data.Common/DataContainer.cs b/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-index 321620f..72e46d1 100644
---- a/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-+++ b/mcs/class/System.Data/System.Data.Common/DataContainer.cs
-@@ -52,7 +52,13 @@ namespace System.Data.Common
+Index: fieldworks-mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.Data/System.Data.Common/DataContainer.cs
++++ fieldworks-mono/mcs/class/System.Data/System.Data.Common/DataContainer.cs
+@@ -52,7 +52,13 @@
  			get { return IsNull (index) ? DBNull.Value : GetValue (index); }
  			set {
  				if (value == null) {
@@ -27,6 +27,3 @@ index 321620f..72e46d1 100644
  					return;
  				}
  
--- 
-1.7.4.1
-

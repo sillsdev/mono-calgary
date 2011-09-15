@@ -4,12 +4,10 @@ Index: fieldworks-mono/mcs/class/System.Runtime.Serialization/Test/System.Runtim
 ===================================================================
 --- fieldworks-mono.orig/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
 +++ fieldworks-mono/mcs/class/System.Runtime.Serialization/Test/System.Runtime.Serialization/XmlObjectSerializerTest.cs
-@@ -1498,5 +1498,17 @@
- 			
- 			var ds = (DataSet) x.ReadObject (r);
+@@ -1500,6 +1500,18 @@
  		}
-+
-+		[Test]
+ 
+ 		[Test]
 +		public void Bug642227_IgnoreUnknownElement()
 +		{
 +			string xml = @"
@@ -20,5 +18,8 @@ Index: fieldworks-mono/mcs/class/System.Runtime.Serialization/Test/System.Runtim
 +			new DataContractSerializer (typeof (Sample1))
 +				.ReadObject (XmlReader.Create (new StringReader (xml)));
 +		}
- 
- 		[Test]
++
++		[Test]
+ 		[ExpectedException (typeof (InvalidDataContractException))] // BaseConstraintType1 is neither DataContract nor Serializable.
+ 		public void BaseConstraint1 ()
+ 		{

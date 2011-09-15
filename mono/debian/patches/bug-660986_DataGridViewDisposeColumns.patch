@@ -9,11 +9,11 @@ FWNX-455
  .../System.Windows.Forms/DataGridViewBand.cs       |    4 +++-
  2 files changed, 15 insertions(+), 1 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-index 7c2d0c3..3a54121 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-@@ -1362,6 +1362,7 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+@@ -1362,6 +1362,7 @@
  					} else {
  						Controls.Remove (editingControl);
  					}
@@ -21,7 +21,7 @@ index 7c2d0c3..3a54121 100644
  				}
  				
  				
-@@ -3358,6 +3359,17 @@ namespace System.Windows.Forms {
+@@ -3358,6 +3359,17 @@
  		}
  
  		protected override void Dispose (bool disposing) {
@@ -39,11 +39,11 @@ index 7c2d0c3..3a54121 100644
  		}
  
  		protected override AccessibleObject GetAccessibilityObjectById (int objectId)
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
-index 3ad8af6..2957fff 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
-@@ -53,7 +53,7 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewBand.cs
+@@ -53,7 +53,7 @@
  
  		~DataGridViewBand ()
  		{
@@ -52,7 +52,7 @@ index 3ad8af6..2957fff 100644
  		}
  
  		[DefaultValue (null)]
-@@ -227,6 +227,8 @@ namespace System.Windows.Forms {
+@@ -227,6 +227,8 @@
  		//public sealed void Dispose () {
  		public void Dispose ()
  		{
@@ -61,6 +61,3 @@ index 3ad8af6..2957fff 100644
  		}
  
  		public override string ToString ()
--- 
-1.7.4.1
-

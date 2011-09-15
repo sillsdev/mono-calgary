@@ -10,11 +10,11 @@ pointer is inside of the text box.
  .../System.Windows.Forms/XplatUIX11.cs             |   11 +++++------
  1 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-index 7dbb0d6..63f4b87 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
-@@ -1728,16 +1728,15 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/XplatUIX11.cs
+@@ -1728,16 +1728,15 @@
  
  					if (xevent.AnyEvent.type == XEventName.KeyPress ||
  					    xevent.AnyEvent.type == XEventName.KeyRelease) {
@@ -36,6 +36,3 @@ index 7dbb0d6..63f4b87 100644
  				}
  
  				hwnd = Hwnd.GetObjectFromWindow(xevent.AnyEvent.window);
--- 
-1.7.4.1
-

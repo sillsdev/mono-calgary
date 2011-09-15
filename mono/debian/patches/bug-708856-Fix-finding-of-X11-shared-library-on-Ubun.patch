@@ -9,11 +9,11 @@ searching for libX11.so.*. This fixes bug 708856.
  configure.in |    3 ++-
  1 files changed, 2 insertions(+), 1 deletions(-)
 
-diff --git a/configure.in b/configure.in
-index a771d1e..56a6bf9 100644
---- a/configure.in
-+++ b/configure.in
-@@ -2569,8 +2569,9 @@ case "$host" in
+Index: fieldworks-mono/configure.in
+===================================================================
+--- fieldworks-mono.orig/configure.in
++++ fieldworks-mono/configure.in
+@@ -2569,8 +2569,9 @@
  	;;
      *-*-*linux*)
  	AC_PATH_X
@@ -24,6 +24,3 @@ index a771d1e..56a6bf9 100644
  		for r in 4 5 6; do
  			if test -f $i/libX11.so.$r; then
  				X11=libX11.so.$r
--- 
-1.7.4.1
-

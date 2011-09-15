@@ -1,8 +1,8 @@
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-index 3c12380..3b807bc 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
-@@ -2527,8 +2527,12 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridView.cs
+@@ -2525,8 +2525,12 @@
  		}
  
  		public Rectangle GetCellDisplayRectangle (int columnIndex, int rowIndex, bool cutOverflow) {
@@ -17,15 +17,12 @@ index 3c12380..3b807bc 100644
  			}
  			
  			int x = 0, y = 0, w = 0, h = 0;
-@@ -2542,20 +2546,31 @@ namespace System.Windows.Forms {
+@@ -2540,20 +2544,31 @@
  			if (RowHeadersVisible)
  				x += RowHeadersWidth;
  
 -			List<DataGridViewColumn> cols = columns.ColumnDisplayIndexSortedArrayList;
-+			// Handle the top left cell when both column and row headers are showing.
-+			if (columnIndex == -1 && rowIndex == -1)
-+				return new Rectangle (BorderWidth, BorderWidth, RowHeadersWidth, ColumnHeadersHeight);
- 
+-
 -			for (int i = first_col_index; i < cols.Count; i++) {
 -				if (!cols[i].Visible)
 -					continue;
@@ -33,6 +30,10 @@ index 3c12380..3b807bc 100644
 -				if (cols[i].Index == columnIndex) {
 -					w = cols[i].Width;
 -					break;
++			// Handle the top left cell when both column and row headers are showing.
++			if (columnIndex == -1 && rowIndex == -1)
++				return new Rectangle (BorderWidth, BorderWidth, RowHeadersWidth, ColumnHeadersHeight);
++
 +			if (columnIndex >= 0)
 +			{
 +				List<DataGridViewColumn> cols = columns.ColumnDisplayIndexSortedArrayList;
@@ -59,7 +60,7 @@ index 3c12380..3b807bc 100644
  			for (int i = first_row_index; i < Rows.Count; i++) {
  				if (!rows[i].Visible)
  					continue;
-@@ -2568,6 +2583,10 @@ namespace System.Windows.Forms {
+@@ -2566,6 +2581,10 @@
  				y += rows [i].Height;
  			}
  			
@@ -70,7 +71,7 @@ index 3c12380..3b807bc 100644
  			return new Rectangle (x, y, w, h);
  		}
  
-@@ -2918,10 +2937,12 @@ namespace System.Windows.Forms {
+@@ -2916,10 +2935,12 @@
  
  		public void InvalidateCell (int columnIndex, int rowIndex)
  		{
@@ -85,7 +86,7 @@ index 3c12380..3b807bc 100644
  				throw new ArgumentOutOfRangeException ("Row index is out of range.");
  
  			if (!is_binding)
-@@ -3791,7 +3812,7 @@ namespace System.Windows.Forms {
+@@ -3789,7 +3810,7 @@
  				eh (this, e);
  		}
  
@@ -94,11 +95,11 @@ index 3c12380..3b807bc 100644
  		{
  			DataGridViewCellValueEventHandler eh = (DataGridViewCellValueEventHandler)(Events [CellValuePushedEvent]);
  			if (eh != null)
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
-index 88552fb..cb9e30e 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
-@@ -1325,10 +1325,15 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/DataGridViewCell.cs
+@@ -1324,10 +1324,15 @@
  		{
  			object oldValue = this.Value;
  

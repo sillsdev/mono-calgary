@@ -18,11 +18,11 @@ Fix a few problems encountered debugging this problem.
  .../System.Windows.Forms/X11Keyboard.cs            |   33 +++++++++++--------
  1 files changed, 19 insertions(+), 14 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-index fc0c7fe..07f5817 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
-@@ -61,6 +61,7 @@ namespace System.Windows.Forms {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11Keyboard.cs
+@@ -61,6 +61,7 @@
  		private bool num_state, cap_state;
  		private bool initialized;
  		private bool menu_state = false;
@@ -30,7 +30,7 @@ index fc0c7fe..07f5817 100644
  
  		private int NumLockMask;
  		private int AltGrMask;
-@@ -72,6 +73,16 @@ namespace System.Windows.Forms {
+@@ -72,6 +73,16 @@
  			EnsureLayoutInitialized ();
  		}
  
@@ -47,7 +47,7 @@ index fc0c7fe..07f5817 100644
  		public IntPtr ClientWindow {
  			get { return client_window; }
  		}
-@@ -197,10 +208,10 @@ namespace System.Windows.Forms {
+@@ -197,10 +208,10 @@
  
  		public void FocusIn (IntPtr window)
  		{
@@ -59,7 +59,7 @@ index fc0c7fe..07f5817 100644
  			if (!xic_table.ContainsKey ((long) window))
  				CreateXicForWindow (window);
  			IntPtr xic = GetXic (window);
-@@ -210,10 +221,10 @@ namespace System.Windows.Forms {
+@@ -210,10 +221,10 @@
  
  		public void FocusOut (IntPtr window)
  		{
@@ -71,7 +71,7 @@ index fc0c7fe..07f5817 100644
  			IntPtr xic = GetXic (window);
  			if (xic != IntPtr.Zero) {
  				Xutf8ResetIC (xic);
-@@ -451,8 +462,7 @@ namespace System.Windows.Forms {
+@@ -451,8 +462,7 @@
  				if (dead_char != 0) {
  					byte [] bytes = new byte [1];
  					bytes [0] = (byte) dead_char;
@@ -81,7 +81,7 @@ index fc0c7fe..07f5817 100644
  					res = -1;
  				}
  			} else {
-@@ -973,6 +983,7 @@ namespace System.Windows.Forms {
+@@ -973,6 +983,7 @@
  				xic = XCreateIC (xim,
  					XNames.XNInputStyle, styleRoot,
  					XNames.XNClientWindow, window,
@@ -89,7 +89,7 @@ index fc0c7fe..07f5817 100644
  					IntPtr.Zero);
  			}
  			return xic;
-@@ -1180,7 +1191,7 @@ namespace System.Windows.Forms {
+@@ -1180,7 +1191,7 @@
  
  			status = IntPtr.Zero;
  			IntPtr xic = GetXic (client_window);
@@ -98,7 +98,7 @@ index fc0c7fe..07f5817 100644
  				do {
  					res = Xutf8LookupString (xic, ref xevent, lookup_byte_buffer, 100, out keysym_res,  out status);
  					if ((int) status != -1) // XLookupBufferOverflow
-@@ -1193,15 +1204,9 @@ namespace System.Windows.Forms {
+@@ -1193,15 +1204,9 @@
  				keysym = (XKeySym) keysym_res.ToInt32 ();
  				return s.Length;
  			} else {
@@ -116,7 +116,7 @@ index fc0c7fe..07f5817 100644
  				keysym = (XKeySym) keysym_res.ToInt32 ();
  				return res;
  			}
-@@ -1267,7 +1272,7 @@ namespace System.Windows.Forms {
+@@ -1267,7 +1272,7 @@
  		private static extern bool XSetLocaleModifiers (string mods);
  
  		[DllImport ("libX11")]
@@ -125,6 +125,3 @@ index fc0c7fe..07f5817 100644
  		[DllImport ("libX11")]
  		internal extern static int Xutf8LookupString(IntPtr xic, ref XEvent xevent, byte [] buffer, int num_bytes, out IntPtr keysym, out IntPtr status);
  
--- 
-1.7.4.1
-

@@ -8,11 +8,11 @@ Could not identify an FWNX for this
  .../System.Xml.Schema/XmlSchemaException.cs        |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs b/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-index 649df76..c18c753 100644
---- a/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-+++ b/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
-@@ -157,7 +157,7 @@ namespace System.Xml.Schema
+Index: fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
++++ fieldworks-mono/mcs/class/System.XML/System.Xml.Schema/XmlSchemaException.cs
+@@ -157,7 +157,7 @@
  
  		private static string GetMessage (string message, string sourceUri, int lineNumber, int linePosition, XmlSchemaObject sourceObj)
  		{
@@ -21,6 +21,3 @@ index 649df76..c18c753 100644
  			if (lineNumber > 0)
  				msg += String.Format (CultureInfo.InvariantCulture, " XML {0} Line {1}, Position {2}.",
  					(sourceUri != null && sourceUri != "") ? "URI: " + sourceUri + " ." : "",
--- 
-1.7.4.1
-

@@ -9,7 +9,7 @@ bug-660860_DoValidationOnAcceptButton.patch
 bug-660986_DataGridViewDisposeColumns.patch
 bug-664695_ToolStripDisposeEventsFirst.patch
 bug-665233_FixToolStripNotReleasingKeyboardCapture.patch
-bug-672879_ComObjectRelease.patch
+bug-672879_672879.patch
 bug-674098_CopyPasteHangRaceCondition.patch
 bug-692206-Improved-fix-for-mono-bug-692206.patch
 bug-694908-Fix-for-bug-694908.patch

@@ -8,11 +8,11 @@ FWNX-485
  .../System.Windows.Forms/ToolStrip.cs              |    4 ++++
  1 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-index ba013b0..7dfec62 100644
---- a/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-+++ b/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
-@@ -727,6 +727,10 @@ namespace System.Windows.Forms
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ToolStrip.cs
+@@ -727,6 +727,10 @@
  		protected override void Dispose (bool disposing)
  		{
  			if (!IsDisposed) {
@@ -23,6 +23,3 @@ index ba013b0..7dfec62 100644
  				CloseToolTip (null);
  				// ToolStripItem.Dispose modifes the collection,
  				// so we iterate it in reverse order
--- 
-1.7.4.1
-
