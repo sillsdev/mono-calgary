@@ -15,6 +15,16 @@ mono_basic_REVISION=1aaf4fdbc
 
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
 
+filter-ws-errors()
+{
+	sed '
+		/: trailing whitespace\.$/{
+			N
+			d
+		}
+		/^warning: [0-9]* lines* adds* whitespace errors\.$/d'
+}
+
 echo $0: Starting ...
 
 if [ -e $0.config ]; then
@@ -80,12 +90,10 @@ do
 
 		[ ! -s $QUILT_PATCHES/series ] ||
 		(
-			git quiltimport --author "Quilt patch <unknown@unknown.com>" --patches $QUILT_PATCHES &>/dev/null
-			# Undo import in working tree
-			for patch in $(tac "$QUILT_PATCHES/series"); do patch -p1 -sRi "$QUILT_PATCHES/$patch" ; done
+			git tag -f quilt-base
 			quilt push -aq
-			# Refresh
-			git status &>/dev/null
+			git reset -q --hard
+			git quiltimport --author "Quilt patch <unknown@unknown.com>" 2>&1 | filter-ws-errors
 		)
 	)
 done
