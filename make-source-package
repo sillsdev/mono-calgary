@@ -27,7 +27,7 @@ set -e -o pipefail
 
 # Input parameters, from the command line
 PROJ=${1?}
-REVISION=${2-HEAD}
+REVISION=${2-quilt-base}
 
 # Figure out directory names
 PROJ=${PROJ#fieldworks-}
@@ -47,7 +47,7 @@ cd $SRCDIR
 git reset --hard -q
 git clean -dxf -q
 git checkout -q $REVISION
-git describe --tags $REVISION >DESCRIPTION
+git describe --tags >DESCRIPTION
 [ -e configure ] || NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
@@ -67,4 +67,12 @@ cp -a $PKGDIR/debian $SRCDIR/debian
 # Create source package
 cd $SRCDIR
 debuild -S
+cd $OLDPWD
+
+# Put things back as they were
+cd $SRCDIR
+git reset --hard -q
+git clean -dxf -q
+PREV=$(git describe --all HEAD@{1})
+git checkout -q ${PREV#heads/}
 cd $OLDPWD
