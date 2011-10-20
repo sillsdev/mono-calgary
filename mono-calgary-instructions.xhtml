@@ -75,7 +75,7 @@
     <h2>Adding a patch</h2>
     <h3>Creating a patch</h3>
     <p>Warning: When working on code in <span class="path">mono-calgary/mono/fieldworks-mono</span> or <span class="path">mono-calgary/libgdiplus/fieldworks-libgdiplus</span>, if you run the <span class="command">checkout-and-build-mono</span> script it may delete your work.</p>
-    <p><ol>
+    <ol>
       <li>In your mono-calgary tree, you previously ran <span class="command">checkout-and-build-mono</span>, which created git commits in <span class="path">foo/fieldworks-foo</span> of the mono-calgary patches.</li>
       <li>Edit mono code in <span class="path">foo/fieldworks-foo</span>.</li>
       <li>Locally commit in <span class="path">foo/fieldworks-foo</span>:<br />
@@ -90,7 +90,7 @@
       <li>Undo your commit so only mono-calgary patches are applied:<br/>
         <span class="command">mono-calgary/mono/fieldworks-mono$ git reset --hard HEAD^</span></li>
       <li><span class="command">mono-calgary/mono/fieldworks-mono$ cd ~/mono-calgary</span></li>
-    </ol></p>
+    </ol>
     <h3>Add patch</h3>
     <p><b>Note:</b> Don't put new patches directly into <tt>${DIR}/debian/patches</tt>, because quilt will copy them there. Put them in the top-level dir, and then delete them afterwards.</p>
     <table>
@@ -167,7 +167,7 @@
     </table>
     <p><b>Note:</b> lsdiff is in the patchutils package.</p>
     <p>If the patch is rejected during a push, you will have to adjust it manually. Use -f to force it to push, and some hunks will be rejected. You will then have to make edits yourself, to the file that it's trying to patch, corresponding to the rejected hunks. You can then proceed with quilt refresh. The patch utility (called internally by quilt) may ask you questions during the push, and this may avoid the need to edit things manually. If patch thinks the patch is reversed this may (or may not) mean the changes are already in the file.</p>
-    <p><h2>Deleting a patch</h2></p>
+    <h2>Deleting a patch</h2>
     <table>
       <tbody>
         <tr>
