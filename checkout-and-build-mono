@@ -98,22 +98,6 @@ do
 	)
 done
 
-for PROJ in $PROJECTS
-do
-	DIR=$PROJ/fieldworks-$PROJ
-
-	echo $0: Building $PROJ ...
-	(
-		cd $DIR
-
-		[ -e configure ] || NOCONFIGURE=1 ./autogen.sh
-
-		./configure --prefix=$MONO_PREFIX
-
-		make $MAKE_PARAMS "$@"
-	)
-done
-
 echo OLD_ARCH=$(uname -m) > $0.config
 
 # Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
@@ -131,9 +115,21 @@ if [ -f $DESTDIR$MONO_PREFIX/bin/mono-real ]; then
 		$SUDOCMD cp $DESTDIR$MONO_PREFIX/bin/mono $DESTDIR$MONO_PREFIX/bin/mono-fw
 	fi
 fi
+
 for PROJ in $PROJECTS
 do
 	DIR=$PROJ/fieldworks-$PROJ
+
+	echo $0: Building $PROJ ...
+	(
+		cd $DIR
+
+		[ -e configure ] || NOCONFIGURE=1 ./autogen.sh
+
+		./configure --prefix=$MONO_PREFIX
+
+		make $MAKE_PARAMS "$@"
+	)
 
 	echo $0: Installing $PROJ ...
 	(
@@ -142,6 +138,7 @@ do
 		$SUDOCMD make install ${DESTDIR:+DESTDIR=}$DESTDIR
 	)
 done
+
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script
 	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
