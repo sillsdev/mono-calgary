@@ -1,3 +1,28 @@
+fieldworks-mono (2.10.4-1) oneiric; urgency=low
+
+  * Upgrade tp 2.10.4
+  * Add and remove patches:
+    -bug-614850_Modal_614850_v6
+    -bug-621749-ListView-inserting
+    -bug-624915_TreeView2.patch
+    -bug-631810_ModalFormCancel.patch
+    -bug-638722_Remove-Werror-from-the-eglib-tests-too.patch
+    -bug-639939_xlookupstring-fix.patch
+    -bug-641756_ClipboardIdleBug.patch
+    -WinFormsComReleasePatch_FWNX-434.patch
+    -bug-654433_XPathSelectElements.patch
+    -bug-658945_ImproveVerticalPositioning_607548.patch
+    -bug-676009-DTDprohibited_inXML
+    -bug-692987_PipeException.patch
+    +bug-708856-Fix-finding-of-X11-shared-library-on-Ubun.patch
+    +bug-xamarin586_ToolStripItem-HandleClick_FWNX-728.patch
+    +bug-xamarin677_DataGridViewBugs.patch
+    +bug-xamarin867_DisabledListViewBug.patch
+    +bug-xamarin919_possible-Form.ShowDialog-crash.patch
+    +bug-xamarin1212_tristate-checkbox-display.patch
+
+ -- Sue Newland <sue_newland@sil.org>  Fri, 04 Nov 2011 10:20:20 -0600
+
 fieldworks-mono (2.8.1-5) maverick; urgency=low
 
   * Add new patches
