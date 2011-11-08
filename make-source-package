@@ -47,19 +47,21 @@ cd $SRCDIR
 git reset --hard -q
 git clean -dxf -q
 git checkout -q $REVISION
-git describe --tags >DESCRIPTION
 [ -e configure ] || [ -e bootstrap-[0-9]* ] || NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
 # Create original source tarball
-cd $PKGDIR
 TARBALL=${NAME}_${UPSTREAM}.orig.tar.gz
-if [ ! -e $TARBALL ]
+if [ ! -e $PKGDIR/$TARBALL ]
 then
 	echo "Creating $TARBALL"
+	cd $SRCDIR
+	git describe --tags >DESCRIPTION
+	cd $OLDPWD
+	cd $PKGDIR
 	tar -czf $TARBALL --exclude-vcs ${SRCDIR#$PKGDIR/}
+	cd $OLDPWD
 fi
-cd $OLDPWD
 
 # Prepare source package
 cp -a $PKGDIR/debian $SRCDIR/debian
