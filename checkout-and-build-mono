@@ -87,11 +87,12 @@ do
 	(
 		cd $DIR
 
+		git tag -f quilt-base
+
 		export QUILT_PATCHES=../debian/patches
 
 		[ ! -s $QUILT_PATCHES/series ] ||
 		(
-			git tag -f quilt-base
 			quilt push -aq
 			git reset -q --hard
 			git clean -dxf
