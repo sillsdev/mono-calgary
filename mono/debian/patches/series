@@ -28,3 +28,5 @@ bug-xamarin919_possible-Form.ShowDialog-crash.patch
 bug-xamarin1212_tristate-checkbox-display.patch
 bug-xamarin-2090-FixSizeOfTextAreaOnMessageBox.patch
 bug-325669-ImplementMultiDisplaySupport.patch
+bug-490247-DataGridView.patch
+bug-497017-XPath.patch
