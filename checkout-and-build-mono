@@ -93,6 +93,7 @@ do
 			git tag -f quilt-base
 			quilt push -aq
 			git reset -q --hard
+			git clean -dxf
 			git quiltimport --author "Quilt patch <unknown@unknown.com>" 2>&1 | filter-ws-errors
 		)
 	)
@@ -143,6 +144,19 @@ if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script
 	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
 	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
+fi
+
+# Create mapping of oleauth32.dll to libViews.so
+CORLIBCONFIG2=$DESTDIR$MONO_PREFIX/lib/mono/2.0/mscorlib.dll.config
+CORLIBCONFIG4=$DESTDIR$MONO_PREFIX/lib/mono/4.0/mscorlib.dll.config
+if [ ! -f "$CORLIBCONFIG2" ] || [ -z "$(grep oleaut32.dll $CORLIBCONFIG2)" ] ; then
+	$SUDOCMD cat > $CORLIBCONFIG2 <<ENDOFDOC
+	<?xml version="1.0" encoding="utf-8"?>
+	<configuration>
+		    <dllmap dll="oleaut32.dll" target="libViews.so" />
+	</configuration>
+ENDOFDOC
+	$SUDOCMD cp $CORLIBCONFIG2 $CORLIBCONFIG4
 fi
 
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but 

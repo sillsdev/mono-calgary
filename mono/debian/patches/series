@@ -30,3 +30,4 @@ bug-xamarin-2090-FixSizeOfTextAreaOnMessageBox.patch
 bug-325669-ImplementMultiDisplaySupport.patch
 bug-490247-DataGridView.patch
 bug-497017-XPath.patch
+bug-496138-ExceptionTreatment.patch
