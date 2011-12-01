@@ -150,12 +150,13 @@ fi
 CORLIBCONFIG2=$DESTDIR$MONO_PREFIX/lib/mono/2.0/mscorlib.dll.config
 CORLIBCONFIG4=$DESTDIR$MONO_PREFIX/lib/mono/4.0/mscorlib.dll.config
 if [ ! -f "$CORLIBCONFIG2" ] || [ -z "$(grep oleaut32.dll $CORLIBCONFIG2)" ] ; then
-	$SUDOCMD cat > $CORLIBCONFIG2 <<ENDOFDOC
+	cat > /tmp/mscorlib.dll.config <<ENDOFDOC
 	<?xml version="1.0" encoding="utf-8"?>
 	<configuration>
 		    <dllmap dll="oleaut32.dll" target="libViews.so" />
 	</configuration>
 ENDOFDOC
+	$SUDOCMD cp /tmp/mscorlib.dll.config $CORLIBCONFIG2
 	$SUDOCMD cp $CORLIBCONFIG2 $CORLIBCONFIG4
 fi
 
