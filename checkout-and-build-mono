@@ -146,20 +146,6 @@ if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
 fi
 
-# Create mapping of oleauth32.dll to libViews.so
-CORLIBCONFIG2=$DESTDIR$MONO_PREFIX/lib/mono/2.0/mscorlib.dll.config
-CORLIBCONFIG4=$DESTDIR$MONO_PREFIX/lib/mono/4.0/mscorlib.dll.config
-if [ ! -f "$CORLIBCONFIG2" ] || [ -z "$(grep oleaut32.dll $CORLIBCONFIG2)" ] ; then
-	cat > /tmp/mscorlib.dll.config <<ENDOFDOC
-	<?xml version="1.0" encoding="utf-8"?>
-	<configuration>
-		    <dllmap dll="oleaut32.dll" target="libViews.so" />
-	</configuration>
-ENDOFDOC
-	$SUDOCMD cp /tmp/mscorlib.dll.config $CORLIBCONFIG2
-	$SUDOCMD cp $CORLIBCONFIG2 $CORLIBCONFIG4
-fi
-
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but 
 # new versions of mono use name 'mono-2'. Support both until we upgrade or 
 # fix our nant.
