@@ -50,6 +50,8 @@ git checkout -q $REVISION
 [ -e configure ] || [ -e bootstrap-[0-9]* ] || NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
+DEBUILD_OPTS=
+
 # Create original source tarball
 TARBALL=${NAME}_${UPSTREAM}.orig.tar.gz
 if [ ! -e $PKGDIR/$TARBALL ]
@@ -61,6 +63,7 @@ then
 	cd $PKGDIR
 	tar -czf $TARBALL --exclude-vcs ${SRCDIR#$PKGDIR/}
 	cd $OLDPWD
+	DEBUILD_OPTS=-sa
 fi
 
 # Prepare source package
@@ -68,7 +71,7 @@ cp -a $PKGDIR/debian $SRCDIR/debian
 
 # Create source package
 cd $SRCDIR
-debuild -S
+debuild -S $DEBUILD_OPTS
 cd $OLDPWD
 
 # Put things back as they were
