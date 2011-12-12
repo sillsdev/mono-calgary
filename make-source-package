@@ -47,7 +47,6 @@ cd $SRCDIR
 git reset --hard -q
 git clean -dxf -q
 git checkout -q $REVISION
-[ -e configure ] || [ -e bootstrap-[0-9]* ] || NOCONFIGURE=1 ./autogen.sh
 cd $OLDPWD
 
 DEBUILD_OPTS=
