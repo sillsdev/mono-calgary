@@ -11,7 +11,7 @@ Homepage: http://www.mono-project.com/
 
 Package: fieldworks-mono-basic
 Architecture: all
-Depends: ${cli:Depends}
+Depends: ${misc:Depends}, ${cli:Depends}
 Description: A version of mono-basic specially for FieldWorks
  A specially patched version of mono-basic from upstream source repos,
  to support FieldWorks. Not intended for general use.

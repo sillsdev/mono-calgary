@@ -25,8 +25,7 @@ Homepage: http://www.mono-project.com/
 
 Package: fieldworks-mono
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
- libglib2.0-cil (>= 2.12), libgtk2.0-cil (>= 2.12)
+Depends: ${misc:Depends}, ${shlibs:Depends}, ${cli:Depends}
 Description: A version of mono specially for FieldWorks
  A specially patched version of mono from upstream source repos,
  to support FieldWorks. Not intended for general use.
