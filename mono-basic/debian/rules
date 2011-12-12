@@ -5,6 +5,8 @@ LIBFW = /usr/lib/fieldworks
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)
 
+PATH := $(LIBFW)/mono/bin:$(PATH)
+
 %:
 	dh $@ --with cli --parallel
 
