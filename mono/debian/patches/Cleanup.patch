@@ -1,0 +1,69 @@
+From 70c45c7f9a59f26f50fca85f2891b0ba078311a6 Mon Sep 17 00:00:00 2001
+From: Eberhard Beilharz <eb1@sil.org>
+Date: Wed, 7 Dec 2011 17:10:42 +0100
+Subject: [PATCH 1/3] Cleanup
+
+- Change project guid for SWF2k5.csproj which was identical to the one
+  for SWF2k5Tests.csproj
+- Fix use of ExpectedExceptionAttribute to work with newer NUnit versions
+
+Change-Id: Id4f7f083c14ff3f894a651dd0f8fa3adb100fb46
+---
+ mcs/class/Managed.Windows.Forms/SWF2k5.csproj      |    2 +-
+ .../DataGridViewColumnCollectionTest.cs            |    2 +-
+ .../Test/System.Windows.Forms/DataGridViewTest.cs  |    2 +-
+ .../Test/System.Windows.Forms/MdiFormTest.cs       |    2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/SWF2k5.csproj
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/SWF2k5.csproj
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/SWF2k5.csproj
+@@ -3,7 +3,7 @@
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>8.0.50727</ProductVersion>
+     <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{5E6430B2-6B9F-4E76-802E-20207EF80391}</ProjectGuid>
++    <ProjectGuid>{d7189672-039d-496b-9daf-24d1f4afa148}</ProjectGuid>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+     <ApplicationIcon>
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewColumnCollectionTest.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewColumnCollectionTest.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewColumnCollectionTest.cs
+@@ -39,7 +39,7 @@
+ 	public class DataGridViewColumnCollectionTest : TestHelper 
+ 	{
+ 		[Test]
+-		[ExpectedException (typeof (InvalidOperationException), "Column's SortMode cannot be set to Automatic while the DataGridView control's SelectionMode is set to FullColumnSelect.")]
++		[ExpectedException (typeof (InvalidOperationException),  ExpectedMessage="Column's SortMode cannot be set to Automatic while the DataGridView control's SelectionMode is set to FullColumnSelect.")]
+ 		public void AddFullColumnSelect ()
+ 		{
+ 			DataGridView dgv = new DataGridView ();
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewTest.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewTest.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/DataGridViewTest.cs
+@@ -62,7 +62,7 @@
+ 		}
+ 
+ 		[Test]
+-		[ExpectedException (typeof (InvalidOperationException), "Generating Clipboard content is not supported when the ClipboardCopyMode property is Disable.")]
++		[ExpectedException (typeof (InvalidOperationException),  ExpectedMessage="Generating Clipboard content is not supported when the ClipboardCopyMode property is Disable.")]
+ 		public void GetClipboardContentsDisabled ()
+ 		{
+ 			using (DataGridView dgv = new DataGridView ()) {
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/MdiFormTest.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/MdiFormTest.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/MdiFormTest.cs
+@@ -998,7 +998,7 @@
+ 
+ 		[Category("NotWorking")]
+ 		[Test]
+-		[ExpectedException(typeof(ArgumentException), "Cannot add a top level control to a control.")]
++		[ExpectedException(typeof(ArgumentException),  ExpectedMessage="Cannot add a top level control to a control.")]
+ 		public void AddToControlsTest ()
+ 		{
+ 			SetUp (false, true);

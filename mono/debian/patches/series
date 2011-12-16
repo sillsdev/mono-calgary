@@ -31,3 +31,6 @@ bug-325669-ImplementMultiDisplaySupport.patch
 bug-490247-DataGridView.patch
 bug-497017-XPath.patch
 bug-496138-ExceptionTreatment.patch
+bug-xamarin-2394-Fix-crash-when-setting-Row.Height.patch
+bug-xamarin-2392-Adjust-row-height-in-DataGridView.patch
+Cleanup.patch
