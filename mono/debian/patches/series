@@ -35,3 +35,4 @@ bug-xamarin-2394-Fix-crash-when-setting-Row.Height.patch
 bug-xamarin-2392-Adjust-row-height-in-DataGridView.patch
 Cleanup.patch
 bug-463149-Fix-text-position-on-buttons.patch
+bug-xamarin-2787-release-capture-LinkLabel.patch
