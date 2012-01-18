@@ -1,0 +1,66 @@
+From 332c7664cbbf076e6f07f3e1df429dcce4637de6 Mon Sep 17 00:00:00 2001
+From: Eberhard Beilharz <eb1@sil.org>
+Date: Mon, 16 Jan 2012 16:18:20 +0100
+Subject: [PATCH] Xamarin-2908: Improve colors when drawing controls
+
+Previously it was very hard to distinguish an enabled control (e.g.
+checkbox) from a disabled control because the colors looked very
+similar. This change modifies ControlLight and ControlLightLight to
+more closely match the color values used in .NET.
+
+It also fixes the way disabled strings on controls are drawn: unless
+a custom background color is specified we use ControlDark from the
+theme.
+
+Change-Id: I4af6b947a1af45ecd10dd6277206f98b34c22196
+---
+ .../System.Windows.Forms/ThemeWin32Classic.cs      |    9 ++-------
+ .../System.Windows.Forms/X11DesktopColors.cs       |   14 +++++---------
+ 2 files changed, 7 insertions(+), 16 deletions(-)
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ThemeWin32Classic.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ThemeWin32Classic.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ThemeWin32Classic.cs
+@@ -7490,13 +7490,8 @@
+ 
+ 		private void DrawStringDisabled20 (Graphics g, string s, Font font, Rectangle layoutRectangle, Color color, TextFormatFlags flags, bool useDrawString)
+ 		{
+-			CPColor cpcolor = ResPool.GetCPColor (color);
+-
+-			layoutRectangle.Offset (1, 1);
+-			TextRenderer.DrawTextInternal (g, s, font, layoutRectangle, cpcolor.LightLight, flags, useDrawString);
+-
+-			layoutRectangle.Offset (-1, -1);
+-			TextRenderer.DrawTextInternal (g, s, font, layoutRectangle, cpcolor.Dark, flags, useDrawString);
++			Color colorToDraw = (color.ToArgb () == SystemColors.Control.ToArgb ()) ? SystemColors.ControlDark : ResPool.GetCPColor (color).Dark;
++			TextRenderer.DrawTextInternal (g, s, font, layoutRectangle, colorToDraw, flags, useDrawString);
+ 		}
+ 
+ 		public  override void CPDrawStringDisabled (Graphics dc, string s, Font font, Color color, RectangleF layoutRectangle, StringFormat format)
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11DesktopColors.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11DesktopColors.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/X11DesktopColors.cs
+@@ -112,16 +112,12 @@
+ 						ThemeEngine.Current.ColorControlText = ColorFromGdkColor (style.fg[0]);
+ 						ThemeEngine.Current.ColorControlDark = ColorFromGdkColor (style.dark[0]);
+ 						ThemeEngine.Current.ColorControlLight = ColorFromGdkColor (style.light[0]);
+-						ThemeEngine.Current.ColorControlLightLight = ControlPaint.Light(ColorFromGdkColor (style.light[0]));
+-						ThemeEngine.Current.ColorControlDarkDark = ControlPaint.Dark(ColorFromGdkColor (style.dark[0]));
++						ThemeEngine.Current.ColorControlLightLight = ControlPaint.Light (ThemeEngine.Current.ColorControlLight);
++						ThemeEngine.Current.ColorControlDarkDark = ControlPaint.Dark (ThemeEngine.Current.ColorControlDark);
+ 
+-						// We don't want ControlLight and ControlLightLight to disappear on a white background!
+-						Color white = Color.FromArgb(255, 255, 255, 255);
+-						if (ThemeEngine.Current.ColorControlLight.ToArgb() == white.ToArgb()) {
+-							ThemeEngine.Current.ColorControlLight = Color.FromArgb (255, 190, 190, 190);
+-						}
+-						if (ThemeEngine.Current.ColorControlLightLight.ToArgb() == white.ToArgb()) {
+-							ThemeEngine.Current.ColorControlLightLight = Color.FromArgb (255, 220, 220, 220);
++						// We don't want ControlLight to disappear on a white background!
++						if (ThemeEngine.Current.ColorControlLight.ToArgb () == Color.White.ToArgb ()) {
++							ThemeEngine.Current.ColorControlLight = Color.FromArgb (255, 227, 227, 227);
+ 						}
+ 						widget = gtk_menu_new ();
+ 						gtk_widget_ensure_style (widget);

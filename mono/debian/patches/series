@@ -37,3 +37,4 @@ Cleanup.patch
 bug-463149-Fix-text-position-on-buttons.patch
 bug-xamarin-2787-release-capture-LinkLabel.patch
 bug-xamarin-2562-Padding-on-Controls.patch
+bug-xamarin-2908-ImproveColors.patch
