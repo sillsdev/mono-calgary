@@ -108,8 +108,8 @@
           <td>Tell quilt which patch directory to work with</td>
         </tr>
         <tr>
-          <td class="command">quilt pop -a</td>
-          <td>Unapply all patches</td>
+          <td class="command">git reset --hard quilt-base</td>
+          <td>Reset the git repo to the state before applying the quilt patches</td>
         </tr>
         <tr>
           <td class="command">quilt series</td>
@@ -152,16 +152,12 @@
           <td>Repeat push+refresh until quilt says you are at the end of the series and can't push any more</td>
         </tr>
         <tr>
-          <td class="command">git commit -am "Latest patches"</td>
-          <td>Import patch into $DIR/fieldworks-$DIR git repository.</td>
-        </tr>
-        <tr>
           <td class="command">cd ../..</td>
           <td>Return to mono-calgary</td>
         </tr>
         <tr>
-          <td>optional: <span class="command">./check-and-build-mono</span></td>
-          <td>If necessary, rebuild mono to check that patch accomplishes what it is supposed to and does not break other things before committing it to our repo.</td>
+          <td class="command">./check-and-build-mono</td>
+          <td>Rebuild mono. If necessary, check that patch accomplishes what it is supposed to and does not break other things before committing it to our repo. This also commits the patches to the local git repo ($DIR/fieldworks-$DIR).</td>
         </tr>
         <tr>
           <td class="command">git gui</td>
