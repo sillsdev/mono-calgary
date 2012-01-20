@@ -6,7 +6,7 @@ LIBFW = /usr/lib/fieldworks
 export MONO_SHARED_DIR=$(CURDIR)
 
 %:
-	dh --with autoreconf $@
+	dh --with autoreconf --parallel $@
 
 override_dh_autoreconf:
 	NOCONFIGURE=1 ./autogen.sh

@@ -8,7 +8,7 @@ FWMONO=$(FWLIB)/mono
 PATH:=$(FWMONO)/bin:$(PATH)
 
 %:
-	dh $@ --with=autoreconf
+	dh $@ --with autoreconf --parallel
 
 # Use custom script instead of autoreconf
 override_dh_autoreconf:

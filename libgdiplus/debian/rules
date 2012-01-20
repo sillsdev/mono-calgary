@@ -3,7 +3,7 @@
 LIBFW = /usr/lib/fieldworks
 
 %:
-	dh --with autoreconf $@
+	dh --with autoreconf --parallel $@
 
 override_dh_autoreconf:
 	NOCONFIGURE=1 ./autogen.sh
