@@ -3,24 +3,24 @@ Section: cli-mono
 Priority: extra
 Maintainer: Neil Mayhew <neil_mayhew@sil.org>
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
-    dh-autoreconf,
-    gawk,
-    pkg-config,
-    libglib2.0-dev (>= 2.4),
-    mono-runtime, mono-gmcs,
-    bison,
-    libtool,
-    libxml-dom-perl,
-    libxslt1-dev,
-    dc,
-    lsb-release,
-    libx11-dev,
-    libxt-dev,
-    zlib1g-dev,
-    autoconf,
-    automake,
-    python
-Standards-Version: 3.9.1
+ dh-autoreconf,
+ gawk,
+ pkg-config,
+ libglib2.0-dev (>= 2.4),
+ mono-runtime, mono-gmcs,
+ bison,
+ libtool,
+ libxml-dom-perl,
+ libxslt1-dev,
+ dc,
+ lsb-release,
+ libx11-dev,
+ libxt-dev,
+ zlib1g-dev,
+ autoconf,
+ automake,
+ python
+Standards-Version: 3.9.2
 Homepage: http://www.mono-project.com/
 
 Package: fieldworks-mono
