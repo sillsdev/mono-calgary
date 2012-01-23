@@ -1,3 +1,12 @@
+fieldworks-libgdiplus (2.10-2) oneiric; urgency=low
+
+  * Update dependencies
+  * Rework debian/rules
+  * Enable parallel builds
+  * Bump standards version
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 23 Jan 2012 15:56:36 -0700
+
 fieldworks-libgdiplus (2.10-1) oneiric; urgency=low
 
   * Upgrade to upstream 2.10

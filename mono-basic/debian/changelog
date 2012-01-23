@@ -1,9 +1,13 @@
 fieldworks-mono-basic (2.10-2) oneiric; urgency=low
 
+  * Update dependencies
+  * Rework debian/rules
+  * Enable parallel builds
   * Use fieldworks-mono for the build since mono >= 2.10 is required and the
     system mono is typically older than that
+  * Bump standards version
 
- -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 09 Dec 2011 09:04:58 -0700
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 23 Jan 2012 15:57:43 -0700
 
 fieldworks-mono-basic (2.10-1) oneiric; urgency=low
 

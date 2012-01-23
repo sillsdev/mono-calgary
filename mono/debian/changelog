@@ -1,3 +1,13 @@
+fieldworks-mono (2.10.4-2) oneiric; urgency=low
+
+  * Update dependencies
+  * Rework debian/rules
+  * Enable parallel builds
+  * Stop adding a custom mono.pc during package building
+  * Bump standards version
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 23 Jan 2012 15:57:43 -0700
+
 fieldworks-mono (2.10.4-1) oneiric; urgency=low
 
   * Upgrade tp 2.10.4

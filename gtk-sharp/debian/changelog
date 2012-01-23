@@ -1,5 +1,11 @@
 fieldworks-gtk-sharp2 (2.12.10-1) maverick; urgency=low
 
+  [ Eberhard Beilharz ]
   * gtk-sharp2 for Mono 2.0 profile
 
- -- Eberhard Beilharz <eb1@sil.org>  Thu, 22 Dec 2011 15:53:40 +0100
+  [ Neil Mayhew ]
+  * Enable parallel builds
+  * Bump standards version
+  * Update dependencies
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 26 Mar 2012 16:22:20 -0600
