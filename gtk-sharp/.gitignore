@@ -1,0 +1,7 @@
+/fieldworks-gtk-sharp/
+/gtk-sharp*.orig.tar.gz
+/gtk-sharp*.debian.tar.gz
+/gtk-sharp*.dsc
+/gtk-sharp*.changes
+/gtk-sharp*.build
+/gtk-sharp*.upload

@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+LIBFW = /usr/lib/fieldworks
+MONO_PREFIX=$(LIBFW)/mono
+PATH:=$(LIBFW)/bin:/usr/local/bin:$(PATH)
+
+override_dh_auto_configure:
+	./bootstrap-2.12 --prefix=$(MONO_PREFIX)
+
+override_dh_auto_test:
+
+%:
+	dh $@
