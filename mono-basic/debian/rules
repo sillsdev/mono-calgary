@@ -22,3 +22,6 @@ override_dh_strip:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -l $(LIBFW)
+
+override_dh_clideps:
+	dh_clideps --exclude-moduleref=ole32.dll
