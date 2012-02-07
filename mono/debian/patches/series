@@ -38,7 +38,6 @@ bug-463149-Fix-text-position-on-buttons.patch
 bug-xamarin-2787-release-capture-LinkLabel.patch
 bug-xamarin-2562-Padding-on-Controls.patch
 bug-xamarin-2908-ImproveColors.patch
-Set-ErrorInfo-in-Marshal.GetHRForException.patch
 Xamarin-2938-Fix-Screen.FromControl.patch
 Xamarin-2912-Fix-AutoSize-behavior-of-FlowLayoutPane.patch
 Xamarin-2462-Fix-clipping-of-last-line-of-dropdown.patch
