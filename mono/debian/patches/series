@@ -41,3 +41,4 @@ bug-xamarin-2908-ImproveColors.patch
 Xamarin-2938-Fix-Screen.FromControl.patch
 Xamarin-2912-Fix-AutoSize-behavior-of-FlowLayoutPane.patch
 Xamarin-2462-Fix-clipping-of-last-line-of-dropdown.patch
+Xamarin-3418-Dispose-menu-items-on-Menu.Dispose.patch
