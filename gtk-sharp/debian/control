@@ -2,7 +2,9 @@ Source: fieldworks-gtk-sharp2
 Section: libs
 Priority: extra
 Maintainer: Eberhard Beilharz <eb1@sil.org>
-Build-Depends: debhelper (>= 7.0.50~), autotools-dev,
+Build-Depends: debhelper (>= 7.0.50~),
+	dh-autoreconf,
+	cli-common-dev,
 	libglib2.0-dev (>= 2.12.0),
 	libgtk2.0-dev (>= 2.12.0),
 	fieldworks-mono (>= 2.10.4)
@@ -11,10 +13,9 @@ Homepage: http://www.mono-project.com/GtkSharp
 #Vcs-Git: git://git.debian.org/collab-maint/gtk-sharp-2.12.git
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/gtk-sharp-2.12.git;a=summary
 
-Package: gtk-sharp2-sil
+Package: fieldworks-gtk-sharp2
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
-	mono-2.10 (>= 2.10.4) | fieldworks-mono (>= 2.10.4)
+Depends: ${misc:Depends}, ${shlibs:Depends}, ${cli:Depends}
 Description: A version of GTK# 2 specially for FieldWorks
  A version of GTK# compiled with the Mono 2.0 profile to support FieldWorks.
  Not intended for general use.
