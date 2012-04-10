@@ -1,4 +1,4 @@
-Source: gtk-sharp2-sil
+Source: fieldworks-gtk-sharp2
 Section: libs
 Priority: extra
 Maintainer: Eberhard Beilharz <eb1@sil.org>
