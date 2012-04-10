@@ -8,7 +8,7 @@ MONO_PREFIX=$(LIBFW)/mono
 PATH:=$(LIBFW)/bin:$(PATH)
 
 %:
-	dh $@ --with=autoreconf,cli
+	dh $@ --with=autoreconf
 
 # Use custom script instead of autoreconf
 override_dh_autoreconf:
