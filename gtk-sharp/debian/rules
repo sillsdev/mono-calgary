@@ -3,9 +3,9 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-LIBFW = /usr/lib/fieldworks
-MONO_PREFIX=$(LIBFW)/mono
-PATH:=$(LIBFW)/bin:$(PATH)
+FWLIB = /usr/lib/fieldworks
+FWMONO=$(FWLIB)/mono
+PATH:=$(FWMONO)/bin:$(PATH)
 
 %:
 	dh $@ --with=autoreconf
@@ -15,18 +15,18 @@ override_dh_autoreconf:
 	NOCONFIGURE=1 dh_autoreconf ./bootstrap-2.12
 
 override_dh_auto_configure:
-	dh_auto_configure -- --prefix=$(MONO_PREFIX)
+	dh_auto_configure -- --prefix=$(FWMONO)
 
 # Don't run make check
 override_dh_auto_test:
 
-# Include LIBFW in shlib dirs searched
+# Include FWLIB in shlib dirs searched
 override_dh_shlibdeps:
-	dh_shlibdeps -l$(MONO_PREFIX)/lib
+	dh_shlibdeps -l$(FWMONO)/lib
 
-# Include LIBFW in cli dirs searched
+# Include FWLIB in cli dirs searched
 override_dh_clideps:
-	dh_clideps -l$(MONO_PREFIX)/lib
+	dh_clideps -l$(FWMONO)/lib
 
 # Put debugging symbols in /usr/lib/debug
 override_dh_strip:
