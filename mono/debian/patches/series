@@ -44,3 +44,4 @@ Xamarin-2462-Fix-clipping-of-last-line-of-dropdown.patch
 Xamarin-3418-Dispose-menu-items-on-Menu.Dispose.patch
 Xamarin-4158-Fix-off-screen-calculation-of-ToolStrip.patch
 Xamarin-4690-Fix-MoveToRoot.patch
+Xamarin-4739-Fix-selection-of-child-nodes.patch
