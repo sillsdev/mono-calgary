@@ -1,0 +1,111 @@
+From 81d53d46a18b5f0fec285ee61889f455dfb71d5a Mon Sep 17 00:00:00 2001
+From: Eberhard Beilharz <eb1@sil.org>
+Date: Mon, 7 May 2012 17:53:22 +0200
+Subject: [PATCH] Xamarin-4921: Fix Listbox.SelectedItem after adding sorted
+ item
+
+When we add an item to a sorted listbox the indices of the selected
+items change and need to be updated.
+
+Change-Id: Ia32849fe10480354835dcd48b37d326d612af04f
+---
+ .../System.Windows.Forms/ListBox.cs                |   15 +++++-
+ .../Test/System.Windows.Forms/ListBoxTest.cs       |   53 ++++++++++++++++++++
+ 2 files changed, 67 insertions(+), 1 deletions(-)
+
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListBox.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListBox.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/System.Windows.Forms/ListBox.cs
+@@ -2589,13 +2589,26 @@
+ 			public int Add (object item)
+ 			{
+ 				int idx;
++				object[] selectedItems = null;
++
++				// we need to remember the original selected items so that we can update the indices
++				if (owner.sorted) {
++					selectedItems = new object[owner.SelectedItems.Count];
++					owner.SelectedItems.CopyTo (selectedItems, 0);
++				}
+ 
+ 				idx = AddItem (item);
+ 				owner.CollectionChanged ();
+ 				
+ 				// If we are sorted, the item probably moved indexes, get the real one
+-				if (owner.sorted)
++				if (owner.sorted) {
++					// update indices of selected items
++					owner.SelectedIndices.Clear ();
++					for (int i = 0; i < selectedItems.Length; i++) {
++						owner.SelectedIndex = this.IndexOf (selectedItems [i]);
++					}
+ 					return this.IndexOf (item);
++				}
+ 					
+ 				return idx;
+ 			}
+Index: fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListBoxTest.cs
+===================================================================
+--- fieldworks-mono.orig/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListBoxTest.cs
++++ fieldworks-mono/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/ListBoxTest.cs
+@@ -854,6 +854,59 @@
+ 			}
+ 			Assert.AreEqual ((Array)expectedAddPositions, (Array)addedAtList.ToArray (typeof (int)), "addedAtList");
+ 		}
++
++		[Test]
++		public void SelectedIndexUpdated () // Xamarin bug 4921
++		{
++			using (Form f = new Form ()) {
++				f.ShowInTaskbar = false;
++
++				ListBox l = new ListBox ();
++				l.Sorted = true;
++				f.Controls.Add (l);
++
++				l.Items.Add ("B");
++				l.SelectedIndex = 0;
++
++				Assert.AreEqual (0, l.SelectedIndex);
++
++				l.Items.Add ("A");
++				Assert.AreEqual (1, l.SelectedIndex);
++			}
++		}
++
++		[Test]
++		public void SelectedIndexUpdated_MultiSelect () // Xamarin bug 4921
++		{
++			using (Form f = new Form ()) {
++				f.ShowInTaskbar = false;
++
++				ListBox l = new ListBox ();
++				l.Sorted = true;
++				l.SelectionMode = SelectionMode.MultiSimple;
++				f.Controls.Add (l);
++
++				l.Items.Add ("B");
++				l.Items.Add ("C");
++				l.SelectedIndex = 0;
++				l.SelectedIndex = 1;
++
++				Assert.AreEqual (2, l.SelectedIndices.Count);
++				Assert.AreEqual (0, l.SelectedIndices [0]);
++				Assert.AreEqual (1, l.SelectedIndices [1]);
++				Assert.AreEqual (2, l.SelectedItems.Count);
++				Assert.AreEqual ("B", l.SelectedItems [0]);
++				Assert.AreEqual ("C", l.SelectedItems [1]);
++
++				l.Items.Add ("A");
++				Assert.AreEqual (2, l.SelectedIndices.Count);
++				Assert.AreEqual (1, l.SelectedIndices[0]);
++				Assert.AreEqual (2, l.SelectedIndices[1]);
++				Assert.AreEqual (2, l.SelectedItems.Count);
++				Assert.AreEqual ("B", l.SelectedItems [0]);
++				Assert.AreEqual ("C", l.SelectedItems [1]);
++			}
++		}
+ 	}
+ 
+ 	[TestFixture]
