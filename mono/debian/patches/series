@@ -48,3 +48,4 @@ Xamarin-4739-Fix-selection-of-child-nodes.patch
 Xamarin-4921-Fix-Listbox.SelectedItem-after-adding-s.patch
 Xamarin-5010-Fix-TreeNode-removal-bug.patch
 Add-missing-4.0-api.patch
+Xamarin-5116-Fix-pasting-of-text-with-upper-ASCII-ch.patch
