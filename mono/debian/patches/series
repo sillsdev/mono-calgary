@@ -49,3 +49,4 @@ Xamarin-4921-Fix-Listbox.SelectedItem-after-adding-s.patch
 Xamarin-5010-Fix-TreeNode-removal-bug.patch
 Add-missing-4.0-api.patch
 Xamarin-5116-Fix-pasting-of-text-with-upper-ASCII-ch.patch
+Xamarin-4959-Fix-copy-of-clipboard-data-after-app-ex.patch
