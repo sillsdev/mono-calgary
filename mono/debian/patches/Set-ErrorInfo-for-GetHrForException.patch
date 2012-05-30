@@ -1,194 +1,195 @@
-From 7df58f2089ec7652cbbc40042f2616373ac8c82d Mon Sep 17 00:00:00 2001
-From: Eberhard Beilharz <eb1@sil.org>
-Date: Tue, 17 Jan 2012 15:25:43 +0100
-Subject: [PATCH] Set ErrorInfo in Marshal.GetHRForException
-
-Marshal.GetHRForException had a MonoTODO because it needs to set
-the errorinfo object so that exceptions get properly passed to
-unmanaged code. Since not all managed exceptions have a corresponding
-HR value but we might need to get to the original thrown exception
-we implement a ManagedErrorInfo helper class that implements the
-IErrorInfo interface but also stores the exception.
-
-In GetExceptionForHR we check if the errorinfo we get is a
-ManagedErrorInfo. If it is we return the exception stored in there
-(if it converts to the same error code), otherwise we construct a new
-exception.
-
-Change-Id: Ib400636ee3caa54c9db8f41dbd40f15710024a63
----
- .../ManagedErrorInfo.cs                            |   63 ++++++++++++++++++++
- .../System.Runtime.InteropServices/Marshal.cs      |   54 +++++++++++------
- mcs/class/corlib/corlib.dll.sources                |    1 +
- 3 files changed, 98 insertions(+), 20 deletions(-)
- create mode 100644 mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
-
-Index: fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
-===================================================================
---- /dev/null
-+++ fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
-@@ -0,0 +1,63 @@
-+// ManagedErrorInfo class
-+//
-+// Eberhard Beilharz (eb1@sil.org)
-+//
-+// Copyright (C) 2012 SIL International
-+using System;
-+using System.Runtime.CompilerServices;
-+using System.Security;
-+
-+namespace System.Runtime.InteropServices
-+{
-+	/// <summary>
-+	/// Helper class that allows to pass an exception as an IErrorInfo object. This is useful
-+	/// when we get an exception in managed code that is called from unmanaged code that is called
-+	/// from managed code and we want to get to the exception in the outer managed code.
-+	/// </summary>
-+	internal class ManagedErrorInfo: IErrorInfo
-+	{
-+		private Exception m_Exception;
-+		public ManagedErrorInfo (Exception e)
-+		{
-+			m_Exception = e;
-+		}
-+
-+		public Exception Exception {
-+			get { return m_Exception; }
-+		}
-+
-+		#region IErrorInfo
-+		public int GetGUID (out Guid guid)
-+		{
-+			// not supported
-+			guid = Guid.Empty;
-+			return 0;
-+		}
-+
-+		public int GetSource (out string source)
-+		{
-+			source = m_Exception.Source;
-+			return 0;
-+		}
-+
-+		public int GetDescription (out string description)
-+		{
-+			description = m_Exception.Message;
-+			return 0;
-+		}
-+
-+		public int GetHelpFile (out string helpFile)
-+		{
-+			helpFile = m_Exception.HelpLink;
-+			return 0;
-+		}
-+
-+		public int GetHelpContext(out uint helpContext)
-+		{
-+			// not supported
-+			helpContext = 0;
-+			return 0;
-+		}
-+		#endregion
-+	}
-+}
-Index: fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
-===================================================================
---- fieldworks-mono.orig/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
-+++ fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
-@@ -363,9 +363,16 @@
- 		}
- #endif // !NET_2_1
- 
--		[MonoTODO ("SetErrorInfo")]
- 		public static int GetHRForException (Exception e)
- 		{
-+			try {
-+				var errorInfo = new ManagedErrorInfo(e);
-+				SetErrorInfo (0, errorInfo);
-+			} catch (Exception ee) {
-+				// ignore any exception - probably there's no suitable SetErrorInfo
-+				// method available.
-+			}
-+
- 			return e.hresult;
- 		}
- 
-@@ -1243,6 +1250,10 @@
- 		}
- 
- 		[DllImport ("oleaut32.dll", CharSet=CharSet.Unicode)]
-+		internal static extern int SetErrorInfo (int dwReserved,
-+			[MarshalAs(UnmanagedType.Interface)] IErrorInfo pIErrorInfo);
-+
-+		[DllImport ("oleaut32.dll", CharSet=CharSet.Unicode)]
- 		internal static extern int GetErrorInfo (int dwReserved,
- 			[MarshalAs(UnmanagedType.Interface)] out IErrorInfo ppIErrorInfo);
- 
-@@ -1253,10 +1264,8 @@
- 
- 		public static Exception GetExceptionForHR (int errorCode, IntPtr errorInfoPtr)
- 		{
--			Exception e = ConvertHrToException (errorCode);
+@@ -1,194 +0,0 @@
+-From 7df58f2089ec7652cbbc40042f2616373ac8c82d Mon Sep 17 00:00:00 2001
+-From: Eberhard Beilharz <eb1@sil.org>
+-Date: Tue, 17 Jan 2012 15:25:43 +0100
+-Subject: [PATCH] Set ErrorInfo in Marshal.GetHRForException
 -
--			if (errorInfoPtr != (IntPtr)(-1) && e != null) {
--				IErrorInfo errorInfo = null;
-+			IErrorInfo errorInfo = null;
-+			if (errorInfoPtr != (IntPtr)(-1)) {
- 				if (errorInfoPtr == IntPtr.Zero) {
- 					try {
- 						if (GetErrorInfo (0, out errorInfo) != 0) {
-@@ -1270,22 +1279,27 @@
- 				} else {
- 					errorInfo = Marshal.GetObjectForIUnknown (errorInfoPtr) as IErrorInfo;
- 				}
-+			}
- 
--				if (errorInfo != null) {
--					uint helpContext;
--					errorInfo.GetHelpContext (out helpContext);
--					string str;
--					errorInfo.GetSource (out str);
--					e.Source = str;
--					errorInfo.GetDescription (out str);
--					e.SetMessage (str);
--					errorInfo.GetHelpFile (out str);
+-Marshal.GetHRForException had a MonoTODO because it needs to set
+-the errorinfo object so that exceptions get properly passed to
+-unmanaged code. Since not all managed exceptions have a corresponding
+-HR value but we might need to get to the original thrown exception
+-we implement a ManagedErrorInfo helper class that implements the
+-IErrorInfo interface but also stores the exception.
 -
--					if (helpContext == 0) {
--						e.HelpLink = str;
--					} else {
--						e.HelpLink = string.Format ("{0}#{1}", str, helpContext);
--					}
-+			if (errorInfo is ManagedErrorInfo && ((ManagedErrorInfo)errorInfo).Exception.hresult == errorCode) {
-+				return ((ManagedErrorInfo)errorInfo).Exception;
-+			}
-+
-+			Exception e = ConvertHrToException (errorCode);
-+			if (errorInfo != null && e != null) {
-+				uint helpContext;
-+				errorInfo.GetHelpContext (out helpContext);
-+				string str;
-+				errorInfo.GetSource (out str);
-+				e.Source = str;
-+				errorInfo.GetDescription (out str);
-+				e.SetMessage (str);
-+				errorInfo.GetHelpFile (out str);
-+
-+				if (helpContext == 0) {
-+					e.HelpLink = str;
-+				} else {
-+					e.HelpLink = string.Format ("{0}#{1}", str, helpContext);
- 				}
- 			}
- 			return e;
-Index: fieldworks-mono/mcs/class/corlib/corlib.dll.sources
-===================================================================
---- fieldworks-mono.orig/mcs/class/corlib/corlib.dll.sources
-+++ fieldworks-mono/mcs/class/corlib/corlib.dll.sources
-@@ -772,6 +772,7 @@
- System.Runtime.InteropServices/LCIDConversionAttribute.cs
- System.Runtime.InteropServices/LIBFLAGS.cs
- System.Runtime.InteropServices/LayoutKind.cs
-+System.Runtime.InteropServices/ManagedErrorInfo.cs
- System.Runtime.InteropServices/Marshal.cs
- System.Runtime.InteropServices/MarshalAsAttribute.cs
- System.Runtime.InteropServices/MarshalDirectiveException.cs
+-In GetExceptionForHR we check if the errorinfo we get is a
+-ManagedErrorInfo. If it is we return the exception stored in there
+-(if it converts to the same error code), otherwise we construct a new
+-exception.
+-
+-Change-Id: Ib400636ee3caa54c9db8f41dbd40f15710024a63
+----
+- .../ManagedErrorInfo.cs                            |   63 ++++++++++++++++++++
+- .../System.Runtime.InteropServices/Marshal.cs      |   54 +++++++++++------
+- mcs/class/corlib/corlib.dll.sources                |    1 +
+- 3 files changed, 98 insertions(+), 20 deletions(-)
+- create mode 100644 mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
+-
+-Index: fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
+-===================================================================
+---- /dev/null
+-+++ fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/ManagedErrorInfo.cs
+-@@ -0,0 +1,63 @@
+-+// ManagedErrorInfo class
+-+//
+-+// Eberhard Beilharz (eb1@sil.org)
+-+//
+-+// Copyright (C) 2012 SIL International
+-+using System;
+-+using System.Runtime.CompilerServices;
+-+using System.Security;
+-+
+-+namespace System.Runtime.InteropServices
+-+{
+-+	/// <summary>
+-+	/// Helper class that allows to pass an exception as an IErrorInfo object. This is useful
+-+	/// when we get an exception in managed code that is called from unmanaged code that is called
+-+	/// from managed code and we want to get to the exception in the outer managed code.
+-+	/// </summary>
+-+	internal class ManagedErrorInfo: IErrorInfo
+-+	{
+-+		private Exception m_Exception;
+-+		public ManagedErrorInfo (Exception e)
+-+		{
+-+			m_Exception = e;
+-+		}
+-+
+-+		public Exception Exception {
+-+			get { return m_Exception; }
+-+		}
+-+
+-+		#region IErrorInfo
+-+		public int GetGUID (out Guid guid)
+-+		{
+-+			// not supported
+-+			guid = Guid.Empty;
+-+			return 0;
+-+		}
+-+
+-+		public int GetSource (out string source)
+-+		{
+-+			source = m_Exception.Source;
+-+			return 0;
+-+		}
+-+
+-+		public int GetDescription (out string description)
+-+		{
+-+			description = m_Exception.Message;
+-+			return 0;
+-+		}
+-+
+-+		public int GetHelpFile (out string helpFile)
+-+		{
+-+			helpFile = m_Exception.HelpLink;
+-+			return 0;
+-+		}
+-+
+-+		public int GetHelpContext(out uint helpContext)
+-+		{
+-+			// not supported
+-+			helpContext = 0;
+-+			return 0;
+-+		}
+-+		#endregion
+-+	}
+-+}
+-Index: fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
+-===================================================================
+---- fieldworks-mono.orig/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
+-+++ fieldworks-mono/mcs/class/corlib/System.Runtime.InteropServices/Marshal.cs
+-@@ -363,9 +363,16 @@
+- 		}
+- #endif // !NET_2_1
+- 
+--		[MonoTODO ("SetErrorInfo")]
+- 		public static int GetHRForException (Exception e)
+- 		{
+-+			try {
+-+				var errorInfo = new ManagedErrorInfo(e);
+-+				SetErrorInfo (0, errorInfo);
+-+			} catch (Exception ee) {
+-+				// ignore any exception - probably there's no suitable SetErrorInfo
+-+				// method available.
+-+			}
+-+
+- 			return e.hresult;
+- 		}
+- 
+-@@ -1243,6 +1250,10 @@
+- 		}
+- 
+- 		[DllImport ("oleaut32.dll", CharSet=CharSet.Unicode)]
+-+		internal static extern int SetErrorInfo (int dwReserved,
+-+			[MarshalAs(UnmanagedType.Interface)] IErrorInfo pIErrorInfo);
+-+
+-+		[DllImport ("oleaut32.dll", CharSet=CharSet.Unicode)]
+- 		internal static extern int GetErrorInfo (int dwReserved,
+- 			[MarshalAs(UnmanagedType.Interface)] out IErrorInfo ppIErrorInfo);
+- 
+-@@ -1253,10 +1264,8 @@
+- 
+- 		public static Exception GetExceptionForHR (int errorCode, IntPtr errorInfoPtr)
+- 		{
+--			Exception e = ConvertHrToException (errorCode);
+--
+--			if (errorInfoPtr != (IntPtr)(-1) && e != null) {
+--				IErrorInfo errorInfo = null;
+-+			IErrorInfo errorInfo = null;
+-+			if (errorInfoPtr != (IntPtr)(-1)) {
+- 				if (errorInfoPtr == IntPtr.Zero) {
+- 					try {
+- 						if (GetErrorInfo (0, out errorInfo) != 0) {
+-@@ -1270,22 +1279,27 @@
+- 				} else {
+- 					errorInfo = Marshal.GetObjectForIUnknown (errorInfoPtr) as IErrorInfo;
+- 				}
+-+			}
+- 
+--				if (errorInfo != null) {
+--					uint helpContext;
+--					errorInfo.GetHelpContext (out helpContext);
+--					string str;
+--					errorInfo.GetSource (out str);
+--					e.Source = str;
+--					errorInfo.GetDescription (out str);
+--					e.SetMessage (str);
+--					errorInfo.GetHelpFile (out str);
+--
+--					if (helpContext == 0) {
+--						e.HelpLink = str;
+--					} else {
+--						e.HelpLink = string.Format ("{0}#{1}", str, helpContext);
+--					}
+-+			if (errorInfo is ManagedErrorInfo && ((ManagedErrorInfo)errorInfo).Exception.hresult == errorCode) {
+-+				return ((ManagedErrorInfo)errorInfo).Exception;
+-+			}
+-+
+-+			Exception e = ConvertHrToException (errorCode);
+-+			if (errorInfo != null && e != null) {
+-+				uint helpContext;
+-+				errorInfo.GetHelpContext (out helpContext);
+-+				string str;
+-+				errorInfo.GetSource (out str);
+-+				e.Source = str;
+-+				errorInfo.GetDescription (out str);
+-+				e.SetMessage (str);
+-+				errorInfo.GetHelpFile (out str);
+-+
+-+				if (helpContext == 0) {
+-+					e.HelpLink = str;
+-+				} else {
+-+					e.HelpLink = string.Format ("{0}#{1}", str, helpContext);
+- 				}
+- 			}
+- 			return e;
+-Index: fieldworks-mono/mcs/class/corlib/corlib.dll.sources
+-===================================================================
+---- fieldworks-mono.orig/mcs/class/corlib/corlib.dll.sources
+-+++ fieldworks-mono/mcs/class/corlib/corlib.dll.sources
+-@@ -772,6 +772,7 @@
+- System.Runtime.InteropServices/LCIDConversionAttribute.cs
+- System.Runtime.InteropServices/LIBFLAGS.cs
+- System.Runtime.InteropServices/LayoutKind.cs
+-+System.Runtime.InteropServices/ManagedErrorInfo.cs
+- System.Runtime.InteropServices/Marshal.cs
+- System.Runtime.InteropServices/MarshalAsAttribute.cs
+- System.Runtime.InteropServices/MarshalDirectiveException.cs
