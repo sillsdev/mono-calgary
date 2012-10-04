@@ -52,3 +52,5 @@ Xamarin-5116-Fix-pasting-of-text-with-upper-ASCII-ch.patch
 Xamarin-4959-Fix-copy-of-clipboard-data-after-app-ex.patch
 Xamarin-5278-Fix-Binder.SelectMethod-when-passed-argument-is-COM-.patch
 FWNX-800-Set-ErrorInfo-in-GetHrForException.patch
+Xamarin-6708-msbuild-bugs-backport.patch
+Xamarin-7594-CoreCompile-Task-Inputs-bug.patch

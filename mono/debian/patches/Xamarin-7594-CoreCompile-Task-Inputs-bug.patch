@@ -1,0 +1,27 @@
+From 41b162489937880faddff4daa18aa8cc8d04bdea Mon Sep 17 00:00:00 2001
+From: Stephen McConnel <stephen_mcconnel@sil.org>
+Date: Tue, 2 Oct 2012 15:36:38 -0500
+Subject: [PATCH] Fix Xamarin bug 7594.
+
+@(DocFileItem) is an output of CoreCompile, not an input.  (This bug still
+exists in the current sources in the mono git repository.)
+---
+ mcs/tools/xbuild/xbuild/Microsoft.CSharp.targets |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Index: fieldworks-mono/mcs/tools/xbuild/xbuild/Microsoft.CSharp.targets
+===================================================================
+--- fieldworks-mono.orig/mcs/tools/xbuild/xbuild/Microsoft.CSharp.targets
++++ fieldworks-mono/mcs/tools/xbuild/xbuild/Microsoft.CSharp.targets
+@@ -23,9 +23,9 @@
+ 
+ 	<Target
+ 		Name="CoreCompile"
+-		Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);@(DocFileItem);
++		Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);
+ 			$(KeyOriginatorFile);@(ReferencePath);$(Win32Icon);$(Win32Resource)"
+-		Outputs="@(IntermediateAssembly)"
++		Outputs="@(DocFileItem);@(IntermediateAssembly)"
+ 		DependsOnTargets="$(CoreCompileDependsOn)"
+ 	>
+ 		<Csc
