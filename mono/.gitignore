@@ -1,7 +1,1 @@
-/fieldworks-mono/
-/fieldworks-mono_*.orig.tar.gz
-/fieldworks-mono_*.debian.tar.gz
-/fieldworks-mono_*.dsc
-/fieldworks-mono_*.changes
-/fieldworks-mono_*.build
-/fieldworks-mono_*.upload
+/source.git/

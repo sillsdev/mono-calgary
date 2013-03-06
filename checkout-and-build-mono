@@ -8,23 +8,7 @@ set -e
 
 PROJECTS="libgdiplus mono mono-basic gtk-sharp"
 
-# Revisions can be a commit hash, a tag or a remote branch (eg origin/mono-2.8)
-libgdiplus_REVISION=2.10
-mono_REVISION=2.10.4
-mono_basic_REVISION=1aaf4fdbc
-gtk_sharp_REVISION=2.12.10
-
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
-
-filter-ws-errors()
-{
-	sed '
-		/: trailing whitespace\.$/{
-			N
-			d
-		}
-		/^warning: [0-9]* lines* adds* whitespace errors\.$/d'
-}
 
 echo $0: Starting ...
 
@@ -45,11 +29,16 @@ for PROJ in $PROJECTS
 do
 	DIR=$PROJ/fieldworks-$PROJ
 
-	eval REVISION=\$${PROJ//-/_}_REVISION
-
 	if [ ! -d $DIR ]; then
 		echo $0: Cloning $PROJ ...
-		git clone git://github.com/mono/$PROJ.git $DIR
+		git clone -b develop git://github.com/sillsdev/$PROJ.git $DIR
+		cd $DIR
+		USER=$(git config fwinit.gerrituser)
+		if [ -n "$USER" ]; then
+			git remote set-url --push origin ssh://$USER@gerrit.lsdev.sil.org:59418/$PROJ.git
+			git config remote.origin.push +refs/heads/*:refs/for/*
+		fi
+		cd $OLDPWD
 	fi
 
 	echo $0: Updating $PROJ ...
@@ -65,39 +54,8 @@ do
 			git clean -dxf
 		fi
 
-		# Fetch latest revisions, if necessary
-		if ! git rev-parse --verify -q $REVISION >/dev/null
-		then
-			echo "$0: Fetching latest changes for $DIR git working copy ..."
-			git fetch origin
-		fi
-
-		# Create a local branch
-		git checkout -q $REVISION --
-		git branch -f calgary
-		git checkout -q calgary
-	)
-done
-
-for PROJ in $PROJECTS
-do
-	DIR=$PROJ/fieldworks-$PROJ
-
-	echo $0: Applying patches in $PROJ ...
-	(
-		cd $DIR
-
-		git tag -f quilt-base
-
-		export QUILT_PATCHES=../debian/patches
-
-		[ ! -s $QUILT_PATCHES/series ] ||
-		(
-			quilt push -aq
-			git reset -q --hard
-			git clean -dxf
-			git quiltimport --author "Quilt patch <unknown@unknown.com>" 2>&1 | filter-ws-errors
-		)
+		git checkout -q develop
+		git pull --rebase
 	)
 done
 
@@ -154,4 +112,3 @@ fi
 $SUDOCMD ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
 
 echo $0: Finished successfully.
-

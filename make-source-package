@@ -4,21 +4,12 @@
 #
 # Create a new source package from the contents of the relevant git directories:
 #
-#	PROJ     libgdiplus or mono
-#	PKGDIR   libgdiplus or mono
-#	SRCDIR   $PKGDIR/fieldworks-$PROJ
+# Usage: make-source-package PROJ [BASE]
 #
-# $SRCDIR is created by checkout-and-build-mono, so you should have run that first.
-# The state of $SRCDIR (patched, etc.) doesn't matter, but the current revision does.
-# By default, this script uses HEAD as the revision, which is a synonym for the
-# currently checked out revision.
+# PROJ is a project name like libgdiplus or mono
+# BASE defaults to HEAD, but could be any tag, branch or hash
 #
-# Usage: make-source-package PROJ [REVISION]
-#
-# PROJ can be PKGDIR
-# REVISION defaults to HEAD, but could be any tag, branch or hash
-#
-# The debian/changelog should be updated first, using dch-i "" to create a new entry,
+# The debian/changelog should be updated first, using dch -i "" to create a new entry,
 # and then an editor to fill in information about the change. You should set
 # DEBEMAIL and DEBFULLNAME in your .profile or environment to make this work properly.
 
@@ -27,56 +18,80 @@ set -e -o pipefail
 
 # Input parameters, from the command line
 PROJ=${1?}
-REVISION=${2-quilt-base}
+REVISION=${2-HEAD}
 
 # Figure out directory names
 PROJ=${PROJ#fieldworks-}
 PROJ=${PROJ%/}
 PKGDIR=$PROJ
-SRCDIR=$PKGDIR/fieldworks-$PROJ
 
-# Obtain package name and version
-cd $PKGDIR
-NAME=$(dpkg-parsechangelog | sed -n '/^Source: /s///p')
-VERSION=$(dpkg-parsechangelog | sed -n '/^Version: /s///p')
-UPSTREAM=$(sed 's/-[^-]*$//' <<<$VERSION)
-cd $OLDPWD
-
-# Prepare source
-cd $SRCDIR
-git reset --hard -q
-git clean -dxf -q
-git checkout -q $REVISION
-cd $OLDPWD
-
-DEBUILD_OPTS=
-
-# Create original source tarball
-TARBALL=${NAME}_${UPSTREAM}.orig.tar.gz
-if [ ! -e $PKGDIR/$TARBALL ]
+# Safety checks
+if [ ! -d $PKGDIR/debian ]
 then
-	echo "Creating $TARBALL"
-	cd $SRCDIR
-	git describe --tags >DESCRIPTION
-	cd $OLDPWD
-	cd $PKGDIR
-	tar -czf $TARBALL --exclude-vcs ${SRCDIR#$PKGDIR/}
-	cd $OLDPWD
-	DEBUILD_OPTS=-sa
+	echo "There is no $PKGDIR/debian directory - are you in the right directory?" >&2
+	exit 1
 fi
 
-# Prepare source package
-cp -a $PKGDIR/debian $SRCDIR/debian
+# Move to the package directory
+cd $PKGDIR
 
-# Create source package
-cd $SRCDIR
-debuild -S $DEBUILD_OPTS
-cd $OLDPWD
+# Obtain the package name and version
+NAME=$(dpkg-parsechangelog | sed -n '/^Source: /s///p')
+VERSION=$(dpkg-parsechangelog | sed -n '/^Version: /s///p')
+UPSTREAM=${VERSION%-*}
+TAG=$UPSTREAM
 
-# Put things back as they were
-cd $SRCDIR
-git reset --hard -q
-git clean -dxf -q
-PREV=$(git describe --all HEAD@{1})
-git checkout -q ${PREV#heads/}
-cd $OLDPWD
+# Checkout the source repo, if necessary
+if [ ! -d source.git ]
+then
+	echo "Cloning $PROJ source repo"
+	git clone --mirror -b develop git://github.com/sillsdev/$PROJ.git source.git
+fi
+
+# Move to the source repo
+cd source.git
+
+# Update
+git remote update
+
+# Check tag
+if ! git describe --tags $TAG &>/dev/null
+then
+	echo "There is no tag for the upstream version $TAG - please create one" >&2
+	exit 1
+fi
+
+# Create the original source tarball if needed
+TARBALL=../../${NAME}_${UPSTREAM}.orig.tar.gz
+if [ ! -e $TARBALL ]
+then
+	echo "Creating $(basename $TARBALL)"
+	TARBALL=${TARBALL%.gz}
+	git archive --prefix=$NAME-$UPSTREAM/ -o $TARBALL $TAG
+	# Ensure repeatable tar.gz files
+	touch -d "$(git log --format=format:%aD -n1 $TAG)" $TARBALL
+	gzip --best -n $TARBALL
+fi
+
+# Create patches
+TMPPATCHES=$(mktemp -d)
+git format-patch -o $TMPPATCHES -N -k $TAG..$REVISION
+
+# Move back to the package directory
+cd ..
+
+# Add patches to the source package
+export QUILT_PATCHES=debian/patches
+rm -rf $QUILT_PATCHES .pc
+mkdir -p $QUILT_PATCHES
+for P in $(ls -r $TMPPATCHES)
+do
+	NAME=${P#[0-9]*-}
+	quilt import -P $NAME $TMPPATCHES/$P
+done
+
+# Remove the temporary directory
+rm -rf $TMPPATCHES
+
+# Create the source package
+debuild -S -nc -sa -i'.*' --source-option=--no-preparation
