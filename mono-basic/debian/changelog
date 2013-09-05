@@ -1,3 +1,10 @@
+fieldworks-mono-basic (2.10-3) stable; urgency=low
+
+  * New patches
+  * git workflow
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 11 Jan 2013 20:25:52 -0700
+
 fieldworks-mono-basic (2.10-2) oneiric; urgency=low
 
   * Update dependencies

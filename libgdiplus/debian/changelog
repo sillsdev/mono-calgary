@@ -1,3 +1,25 @@
+fieldworks-libgdiplus (2.10.8-1) stable; urgency=low
+
+  * Upgrade to 2.10.8
+  * No new patches
+  * See git log --first-parent fieldworks/2.10-4..fieldworks/2.10.8-1
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 28 May 2013 22:04:37 -0600
+
+fieldworks-libgdiplus (2.10-4) stable; urgency=low
+
+  * New patch:
+    +Fix-string-drawing-truncation-in-combo-boxes.patch
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 22 Feb 2013 17:34:57 -0700
+
+fieldworks-libgdiplus (2.10-3) stable; urgency=low
+
+  * New patches
+  * git workflow
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 11 Jan 2013 20:19:38 -0700
+
 fieldworks-libgdiplus (2.10-2) oneiric; urgency=low
 
   * Update dependencies

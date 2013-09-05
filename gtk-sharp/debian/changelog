@@ -1,3 +1,10 @@
+fieldworks-gtk-sharp2 (2.12.10-2) stable; urgency=low
+
+  * New patches
+  * git workflow
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 11 Jan 2013 20:26:01 -0700
+
 fieldworks-gtk-sharp2 (2.12.10-1) maverick; urgency=low
 
   [ Eberhard Beilharz ]

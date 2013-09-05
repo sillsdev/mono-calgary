@@ -1,3 +1,35 @@
+fieldworks-mono (2.10.9-1) stable; urgency=low
+
+  * Upgrade to 2.10.9
+  * Add patches:
+    +Improve-output-if-Xinerama-isn-t-installed-FWNX-1046.patch
+    +Fix-Timer-deadlock-problem-cherrypick.patch
+    +Fix-icon-in-unity-launcher-FWNX-892.patch
+    +Fix-crash-loading-localized-resources.patch
+    +Novell-bug-691291.-Fix-proxy-on-Download-cherry-pick.patch
+    +Provide-proxy-support-for-Windows.patch
+    +Update-mcs-class-System-System.Net-WebRequest.cs.patch
+    +Fix-Exception-thrown-in-Linux-when-no_proxy-is-empty.patch
+    +Change-check-to-detect-Windows.patch
+    +WebRequest.GetSystemWebProxy-throws-a-NullReferenceE.patch
+  * See git log --first-parent fieldworks/2.10.4-4..fieldworks/2.10.9-1
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 28 May 2013 21:50:13 -0600
+
+fieldworks-mono (2.10.4-4) stable; urgency=low
+
+  * Add patch:
+    +Fix-crash-from-null-control-in-ContainerControl.patch
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 22 Feb 2013 17:29:27 -0700
+
+fieldworks-mono (2.10.4-3) stable; urgency=low
+
+  * New patches
+  * git workflow
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Thu, 10 Jan 2013 17:58:24 -0700
+
 fieldworks-mono (2.10.4-2) oneiric; urgency=low
 
   * Update dependencies
