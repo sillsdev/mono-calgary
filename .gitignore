@@ -1,5 +1,5 @@
 *~
-/checkout-and-build-mono.config
+/build-and-install.config
 /fieldworks-gtk-sharp2_*.build
 /fieldworks-gtk-sharp2_*.changes
 /fieldworks-gtk-sharp2_*.debian.tar.gz

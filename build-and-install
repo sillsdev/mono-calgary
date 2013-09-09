@@ -1,0 +1,93 @@
+#!/bin/bash
+
+#	build-and-install
+#
+#	Build and install mono from the directory created by initrepo
+#
+#	It's expected that each project is cloned into the current directory
+#	This script can be placed anywhere, and doesn't need to be in that directory
+
+set -e
+
+PROJECTS="libgdiplus mono mono-basic gtk-sharp"
+
+[ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
+
+SCRIPT=$(basename "$0")
+CONFIG=$SCRIPT.config
+
+echo "$SCRIPT: Starting ..."
+
+if [ -e "$CONFIG" ]; then
+	. "$CONFIG"
+
+	if [ "$OLD_ARCH" != "$(uname -m)" ]; then
+		echo "$SCRIPT: Switching architecture. Doing a 'make clean'"
+		for PROJ in $PROJECTS
+		do
+			[ -d $PROJ ] && (cd $PROJ; make clean)
+		done
+	fi
+fi
+
+for PROJ in $PROJECTS
+do
+	echo "$SCRIPT: Checking $PROJ ..."
+	(
+		cd $PROJ
+
+		git status -uno
+	)
+done
+
+echo OLD_ARCH=$(uname -m) >$CONFIG
+
+# Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
+# caller should set MONO_PREFIX or DESTDIR prior to calling this script)
+if [ $(sudo -l > /dev/null ; echo $?) -eq 0 ]; then
+	SUDOCMD=sudo
+else
+	SUDOCMD=
+fi
+
+if [ -f $DESTDIR$MONO_PREFIX/bin/mono-real ]; then
+	# Because mono-real exists it is very likely that mono is a wrapper script used for
+	# debugging. Save it and restore it later.
+	if [ ! -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
+		$SUDOCMD cp $DESTDIR$MONO_PREFIX/bin/mono $DESTDIR$MONO_PREFIX/bin/mono-fw
+	fi
+fi
+
+for PROJ in $PROJECTS
+do
+	echo "$SCRIPT: Building $PROJ ..."
+	(
+		cd $PROJ
+
+		[ -e configure ] || ( [ -e bootstrap-[0-9]* ] && NOCONFIGURE=1 ./bootstrap-[0-9]* ) || NOCONFIGURE=1 ./autogen.sh
+
+		./configure --prefix=$MONO_PREFIX
+
+		make $MAKE_PARAMS "$@"
+	)
+
+	echo "$SCRIPT: Installing $PROJ ..."
+	(
+		cd $PROJ
+
+		$SUDOCMD make install ${DESTDIR:+DESTDIR=}$DESTDIR
+	)
+done
+
+if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
+	# reinstantiate the wrapper script
+	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
+	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
+fi
+
+# Some versions of nant expect mono to use the pkg-config name of 'mono', but
+# new versions of mono use name 'mono-2'. Support both until we upgrade or
+# fix our nant.
+$SUDOCMD ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
+
+echo "$SCRIPT: Finished successfully."
