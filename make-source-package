@@ -44,8 +44,19 @@ TAG=$UPSTREAM
 # Checkout the source repo, if necessary
 if [ ! -d source.git ]
 then
+	# Check for user-specified reference repos
+	REFREPO=$REFREPODIR/$PROJ
+	if [ -n "$REFREPODIR" -a -d "$REFREPO" ]; then
+		REF=--reference=$REFREPO
+	else
+		REF=
+	fi
+
 	echo "Cloning $PROJ source repo"
-	git clone --mirror -b develop git://github.com/sillsdev/$PROJ.git source.git
+	git clone --mirror -b develop $REF git://github.com/sillsdev/$PROJ.git source.git
+
+	# Detach from any reference repo
+	(cd source.git && git repack -ad)
 fi
 
 # Move to the source repo

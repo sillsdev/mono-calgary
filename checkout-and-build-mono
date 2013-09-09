@@ -31,13 +31,24 @@ do
 
 	if [ ! -d $DIR ]; then
 		echo $0: Cloning $PROJ ...
-		git clone -b develop git://github.com/sillsdev/$PROJ.git $DIR
+
+		# Check for user-specified reference repo
+		REFREPO=$REFREPODIR/$PROJ
+		if [ -n "$REFREPODIR" -a -d "$REFREPO" ]; then
+			REF=--reference=$REFREPO
+		else
+			REF=
+		fi
+
+		git clone -b develop $REF git://github.com/sillsdev/$PROJ.git $DIR
+
 		cd $DIR
 		USER=$(git config fwinit.gerrituser)
 		if [ -n "$USER" ]; then
 			git remote set-url --push origin ssh://$USER@gerrit.lsdev.sil.org:59418/$PROJ.git
 			git config remote.origin.push +refs/heads/*:refs/for/*
 		fi
+		git repack -ad # Detach from any reference repo
 		cd $OLDPWD
 	fi
 
