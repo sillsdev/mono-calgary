@@ -9,11 +9,42 @@
 
 set -e
 
-PROJECTS="libgdiplus mono mono-basic gtk-sharp"
+# Import git shell functions
 
-[ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
+NONGIT_OK=yes  # Stop git-sh-setup from complaining
+USAGE="[ --force | -f ] [ --help | -h ]"
+
+. "$(git --exec-path)/git-sh-setup"
+
+# Use getopt to parse options into a manageable form
 
 SCRIPT=$(basename "$0")
+PARSEDARGS=$(getopt -n "$SCRIPT" -o fh --long force,help -- "$@") || usage
+eval set -- "$PARSEDARGS"
+
+# Process options
+
+PROJECTS="libgdiplus mono mono-basic gtk-sharp"
+[ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
+FORCE=
+
+while true
+do
+	case "$1" in
+		-f|--force) FORCE=yes; shift;;
+		-h|--help) usage;;
+		--) shift; break;;
+		*) echo "Internal error: option '$1' not handled"; exit 1 ;;
+	esac
+done
+
+if [ $# -ne 0 ]
+then
+	echo "Unexpected arguments:" "$@"
+	usage
+fi
+
+# Define utility functions
 
 BOLD=$(tput bold 2>/dev/null)
 NORM=$(tput sgr0 2>/dev/null)
@@ -24,6 +55,8 @@ trace()
 }
 
 trace "Starting ..."
+
+# Check things
 
 CONFIG=$SCRIPT.config
 
@@ -45,11 +78,18 @@ do
 	(
 		cd $PROJ
 
-		git status -uno
+		if [ "$FORCE" = yes ]
+		then
+			git status -uno
+		else
+			require_clean_work_tree "continue" "Use -f|--force to override this behavior"
+		fi
 	)
 done
 
 echo OLD_ARCH=$(uname -m) >$CONFIG
+
+# Build
 
 # Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
 # caller should set MONO_PREFIX or DESTDIR prior to calling this script)
