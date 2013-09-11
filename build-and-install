@@ -14,15 +14,24 @@ PROJECTS="libgdiplus mono mono-basic gtk-sharp"
 [ -z "${MONO_PREFIX}" ] && MONO_PREFIX="/usr/local"
 
 SCRIPT=$(basename "$0")
-CONFIG=$SCRIPT.config
 
-echo "$SCRIPT: Starting ..."
+BOLD=$(tput bold 2>/dev/null)
+NORM=$(tput sgr0 2>/dev/null)
+
+trace()
+{
+	echo "$SCRIPT: $BOLD$@$NORM"
+}
+
+trace "Starting ..."
+
+CONFIG=$SCRIPT.config
 
 if [ -e "$CONFIG" ]; then
 	. "$CONFIG"
 
 	if [ "$OLD_ARCH" != "$(uname -m)" ]; then
-		echo "$SCRIPT: Switching architecture. Doing a 'make clean'"
+		trace "Switching architecture. Doing a 'make clean'"
 		for PROJ in $PROJECTS
 		do
 			[ -d $PROJ ] && (cd $PROJ; make clean)
@@ -32,7 +41,7 @@ fi
 
 for PROJ in $PROJECTS
 do
-	echo "$SCRIPT: Checking $PROJ ..."
+	trace "Checking $PROJ ..."
 	(
 		cd $PROJ
 
@@ -60,7 +69,7 @@ fi
 
 for PROJ in $PROJECTS
 do
-	echo "$SCRIPT: Building $PROJ ..."
+	trace "Building $PROJ ..."
 	(
 		cd $PROJ
 
@@ -71,7 +80,7 @@ do
 		make $MAKE_PARAMS "$@"
 	)
 
-	echo "$SCRIPT: Installing $PROJ ..."
+	trace "Installing $PROJ ..."
 	(
 		cd $PROJ
 
@@ -90,4 +99,4 @@ fi
 # fix our nant.
 $SUDOCMD ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
 
-echo "$SCRIPT: Finished successfully."
+trace "Finished successfully"
