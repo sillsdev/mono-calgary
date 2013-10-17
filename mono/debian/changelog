@@ -1,3 +1,21 @@
+fieldworks-mono (2.10.9-3) stable; urgency=low
+
+  * Add patches:
+    +Fix-localized-resource-loading-bug-FWNX-1164.patch
+  * See git log fieldworks/2.10.9-2..fieldworks/2.10.9-3
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Thu, 26 Sep 2013 17:03:25 -0600
+
+fieldworks-mono (2.10.9-2) stable; urgency=low
+
+  * Add patches:
+    +Increment-our-mono-version-number.patch
+    +Fix-275.patch
+    +Fixes-for-automake-and-autogen.sh-in-Debian-testing.patch
+  * See git log fieldworks/2.10.9-1..fieldworks/2.10.9-2
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 23 Sep 2013 14:46:51 -0600
+
 fieldworks-mono (2.10.9-1) stable; urgency=low
 
   * Upgrade to 2.10.9
