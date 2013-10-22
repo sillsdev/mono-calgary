@@ -105,4 +105,4 @@ done
 rm -rf $TMPPATCHES
 
 # Create the source package
-debuild -S -nc -sa -i'.*' --source-option=--no-preparation
+debuild $DEBUILD_ADDITIONAL_OPTS -S -nc -sa -i'.*' --source-option=--no-preparation
