@@ -1,3 +1,10 @@
+gtk-sharp2-sil (2.12.10-2) stable; urgency=low
+
+  * Rename to gtk-sharp2-sil
+  * Install into /opt/mono-sil
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Mon, 27 Jan 2014 12:10:24 -0600
+
 fieldworks-gtk-sharp2 (2.12.10-2) stable; urgency=low
 
   * New patches

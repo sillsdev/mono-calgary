@@ -1,6 +1,6 @@
-fieldworks-libgdiplus for Debian
---------------------------------
+libgdiplus-sil for Debian
+-------------------------
 
-This package is purely for the support of fieldworks.
+This package is purely for the support of SIL programs.
 
- -- Neil Mayhew <neil_mayhew@sil.org>  Thu, 20 May 2010 17:23:40 -0600
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Mon, 27 Jan 2014 12:30:50 -0600

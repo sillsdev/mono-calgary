@@ -1,3 +1,10 @@
+mono-sil (2.10.9-4) stable; urgency=low
+
+  * Rename from fieldworks-mono to mono-sil
+  * Install in /opt/mono-sil instead of /usr/lib/fieldworks
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Mon, 27 Jan 2014 11:10:17 -0600
+
 fieldworks-mono (2.10.9-3) stable; urgency=low
 
   * Add patches:

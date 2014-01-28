@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-LIBFW = /usr/lib/fieldworks
+MONO_PREFIX = /opt/mono-sil
 
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)
@@ -12,7 +12,7 @@ override_dh_autoreconf:
 	NOCONFIGURE=1 ./autogen.sh
 
 override_dh_auto_configure:
-	dh_auto_configure -- --prefix=$(LIBFW)/mono --sysconfdir=$(LIBFW)/mono/etc
+	dh_auto_configure -- --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
 
 # Don't run make check
 override_dh_auto_test:
@@ -22,4 +22,4 @@ override_dh_strip:
 	dh_strip -k
 
 override_dh_shlibdeps:
-	dh_shlibdeps -l $(LIBFW)
+	dh_shlibdeps -l $(MONO_PREFIX)/lib

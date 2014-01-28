@@ -1,4 +1,4 @@
-Source: fieldworks-libgdiplus
+Source: libgdiplus-sil
 Section: cli-mono
 Priority: extra
 Maintainer: Neil Mayhew <neil_mayhew@sil.org>
@@ -25,9 +25,10 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
 Standards-Version: 3.9.2
 Homepage: http://www.mono-project.com/
 
-Package: fieldworks-libgdiplus
+Package: libgdiplus-sil
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: A version of libgdiplus specially for FieldWorks
+Description: A version of libgdiplus specially for SIL programs
  A specially patched version of libgdiplus from upstream source repos,
- to support FieldWorks. Not intended for general use.
+ to support FieldWorks and other SIL programs. Not intended for general
+ use.
