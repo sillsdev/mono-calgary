@@ -53,17 +53,25 @@ then
 	fi
 
 	echo "Cloning $PROJ source repo"
-	git clone --mirror -b develop $REF git://github.com/sillsdev/$PROJ.git source.git
+	git clone --bare -b develop $REF git://github.com/sillsdev/$PROJ.git source.git
+
+	cd source.git
+
+	# Configure mirroring
+	git config remote.origin.fetch +refs/heads/*:refs/heads/*
 
 	# Detach from any reference repo
-	(cd source.git && git repack -ad)
+	git repack -ad
+	rm objects/info/alternates
+
+	cd ..
 fi
 
 # Move to the source repo
 cd source.git
 
 # Update
-git remote update
+git remote update -p
 
 # Check tag
 if ! git describe --tags $TAG &>/dev/null
