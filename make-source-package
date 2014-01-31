@@ -45,11 +45,15 @@ TAG=$UPSTREAM
 if [ ! -d source.git ]
 then
 	# Check for user-specified reference repos
-	REFREPO=$REFREPODIR/$PROJ
-	if [ -n "$REFREPODIR" -a -d "$REFREPO" ]; then
-		REF=--reference=$REFREPO
-	else
-		REF=
+	if [ -n "$REFREPODIR" ]; then
+		REFREPO=$REFREPODIR/$PROJ
+		if [ -d "$REFREPO.git" ]; then
+			REF=--reference=$REFREPO.git
+		elif [ -d "$REFREPO" ]; then
+			REF=--reference=$REFREPO
+		else
+			REF=
+		fi
 	fi
 
 	echo "Cloning $PROJ source repo"
@@ -62,7 +66,7 @@ then
 
 	# Detach from any reference repo
 	git repack -ad
-	rm objects/info/alternates
+	rm -f objects/info/alternates
 
 	cd ..
 fi
