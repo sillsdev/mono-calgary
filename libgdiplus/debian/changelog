@@ -1,3 +1,10 @@
+fieldworks-libgdiplus (2.10.8-2) stable; urgency=medium
+
+  * New patch:
+    +Enable-building-libgdiplus-with-freetype-2.5.1-and-l.patch
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 24 Feb 2014 15:12:33 -0700
+
 fieldworks-libgdiplus (2.10.8-1) stable; urgency=low
 
   * Upgrade to 2.10.8
