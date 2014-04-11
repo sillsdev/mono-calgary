@@ -130,8 +130,8 @@ done
 
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	# reinstantiate the wrapper script
-	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono{,-real}
-	$SUDOCMD cp -f $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
+	$SUDOCMD mv -f  $DESTDIR$MONO_PREFIX/bin/mono{,-real}
+	$SUDOCMD ln -sf $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
 fi
 
 # Some versions of nant expect mono to use the pkg-config name of 'mono', but
