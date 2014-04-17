@@ -1,3 +1,40 @@
+fieldworks-mono (2.10.9-5) stable; urgency=low
+
+  * Add patches:
+    +fixed-incorrect-handling-of-space-in-XSL-value-of-el.patch
+    +XSL-node-set-function-now-behaves-more-like-MS-versi.patch
+    +fixed-bug-with-handling-of-global-variables-in-XSLs.patch
+    +fix-compilation-under-NET_2_0.patch
+    +ifdef-4.0-using.patch
+    +Fix-compilation-failure-of-FlowPanelTests.patch
+    +Add-missing-assembly-references-to-test-targets.patch
+    +Ignore-some-corlib-tests-which-fail-on-linux.patch
+    +better-fix-for-handling-of-global-variables-in-XSLs.patch
+    +added-unit-tests-for-XSL-node-set-bug.patch
+    +added-unit-test-for-XSL-value-of-bug.patch
+    +Properly-fill-in-the-whole-TableLayoutPanel.patch
+    +Match-.NET-behavior-with-AutoSize-Columns-Rows.patch
+    +Test-to-reveal-defect-in-XmlSerializer-Bug-18558.patch
+    +Fix-for-the-XMLSerializer-bug-18558.patch
+    +Fix-bugs-in-sizing-TableLayoutPanel-Xamarin-bug-1863.patch
+  * See git log sil/2.10.9-4..sil/2.10.9-5
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Wed, 09 Apr 2014 09:59:29 -0400
+
+fieldworks-mono (2.10.9-4) stable; urgency=low
+
+  * Rename from fieldworks-mono to mono-sil
+  * Install in /opt/mono-sil instead of /usr/lib/fieldworks
+  * Add patches:
+    +Fix-ComboBox-list-to-not-display-offscreen.patch
+    +Fix-MessageBox-windows-to-wrap-message-texts-reasona.patch
+    +Improve-Settings-behavior-to-match-Windows-.Net-more.patch
+    +Partially-implement-Help.ShowHelp.patch
+    +Account-for-icon-width-better-in-MessageBox-display.patch
+  * See git log fieldworks/2.10.9-3..sil/2.10.9-4
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Mon, 27 Jan 2014 11:10:17 -0600
+
 fieldworks-mono (2.10.9-3) stable; urgency=low
 
   * Add patches:
