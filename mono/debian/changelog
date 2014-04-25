@@ -1,3 +1,12 @@
+mono-sil (2.10.9-6) stable; urgency=low
+
+  * Add patches:
+    +Revise-ScrollableControl.OnLayout-to-readjust-scroll.patch
+    +Prevent-call-to-OwnerLostFocusHandler-for-disposed-o.patch
+  * See git log sil/2.10.9-5..sil/2.10.9-6
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Fri, 25 Apr 2014 17:17:04 -0400
+
 mono-sil (2.10.9-5) stable; urgency=low
 
   * Add patches:
