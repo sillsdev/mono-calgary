@@ -1,3 +1,12 @@
+mono-sil (2.10.9-7) stable; urgency=low
+
+  * Add patches:
+    +Fix-for-MemoryMappedFile-bug-13901.patch
+    +Fix-window-icon-not-showing-properly-in-launcher.patch
+  * See git log sil/2.10.9-6..sil/2.10.9-7
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 01 Jul 2014 12:08:25 -0400
+
 mono-sil (2.10.9-6) stable; urgency=low
 
   * Add patches:
