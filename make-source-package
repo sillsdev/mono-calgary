@@ -39,7 +39,7 @@ cd $PKGDIR
 NAME=$(dpkg-parsechangelog | sed -n '/^Source: /s///p')
 VERSION=$(dpkg-parsechangelog | sed -n '/^Version: /s///p')
 UPSTREAM=${VERSION%-*}
-TAG=$UPSTREAM
+TAG=merge/$UPSTREAM
 
 # Checkout the source repo, if necessary
 if [ ! -d source.git ]
