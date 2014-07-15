@@ -49,10 +49,11 @@ then
 		REFREPO=$REFREPODIR/$PROJ
 		if [ -d "$REFREPO.git" ]; then
 			REF=--reference=$REFREPO.git
-		elif [ -d "$REFREPO" ]; then
-			REF=--reference=$REFREPO
+		elif [ -d "$REFREPO/.git" ]; then
+			REF=--reference=$REFREPO/.git
 		else
-			REF=
+			echo "Can't reference $REFREPO.git or $REFREPO/.git" >&2
+			exit 1
 		fi
 	fi
 
