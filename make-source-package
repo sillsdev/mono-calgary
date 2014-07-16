@@ -41,8 +41,14 @@ VERSION=$(dpkg-parsechangelog | sed -n '/^Version: /s///p')
 UPSTREAM=${VERSION%-*}
 TAG=merge/$UPSTREAM
 
+git-recursive()
+{
+	eval "$1"
+	git submodule foreach --recursive "$1"
+}
+
 # Checkout the source repo, if necessary
-if [ ! -d source.git ]
+if [ ! -d source ]
 then
 	# Check for user-specified reference repos
 	if [ -n "$REFREPODIR" ]; then
@@ -55,28 +61,32 @@ then
 			echo "Can't reference $REFREPO.git or $REFREPO/.git" >&2
 			exit 1
 		fi
+	elif [ -d source.git ]; then
+		REF=--reference=source.git
 	fi
 
 	echo "Cloning $PROJ source repo"
-	git clone --bare -b develop $REF git://github.com/sillsdev/$PROJ.git source.git
+	git clone -b develop $REF --recursive git://github.com/sillsdev/$PROJ.git source
 
-	cd source.git
-
-	# Configure mirroring
-	git config remote.origin.fetch +refs/heads/*:refs/heads/*
+	cd source
 
 	# Detach from any reference repo
-	git repack -ad
-	rm -f objects/info/alternates
+	git-recursive "[ -f objects/info/alternates ] && git repack -ad; rm -f objects/info/alternates"
+
+	# Suppress advice about detached heads
+	git-recursive "git config --bool advice.detachedHead false"
 
 	cd ..
+
+	rm -rf source.git
 fi
 
 # Move to the source repo
-cd source.git
+cd source
 
 # Update
 git remote update -p
+git submodule update --recursive --init
 
 # Check tag
 if ! git describe --tags $TAG &>/dev/null
@@ -90,11 +100,25 @@ TARBALL=../../${NAME}_${UPSTREAM}.orig.tar.gz
 if [ ! -e $TARBALL ]
 then
 	echo "Creating $(basename $TARBALL)"
-	TARBALL=${TARBALL%.gz}
-	git archive --prefix=$NAME-$UPSTREAM/ -o $TARBALL $TAG
+
+	TARDIR=$(cd $(dirname $TARBALL) && pwd)
+	TARNAME=$(basename $TARBALL .gz)
+	TARBALL=$TARDIR/$TARNAME
+
+	git checkout $TAG
+	git submodule update --recursive
+
+	git archive --prefix=$NAME-$UPSTREAM/ -o $TARBALL HEAD
+	git submodule foreach --recursive "
+		git archive --prefix=$NAME-$UPSTREAM/\$path/ -o submodule.tar HEAD
+		tar -Af $TARBALL submodule.tar
+		rm submodule.tar"
+
 	# Ensure repeatable tar.gz files
-	touch -d "$(git log --format=format:%aD -n1 $TAG)" $TARBALL
+	touch -d "$(git log --format=format:%aD -n1 HEAD)" $TARBALL
 	gzip --best -n $TARBALL
+
+	git checkout develop
 fi
 
 # Create patches
