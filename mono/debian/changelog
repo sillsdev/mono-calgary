@@ -1,3 +1,10 @@
+mono-sil (3.4.0-1) stable; urgency=medium
+
+  * New upstream release
+  * See git log sil/2.10.9-7..sil/3.4.0-1
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Mon, 14 Jul 2014 18:37:09 -0600
+
 mono-sil (2.10.9-7) stable; urgency=low
 
   * Add patches:
