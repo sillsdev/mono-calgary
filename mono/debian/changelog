@@ -1,3 +1,13 @@
+mono-sil (3.4.0-2) stable; urgency=medium
+
+  * Add patches:
+    +Fix-tooltip-display-for-ListView-when-using-Groups.patch
+  * Update patches:
+    +System-Fix-a-problem-with-serializing-configuration-.patch
+  * See git log sil/3.4.0-1..sil/3.4.0-2
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 22 Jul 2014 23:18:00 -0600
+
 mono-sil (3.4.0-1) stable; urgency=medium
 
   * New upstream release
