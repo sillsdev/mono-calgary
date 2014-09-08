@@ -1,3 +1,11 @@
+mono-sil (3.4.0-3) stable; urgency=medium
+
+  * Add patches:
+    +Fix-scrolling-in-ListView.EnsureVisible-int-index.patch
+  * See git log sil/3.4.0-2..sil/3.4.0-3
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Mon, 08 Sep 2014 10:33:09 -0400
+
 mono-sil (3.4.0-2) stable; urgency=medium
 
   * Add patches:
