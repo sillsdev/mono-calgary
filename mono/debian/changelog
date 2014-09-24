@@ -1,3 +1,10 @@
+mono-sil (3.4.0-4) stable; urgency=medium
+
+  * Pass graphics object when calculating button text and image
+  * See git log sil/3.4.0-3..sil/3.4.0-4
+
+ -- Eberhard Beilharz <eb1@sil.org>  Wed, 24 Sep 2014 16:17:08 +0200
+
 mono-sil (3.4.0-3) stable; urgency=medium
 
   * Add patches:
