@@ -1,3 +1,9 @@
+libgdiplus-sil (2.10.8-3) stable; urgency=low
+
+  * Re-release package
+
+ -- Eberhard Beilharz <eb1@sil.org>  Thu, 25 Sep 2014 14:57:45 +0200
+
 libgdiplus-sil (2.10.8-2) stable; urgency=low
 
   * Rename to libgdiplus-sil
