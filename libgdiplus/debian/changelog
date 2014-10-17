@@ -1,3 +1,10 @@
+libgdiplus-sil (2.10.8-5) stable; urgency=medium
+
+  * Use pango to render text. This improves the support for non-roman scripts
+    in the UI.
+
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 30 Sep 2014 17:57:12 +0200
+
 libgdiplus-sil (2.10.8-4) stable; urgency=medium
 
   * Update dependencies (for utopic)

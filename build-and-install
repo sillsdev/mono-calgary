@@ -115,7 +115,13 @@ do
 
 		[ -e configure ] || ( [ -e bootstrap-[0-9]* ] && NOCONFIGURE=1 ./bootstrap-[0-9]* ) || NOCONFIGURE=1 ./autogen.sh
 
-		./configure --prefix=$MONO_PREFIX
+		if [ $PROJ = "libgdiplus" ]; then
+			EXTRACONFIGPARAMS="--sysconfdir=$MONO_PREFIX/etc --with-pango"
+		else
+			EXTRACONFIGPARAMS=
+		fi
+
+		./configure --prefix=$MONO_PREFIX $EXTRACONFIGPARAMS
 
 		make $MAKE_PARAMS "$@"
 	)
