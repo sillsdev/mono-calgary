@@ -1,6 +1,20 @@
+mono-sil (3.4.0-5) stable; urgency=medium
+
+  * Add patches:
+    +Remove-excessive-shortcut-key-matching-in-ToolStrip.patch
+    +Fix-potential-crash-in-ListView.ItemControl.ItemsMou.patch
+    +MWF-Display-visual-feedback-on-pressed-button.patch
+    +MWF-Improve-ellipsis-handling.patch
+    +MWF-Use-full-width-for-measuring-text.patch
+    +MWF-Use-full-available-height-for-text.patch
+  * See git log sil/3.4.0-4..sil/3.4.0-5
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Mon, 20 Oct 2014 12:28:13 -0400
+
 mono-sil (3.4.0-4) stable; urgency=medium
 
-  * Pass graphics object when calculating button text and image
+  * Add patches:
+    +Pass-graphics-object-when-calculating-button-text-an.patch
   * See git log sil/3.4.0-3..sil/3.4.0-4
 
  -- Eberhard Beilharz <eb1@sil.org>  Wed, 24 Sep 2014 16:17:08 +0200
