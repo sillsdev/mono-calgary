@@ -1,3 +1,15 @@
+libgdiplus-sil (2.10.8-4) stable; urgency=medium
+
+  * Update dependencies (for utopic)
+  * Add patches:
+    +Fix-UTF8-handling-in-pango-text.c.patch
+    +Fix-width-measurements-and-accelerator-handling.patch
+    +Improvements-to-pango-code.patch
+    +Fix-problem-with-pango-measure-string.patch
+    +Fix-height-calculation-in-pango-setup-layout-code.patch
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 21 Oct 2014 20:58:38 -0400
+
 libgdiplus-sil (2.10.8-3) stable; urgency=low
 
   * Re-release package
