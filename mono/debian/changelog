@@ -1,3 +1,10 @@
+mono-sil (3.4.0-6) stable; urgency=medium
+
+  * Add patches:
+    +Zero-out-pointers-to-freed-memory-in-AudioDevice.patch
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 28 Oct 2014 15:20:21 -0400
+
 mono-sil (3.4.0-5) stable; urgency=medium
 
   * Add patches:
