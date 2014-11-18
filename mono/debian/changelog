@@ -1,3 +1,10 @@
+mono-sil (3.4.0-7) stable; urgency=medium
+
+  * Add patches:
+    +Fix-crash-when-removing-last-item-in-ListView.patch
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 18 Nov 2014 09:56:26 -0500
+
 mono-sil (3.4.0-6) stable; urgency=medium
 
   * Add patches:
