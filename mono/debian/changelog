@@ -1,7 +1,16 @@
+mono-sil (3.4.0-8) stable; urgency=medium
+
+  * Add patches:
+    +Fix-bug-that-truncates-button-text.patch
+  * See git log sil/3.4.0-7..sil/3.4.0-8
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Thu, 20 Nov 2014 09:31:40 -0500
+
 mono-sil (3.4.0-7) stable; urgency=medium
 
   * Add patches:
     +Fix-crash-when-removing-last-item-in-ListView.patch
+  * See git log sil/3.4.0-6..sil/3.4.0-7
 
  -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 18 Nov 2014 09:56:26 -0500
 
@@ -9,6 +18,7 @@ mono-sil (3.4.0-6) stable; urgency=medium
 
   * Add patches:
     +Zero-out-pointers-to-freed-memory-in-AudioDevice.patch
+  * See git log sil/3.4.0-5..sil/3.4.0-6
 
  -- Chris Hubbard <chris_hubbard@sil.org>  Tue, 28 Oct 2014 15:20:21 -0400
 
