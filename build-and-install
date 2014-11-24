@@ -7,7 +7,7 @@
 #	It's expected that each project is cloned into the current directory
 #	This script can be placed anywhere, and doesn't need to be in that directory
 
-set -e
+set -e -o pipefail
 
 # Import git shell functions
 
@@ -74,16 +74,17 @@ fi
 for PROJ in $PROJECTS
 do
 	trace "Checking $PROJ ..."
-	(
-		cd $PROJ
 
-		if [ "$FORCE" = yes ]
-		then
-			git status -uno
-		else
-			require_clean_work_tree "continue" "Use -f|--force to override this behavior"
-		fi
-	)
+	cd $PROJ
+
+	if [ "$FORCE" = yes ]
+	then
+		git status -uno
+	else
+		require_clean_work_tree "continue" "Use -f|--force to override this behavior"
+	fi
+
+	cd $OLDPWD
 done
 
 echo OLD_ARCH=$(uname -m) >$CONFIG
@@ -109,28 +110,26 @@ fi
 for PROJ in $PROJECTS
 do
 	trace "Building $PROJ ..."
-	(
-		cd $PROJ
 
-		[ -e configure ] || ( [ -e bootstrap-[0-9]* ] && NOCONFIGURE=1 ./bootstrap-[0-9]* ) || NOCONFIGURE=1 ./autogen.sh
+	cd $PROJ
 
-		if [ $PROJ = "libgdiplus" ]; then
-			EXTRACONFIGPARAMS="--sysconfdir=$MONO_PREFIX/etc --with-pango"
-		else
-			EXTRACONFIGPARAMS=
-		fi
+	[ -e configure ] || ( [ -e bootstrap-[0-9]* ] && NOCONFIGURE=1 ./bootstrap-[0-9]* ) || NOCONFIGURE=1 ./autogen.sh
 
-		./configure --prefix=$MONO_PREFIX $EXTRACONFIGPARAMS
+	if [ $PROJ = "libgdiplus" ]; then
+		EXTRACONFIGPARAMS="--sysconfdir=$MONO_PREFIX/etc --with-pango"
+	else
+		EXTRACONFIGPARAMS=
+	fi
 
-		make $MAKE_PARAMS
-	)
+	./configure --prefix=$MONO_PREFIX $EXTRACONFIGPARAMS
+
+	make $MAKE_PARAMS
 
 	trace "Installing $PROJ ..."
-	(
-		cd $PROJ
 
-		$SUDOCMD make install ${DESTDIR:+DESTDIR=}$DESTDIR
-	)
+	$SUDOCMD make install ${DESTDIR:+DESTDIR=}$DESTDIR
+
+	cd $OLDPWD
 done
 
 if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
