@@ -2,7 +2,7 @@
 [ -z "$MONO_PREFIX" ] && export MONO_PREFIX=/opt/mono-sil
 # don't try bootstrapping the shell script wrapper if the build fails
 set -e
-"$(dirname $0)"/build-and-install
+"$(dirname $0)"/build-and-install "$@"
 # bootstrap the shell script wrapper as the mono that gets called (if needed)
 if [ ! -f $MONO_PREFIX/bin/mono-real ]; then
     sudo /bin/mv -v $MONO_PREFIX/bin/mono $MONO_PREFIX/bin/mono-real

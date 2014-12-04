@@ -12,7 +12,7 @@ set -e
 # Import git shell functions
 
 NONGIT_OK=yes  # Stop git-sh-setup from complaining
-USAGE="[ --force | -f ] [ --help | -h ]"
+USAGE="[ --force | -f ] [ --help | -h ] [PROJECT ...]"
 
 . "$(git --exec-path)/git-sh-setup"
 
@@ -40,8 +40,7 @@ done
 
 if [ $# -ne 0 ]
 then
-	echo "Unexpected arguments:" "$@"
-	usage
+	PROJECTS="$@"
 fi
 
 # Define utility functions
@@ -123,7 +122,7 @@ do
 
 		./configure --prefix=$MONO_PREFIX $EXTRACONFIGPARAMS
 
-		make $MAKE_PARAMS "$@"
+		make $MAKE_PARAMS
 	)
 
 	trace "Installing $PROJ ..."
