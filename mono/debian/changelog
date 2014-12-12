@@ -1,3 +1,15 @@
+mono-sil (3.4.0-9) stable; urgency=medium
+
+  * Fix several crashes related to COM objects
+  * [MWF] Fix problem when button text overlaps image
+  * [MWF] Don't truncate text on ToolStripButton
+  * [MWF] Fix crash in multi-selection list view
+  * [MWF] Use Ctrl+PageUp/PageDown for Tab Navigation
+
+  See git log sil/3.4.0-8..sil/3.4.0-9
+
+ -- Eberhard Beilharz <eb1@sil.org>  Fri, 12 Dec 2014 12:09:18 +0100
+
 mono-sil (3.4.0-8) stable; urgency=medium
 
   * Add patches:
