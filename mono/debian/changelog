@@ -1,3 +1,9 @@
+mono-sil (3.4.0-10) stable; urgency=medium
+
+  * Install certificates
+
+ -- Eberhard Beilharz <eb1@sil.org>  Fri, 19 Dec 2014 10:32:25 +0100
+
 mono-sil (3.4.0-9) stable; urgency=medium
 
   * Fix several crashes related to COM objects
