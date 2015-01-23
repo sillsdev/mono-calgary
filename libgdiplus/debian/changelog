@@ -1,3 +1,11 @@
+libgdiplus-sil (2.10.8-8) stable; urgency=medium
+
+  * Fix pango_MeasureStringRanges to work properly (BL-667)
+
+  See git log sil/2.10.8-7..sil/2.10.8-8
+
+ -- Eberhard Beilharz <eb1@sil.org>  Fri, 23 Jan 2015 18:49:40 +0100
+
 libgdiplus-sil (2.10.8-7) stable; urgency=medium
 
   * Add patches:
