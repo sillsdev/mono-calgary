@@ -1,3 +1,13 @@
+mono-sil (3.4.0-12) stable; urgency=medium
+
+  * Add patches:
+    +Fix-TextBox-display-to-handle-kerning-fonts-BL-879.patch
+    +Fix-the-default-behavior-of-ToolStripLayoutStyle.Tab.patch
+
+  See git log sil/3.4.0-11..sil/3.4.0-12
+
+ -- Chris Hubbard <chris_hubbard@sil.org>  Fri, 30 Jan 2015 09:13:43 -0500
+
 mono-sil (3.4.0-11) stable; urgency=medium
 
   * [MWF] Fix rendering issue in TextBoxes (BL-879 and BL-822)
