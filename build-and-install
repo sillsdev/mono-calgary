@@ -18,6 +18,12 @@ USAGE="[ --force | -f ] [ --help | -h ] [PROJECT ...]"
 
 # Use getopt to parse options into a manageable form
 
+# See the man page for an explanation of using -T to check for legacy getopt
+if getopt -T >/dev/null; then
+	echo "This script needs an enhanced version of getopt" >&2
+	exit 1
+fi
+
 SCRIPT=$(basename "$0")
 PARSEDARGS=$(getopt -n "$SCRIPT" -o fh --long force,help -- "$@") || usage
 eval set -- "$PARSEDARGS"
