@@ -99,7 +99,7 @@ echo OLD_ARCH=$(uname -m) >$CONFIG
 
 # Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
 # caller should set MONO_PREFIX or DESTDIR prior to calling this script)
-if [ $(sudo -l > /dev/null ; echo $?) -eq 0 ]; then
+if sudo -v; then
 	SUDOCMD=sudo
 else
 	SUDOCMD=
@@ -143,10 +143,5 @@ if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
 	$SUDOCMD mv -f  $DESTDIR$MONO_PREFIX/bin/mono{,-real}
 	$SUDOCMD ln -sf $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
 fi
-
-# Some versions of nant expect mono to use the pkg-config name of 'mono', but
-# new versions of mono use name 'mono-2'. Support both until we upgrade or
-# fix our nant.
-$SUDOCMD ln -sf mono-2.pc $DESTDIR$MONO_PREFIX/lib/pkgconfig/mono.pc
 
 trace "Finished successfully"
