@@ -105,12 +105,15 @@ else
 	SUDOCMD=
 fi
 
-if [ -f $DESTDIR$MONO_PREFIX/bin/mono-real ]; then
-	# Because mono-real exists it is very likely that mono is a wrapper script used for
-	# debugging. Save it and restore it later.
-	if [ ! -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
-		$SUDOCMD cp $DESTDIR$MONO_PREFIX/bin/mono $DESTDIR$MONO_PREFIX/bin/mono-fw
-	fi
+MONO_BIN=$DESTDIR$MONO_PREFIX/bin
+
+if [ -L $MONO_BIN/mono -a $(readlink   $MONO_BIN/mono) = mono-sil -o \
+   ! -L $MONO_BIN/mono -a $(stat -c %s $MONO_BIN/mono) -lt 20000 ]
+then
+	# mono is (a link to) a wrapper script used for debugging. Save it and restore it later.
+	$SUDOCMD mv -f $MONO_BIN/mono{,-wrapper}
+	trap "[ -e $MONO_BIN/mono ] && $SUDOCMD mv -f $MONO_BIN/mono{,-real}
+	      $SUDOCMD mv -f $MONO_BIN/mono{-wrapper,}" 0
 fi
 
 for PROJ in $PROJECTS
@@ -137,11 +140,5 @@ do
 
 	cd $OLDPWD
 done
-
-if [ -f $DESTDIR$MONO_PREFIX/bin/mono-fw ]; then
-	# reinstantiate the wrapper script
-	$SUDOCMD mv -f  $DESTDIR$MONO_PREFIX/bin/mono{,-real}
-	$SUDOCMD ln -sf $DESTDIR$MONO_PREFIX/bin/mono-fw $DESTDIR$MONO_PREFIX/bin/mono
-fi
 
 trace "Finished successfully"
