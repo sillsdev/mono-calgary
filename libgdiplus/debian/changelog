@@ -1,3 +1,11 @@
+libgdiplus-sil (2.10.8-9) stable; urgency=medium
+
+  * Add patches:
+    +Check-for-libtoolize-rather-than-libtool.patch
+  * See git log sil/2.10.8-8..sil/2.10.8-9
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 12 Jun 2015 07:19:47 -0600
+
 libgdiplus-sil (2.10.8-8) stable; urgency=medium
 
   * Fix pango_MeasureStringRanges to work properly (BL-667)

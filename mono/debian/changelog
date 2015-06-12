@@ -1,3 +1,11 @@
+mono-sil (3.4.0-13) stable; urgency=medium
+
+  * Add patches:
+    +Check-for-libtoolize-rather-than-libtool.patch
+  * See git log sil/3.4.0-12..sil/3.4.0-13
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Fri, 12 Jun 2015 07:19:21 -0600
+
 mono-sil (3.4.0-12) stable; urgency=medium
 
   * Add patches:
