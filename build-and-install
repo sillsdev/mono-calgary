@@ -99,7 +99,8 @@ echo OLD_ARCH=$(uname -m) >$CONFIG
 
 # Determine if we can use sudo. Otherwise just try without and hope for the best (in this case
 # caller should set MONO_PREFIX or DESTDIR prior to calling this script)
-if sudo -v; then
+# Note that 'sudo -v' challenges for a password even in some passwordless sudo environments.
+if sudo true; then
 	SUDOCMD=sudo
 else
 	SUDOCMD=
