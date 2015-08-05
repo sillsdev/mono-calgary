@@ -1,3 +1,9 @@
+mono-sil (3.4.0-14) stable; urgency=medium
+
+  * See git log sil/3.4.0-13..sil/3.4.0-14
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Wed Aug  5 14:16:13 CDT 2015
+
 mono-sil (3.4.0-13) stable; urgency=medium
 
   * Add patches:
