@@ -108,8 +108,8 @@ fi
 
 MONO_BIN=$DESTDIR$MONO_PREFIX/bin
 
-if [ -L $MONO_BIN/mono -a $(readlink   $MONO_BIN/mono) = mono-sil -o \
-   ! -L $MONO_BIN/mono -a $(stat -c %s $MONO_BIN/mono) -lt 20000 ]
+if [ -L $MONO_BIN/mono -a "$(readlink   $MONO_BIN/mono)" = mono-sil -o \
+   ! -L $MONO_BIN/mono -a "$(stat -c %s $MONO_BIN/mono)" -lt 20000 ]
 then
 	# mono is (a link to) a wrapper script used for debugging. Save it and restore it later.
 	$SUDOCMD mv -f $MONO_BIN/mono{,-wrapper}
