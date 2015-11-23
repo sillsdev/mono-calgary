@@ -1,3 +1,11 @@
+mono-sil (3.4.0-15) stable; urgency=medium
+
+  * Fix problem with scrollbars in TreeView
+  * Fix problem pasting text (LT-16605)
+  * See git log sil/3.4.0-14..sil/3.4.0-15
+
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 23 Nov 2015 18:08:02 +0100
+
 mono-sil (3.4.0-14) stable; urgency=medium
 
   * See git log sil/3.4.0-13..sil/3.4.0-14
