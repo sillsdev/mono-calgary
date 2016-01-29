@@ -7,6 +7,10 @@ USER_DIR = debian/mono-sil/usr
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)
 
+# Use the best available gcc/g++ 4.x
+CC  := $(shell cd /usr/bin && ls -v gcc-4.* | tail -n1)
+CXX := $(shell cd /usr/bin && ls -v g++-4.* | tail -n1)
+
 %:
 	dh --with autoreconf --parallel $@
 
@@ -14,7 +18,7 @@ override_dh_autoreconf:
 	NOCONFIGURE=1 ./autogen.sh
 
 override_dh_auto_configure:
-	dh_auto_configure -- --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
+	dh_auto_configure -- CC=$(CC) CXX=$(CXX) --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
 
 override_dh_auto_build:
 	dh_auto_build -- EXTERNAL_MCS=mcs
