@@ -9,7 +9,7 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  gawk,
  pkg-config,
  libglib2.0-dev (>= 2.4),
- cli-common-dev,
+ cli-common-dev (>= 0.8~),
  bison,
  libtool,
  libxml-dom-perl,
@@ -22,7 +22,7 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  autoconf,
  automake,
  python
-Standards-Version: 3.9.2
+Standards-Version: 3.9.6
 Homepage: http://www.mono-project.com/
 
 Package: mono-sil
