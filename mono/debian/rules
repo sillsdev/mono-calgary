@@ -1,8 +1,6 @@
 #!/usr/bin/make -f
 
 MONO_PREFIX = /opt/mono-sil
-MONO_DIR = debian/mono-sil/$(MONO_PREFIX)
-USER_DIR = debian/mono-sil/usr
 
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)
@@ -26,12 +24,6 @@ override_dh_auto_build:
 
 # Don't run make check
 override_dh_auto_test:
-
-override_dh_auto_install:
-	dh_auto_install
-	XDG_CONFIG_HOME=$(USER_DIR)/share \
-	$(MONO_DIR)/bin/mono $(MONO_DIR)/lib/mono/4.5/mozroots.exe --import --sync
-	mkdir $(USER_DIR)/share/.mono/keypairs
 
 # Put debugging symbols in /usr/lib/debug
 override_dh_strip:
