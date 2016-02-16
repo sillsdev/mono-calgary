@@ -27,7 +27,7 @@ Homepage: http://www.mono-project.com/
 
 Package: mono-sil
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, ca-certificates (>= 20121114)
 Description: A version of mono specially for SIL programs
  A specially patched version of mono from upstream source repos,
  to support FieldWorks and other SIL programs. Not intended for
