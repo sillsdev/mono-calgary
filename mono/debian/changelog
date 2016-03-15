@@ -1,3 +1,14 @@
+mono-sil (3.4.0-16) stable; urgency=medium
+
+  * Don't ignore drives with type "aufs" or "overlay"
+  * Discontinue the inclusion of the Mozilla CA certs in package
+  * Upstream cherry-picks:
+    452073b Add a tool which can sync the Mono cert store
+    3552179 Put KeyPairPersistence load into a try{}catch{} block
+    d53ed1c Workaround for certificates with ECC public keys only
+
+ -- Neil Mayhew <neil_mayhew@sil.org>  Tue, 15 Mar 2016 15:47:18 -0600
+
 mono-sil (3.4.0-15) stable; urgency=medium
 
   * Fix problem with scrollbars in TreeView
