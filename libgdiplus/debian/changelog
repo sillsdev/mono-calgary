@@ -1,3 +1,10 @@
+libgdiplus-sil (3.4.0-2) stable; urgency=low
+
+  * Fix crash due to uninitialized variable
+  * Fix compilation with giflib version 5
+
+ -- MarkS <marksvc@gmail.com>  Mon, 21 Mar 2016 10:28:19 -0600
+
 libgdiplus-sil (3.4.0-1) stable; urgency=medium
 
   * Update version number to match mono-sil version
