@@ -1,3 +1,10 @@
+mono-sil (3.4.0-17) stable; urgency=medium
+
+  * Upstream cherry-pick (fixes recurring random crash in Bloom):
+    2f710f7 [corlib] Make invariant NumberFormatter thread static
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Thu, 07 Apr 2016 14:01:57 -0500
+
 mono-sil (3.4.0-16) stable; urgency=medium
 
   * Don't ignore drives with type "aufs" or "overlay"
