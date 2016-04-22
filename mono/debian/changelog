@@ -1,3 +1,9 @@
+mono4-sil (4.4.0.122) stable; urgency=medium
+
+  * Upgrade to upstream version 4.4 
+
+ -- Eberhard Beilharz <eb1@sil.org>  Fri, 22 Apr 2016 17:59:08 +0200
+
 mono-sil (3.4.0-17) stable; urgency=medium
 
   * Upstream cherry-pick (fixes recurring random crash in Bloom):
