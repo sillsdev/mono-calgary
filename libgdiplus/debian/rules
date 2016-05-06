@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-MONO_PREFIX = /opt/mono-sil
+MONO_PREFIX = /opt/mono4-sil
 
 %:
 	dh --with autoreconf --parallel $@

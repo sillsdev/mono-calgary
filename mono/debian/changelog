@@ -1,8 +1,10 @@
-mono4-sil (4.4.0.122) stable; urgency=medium
+mono4-sil (4.4.0-1) stable; urgency=low
 
-  * Upgrade to upstream version 4.4 
+  * Update to be based on current upstream sources (4.4.0)
+  * Rename to mono4-sil
+  * Install into /opt/mono4-sil
 
- -- Eberhard Beilharz <eb1@sil.org>  Fri, 22 Apr 2016 17:59:08 +0200
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Fri, 06 May 2016 10:15:10 -0500
 
 mono-sil (3.4.0-17) stable; urgency=medium
 

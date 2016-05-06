@@ -1,4 +1,4 @@
-libgdiplus-sil for Debian
+libgdiplus4-sil for Debian
 -------------------------
 
 Check the libgdiplus sources out of git and use git archive to create a tarball:

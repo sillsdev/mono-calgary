@@ -1,3 +1,11 @@
+gtk-sharp4-sil (4.4.0-1) stable; urgency=low
+
+  * Update to be based on current upstream sources
+  * Rename to gtk-sharp4-sil
+  * Install into /opt/mono4-sil
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Fri, 06 May 2016 10:15:10 -0500
+
 gtk-sharp2-sil (2.12.10-2) stable; urgency=low
 
   * Rename to gtk-sharp2-sil

@@ -1,7 +1,7 @@
-Source: libgdiplus-sil
+Source: libgdiplus4-sil
 Section: cli-mono
 Priority: extra
-Maintainer: Neil Mayhew <neil_mayhew@sil.org>
+Maintainer: Stephen McConnel <stephen_mcconnel@sil.org>
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  dh-autoreconf,
  gawk,
@@ -23,10 +23,10 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  libexif-dev,
  libcairo2-dev (>= 1.4),
  libpango1.0-dev (>= 1.16)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.5
 Homepage: http://www.mono-project.com/
 
-Package: libgdiplus-sil
+Package: libgdiplus4-sil
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A version of libgdiplus specially for SIL programs

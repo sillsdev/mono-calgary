@@ -1,3 +1,11 @@
+mono-basic4-sil (4.4.0-1) stable; urgency=low
+
+  * Update to be based on current upstream sources
+  * Rename to mono-basic4-sil
+  * Install into /opt/mono4-sil
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Fri, 06 May 2016 10:15:10 -0500
+
 mono-basic-sil (2.10-4) stable; urgency=low
 
   * Rename to mono-basic-sil

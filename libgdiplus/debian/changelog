@@ -1,3 +1,11 @@
+libgdiplus4-sil (4.4.0-1) stable; urgency=low
+
+  * Update to be based on current upstream sources
+  * Rename to libgdiplus4-sil
+  * Install into /opt/mono4-sil
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Fri, 06 May 2016 10:15:10 -0500
+
 libgdiplus-sil (3.4.0-2) stable; urgency=low
 
   * Fix crash due to uninitialized variable
