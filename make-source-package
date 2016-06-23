@@ -106,7 +106,7 @@ then
 	TARBALL=$TARDIR/$TARNAME
 
 	git checkout $TAG
-	git submodule update --recursive
+	git submodule update --recursive --init
 
 	git archive --prefix=$NAME-$UPSTREAM/ -o $TARBALL HEAD
 	git submodule foreach --recursive "
