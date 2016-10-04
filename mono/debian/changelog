@@ -1,3 +1,9 @@
+mono4-sil (4.6.1-1) stable; urgency=medium
+
+  * Update to be based on current upstream sources (4.6.1 branch) 
+
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 04 Oct 2016 16:11:26 +0200
+
 mono4-sil (4.4.0-1) stable; urgency=low
 
   * Update to be based on current upstream sources (4.4.0)
