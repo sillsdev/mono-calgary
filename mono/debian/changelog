@@ -1,3 +1,10 @@
+mono-sil (3.4.0-18) stable; urgency=medium
+
+  * Add dev package
+  * Fix race condition in SemaphoreSlim.Wait()
+
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 11 Oct 2016 15:09:59 +0200
+
 mono-sil (3.4.0-17) stable; urgency=medium
 
   * Upstream cherry-pick (fixes recurring random crash in Bloom):
