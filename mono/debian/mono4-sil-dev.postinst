@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "x$1" == "xconfigure" ]; then
+	cd /opt/mono4-sil/bin
+	ln -sf mono-sil.sh mono
+fi
+
+exit 0

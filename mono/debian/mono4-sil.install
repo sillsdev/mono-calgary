@@ -1,1 +1,2 @@
 debian/mono4-sil-keystore /etc/ca-certificates/update.d/
+opt/mono4-sil/

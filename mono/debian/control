@@ -30,5 +30,12 @@ Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, ca-certificates (>= 20121114)
 Description: A version of mono specially for SIL programs
  A specially patched version of mono from upstream source repos,
- to support FieldWorks and other SIL programs. Not intended for
- general use.
+ to support FieldWorks and other SIL programs.
+
+Package: mono4-sil-dev
+Architecture: any
+Depends: mono4-sil
+Description: A version of mono specially for SIL programs - debugging environment
+ This package installs a script to set up the environment. This is needed
+ for debugging projects that run with mono-sil. The package also updates
+ the mono symlink to call the script.
