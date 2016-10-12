@@ -34,7 +34,7 @@ Description: A version of mono specially for SIL programs
 
 Package: mono-sil-dev
 Architecture: any
-Depends: mono-sil
+Depends: mono-sil (= ${binary:Version})
 Description: A version of mono specially for SIL programs - debugging environment
  This package installs a script to set up the environment. This is needed
  for debugging projects that run with mono-sil. The package also updates
