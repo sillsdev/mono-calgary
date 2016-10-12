@@ -1,7 +1,7 @@
 Source: libgdiplus-sil
 Section: cli-mono
 Priority: extra
-Maintainer: Neil Mayhew <neil_mayhew@sil.org>
+Maintainer: Eberhard Beilharz <eb1@sil.org>
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  dh-autoreconf,
  gawk,
