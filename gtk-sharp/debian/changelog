@@ -1,3 +1,10 @@
+gtk-sharp4-sil (4.6.0-1) stable; urgency=medium
+
+  * Revert to GTK 2.x
+  * Based on upstream 2.12.42 tag
+
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 21 Nov 2016 18:18:14 +0100
+
 gtk-sharp4-sil (4.4.0-1) stable; urgency=low
 
   * Update to be based on current upstream sources
