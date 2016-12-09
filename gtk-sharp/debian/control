@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7.0.50~),
 	dh-autoreconf,
 	cli-common-dev,
 	libglib2.0-dev (>= 2.12.0),
-	libgtk-3-dev,
+	libgtk2.0-dev,
 	mono4-sil (>= 4.4.0)
 Standards-Version: 3.9.5
 Homepage: http://www.mono-project.com/GtkSharp
@@ -16,5 +16,5 @@ Package: gtk-sharp4-sil
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, ${cli:Depends}
 Description: A version of GTK# 2 specially for SIL programs
- A version of GTK# compiled with the Mono 2.0 profile to support FieldWorks
- and other SIL programs.  Not intended for general use.
+ A version of GTK# to support FieldWorks and other SIL programs.
+ Not intended for general use.
