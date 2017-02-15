@@ -1,3 +1,10 @@
+mono-sil (3.4.0-19) stable; urgency=medium
+
+  * Fix bug when marshalling COM interfaces in arrays
+  * Fix pasting of Unicode text
+
+ -- Eberhard Beilharz <eb1@sil.org>  Wed, 15 Feb 2017 18:30:35 +0100
+
 mono-sil (3.4.0-18) stable; urgency=medium
 
   * Add dev package
