@@ -1,3 +1,9 @@
+mono-basic4-sil (4.6-2) stable; urgency=medium
+
+  * Update dependencies 
+
+ -- Eberhard Beilharz <eb1@sil.org>  Fri, 17 Feb 2017 14:24:19 +0100
+
 mono-basic4-sil (4.6-1) stable; urgency=medium
 
   * Update based on upstream 4.6 tag 

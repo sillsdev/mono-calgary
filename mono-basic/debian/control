@@ -3,15 +3,16 @@ Section: cli-mono
 Priority: extra
 Maintainer: Stephen McConnel <stephen_mcconnel@sil.org>
 Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
- cli-common-dev (>= 0.4.4),
- lsb-release,
- mono4-sil
+	cli-common-dev (>= 0.4.4),
+	lsb-release,
+	mono4-sil
 Standards-Version: 3.9.5
 Homepage: http://www.mono-project.com/
 
 Package: mono-basic4-sil
 Architecture: all
-Depends: ${misc:Depends}, ${cli:Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends},
+	mono4-sil
 Description: A version of mono-basic specially for SIL programs
  A specially patched version of mono-basic from upstream source repos,
  to support SIL programs such as FieldWorks. Not intended for general
