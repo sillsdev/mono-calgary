@@ -1,5 +1,5 @@
 Source: gtk-sharp2-sil
-Section: libs
+Section: cli-mono
 Priority: extra
 Maintainer: Eberhard Beilharz <eb1@sil.org>
 Build-Depends: debhelper (>= 7.0.50~),
