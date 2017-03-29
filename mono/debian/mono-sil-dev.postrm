@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$1" == "remove" -o "$1" == "purge" ]; then
+	cd /opt/mono-sil/bin
+	ln -sf mono-sgen mono
+fi
+
+exit 0
