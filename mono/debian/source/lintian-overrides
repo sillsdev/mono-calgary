@@ -1,6 +1,6 @@
 # Some externals have missing source
-mono4-sil source: source-contains-prebuilt-ms-help-file external/Lucene.Net/*
-mono4-sil source: source-contains-prebuilt-ms-help-file external/Newtonsoft.Json/*
-mono4-sil source: source-is-missing external/Lucene.Net/*
-mono4-sil source: source-is-missing mcs/class/MicrosoftAjaxLibrary/*
-mono4-sil source: source-is-missing mcs/class/System.Web/Test/jsunit/*
+mono5-sil source: source-contains-prebuilt-ms-help-file external/Lucene.Net/*
+mono5-sil source: source-contains-prebuilt-ms-help-file external/Newtonsoft.Json/*
+mono5-sil source: source-is-missing external/Lucene.Net/*
+mono5-sil source: source-is-missing mcs/class/MicrosoftAjaxLibrary/*
+mono5-sil source: source-is-missing mcs/class/System.Web/Test/jsunit/*

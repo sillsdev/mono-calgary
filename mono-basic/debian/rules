@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-MONO_PREFIX = /opt/mono4-sil
+MONO_PREFIX = /opt/mono5-sil
 
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)

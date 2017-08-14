@@ -1,3 +1,9 @@
+libgdiplus5-sil (5.4.0-1) stable; urgency=medium
+
+  * Rename to libgdiplus5-sil 
+
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 14 Aug 2017 14:10:07 -0600
+
 libgdiplus4-sil (4.4.0-1) stable; urgency=low
 
   * Update to be based on current upstream sources

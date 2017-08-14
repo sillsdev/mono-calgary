@@ -1,0 +1,2 @@
+debian/mono5-sil-keystore /etc/ca-certificates/update.d/
+opt/mono5-sil/

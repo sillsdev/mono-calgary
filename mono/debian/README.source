@@ -1,9 +1,9 @@
-mono4-sil for Debian
+mono5-sil for Debian
 -------------------
 
 Check the mono sources out of git and use git archive to create a tarball:
 
-git archive --prefix mono4-sil/ $REVISION | gzip >$TARBALL
+git archive --prefix mono5-sil/ $REVISION | gzip >$TARBALL
 
 This is done more conveniently by the make-source-package script.
 
