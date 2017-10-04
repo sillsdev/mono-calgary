@@ -14,9 +14,9 @@ override_dh_autoreconf:
 override_dh_auto_configure:
 	dh_auto_configure -- --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
 
-override_dh_auto_build:
-	make get-monolite-latest
-	dh_auto_build -- EXTERNAL_MCS=false
+#override_dh_auto_build:
+#	make get-monolite-latest
+#	dh_auto_build -- EXTERNAL_MCS=false
 
 # Don't run make check
 override_dh_auto_test:
