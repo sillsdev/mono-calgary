@@ -110,7 +110,7 @@ then
 
 	git archive --prefix=$NAME-$UPSTREAM/ -o $TARBALL HEAD
 	git submodule foreach --recursive "
-		git archive --prefix=$NAME-$UPSTREAM/\$path/ -o submodule.tar HEAD
+		git archive --prefix=$NAME-$UPSTREAM/\$(realpath --relative-to=$PWD \$toplevel)/\$path/ -o submodule.tar HEAD
 		tar -Af $TARBALL submodule.tar
 		rm submodule.tar"
 
