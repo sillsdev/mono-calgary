@@ -2,7 +2,9 @@ Source: mono5-sil
 Section: cli-mono
 Priority: extra
 Maintainer: Stephen McConnel <stephen_mcconnel@sil.org>
-Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
+Uploaders: Stephen McConnel <stephen_mcconnel@sil.org>,
+ Eberhard Beilharz <eb1@sil.org>
+Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.13.19),
  g++ (>= 4.8),
  wget,
  dh-autoreconf,
@@ -11,8 +13,7 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  libglib2.0-dev (>= 2.4),
  cli-common-dev (>= 0.8~),
  bison,
- libtool,
- libtool (< 2.4.6) | libtool-bin,
+ libtool (<< 2.4.6) | libtool-bin,
  libxml-dom-perl,
  libxslt1-dev,
  dc,
@@ -24,10 +25,9 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
  automake,
  cmake,
  python,
- build-essential,
  mono-devel,
  gettext
-Standards-Version: 3.9.5
+Standards-Version: 3.9.7
 Homepage: http://www.mono-project.com/
 
 Package: mono5-sil
@@ -39,7 +39,8 @@ Description: A version of mono specially for SIL programs
 
 Package: mono5-sil-dev
 Architecture: any
-Depends: mono5-sil (= ${binary:Version})
+Depends:  ${misc:Depends},
+ mono5-sil (= ${binary:Version})
 Description: A version of mono specially for SIL programs - debugging environment
  This package installs a script to set up the environment. This is needed
  for debugging projects that run with mono-sil. The package also updates
