@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7.0.50~), dpkg-dev (>= 1.13.19),
 	cli-common-dev (>= 0.4.4),
 	lsb-release,
 	mono5-sil
-Standards-Version: 3.9.5
+Standards-Version: 3.9.7
 Homepage: http://www.mono-project.com/
 
 Package: mono-basic5-sil
