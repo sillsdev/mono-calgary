@@ -1,4 +1,4 @@
-libgdiplus4-sil (4.4.1-1) UNRELEASED; urgency=low
+libgdiplus4-sil (4.4.0-2) UNRELEASED; urgency=low
 
   * Add handling of 8-bit grayscale+alpha PNG images (fix taken from master)
 
