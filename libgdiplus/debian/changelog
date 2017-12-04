@@ -1,3 +1,9 @@
+libgdiplus4-sil (4.4.1-1) UNRELEASED; urgency=low
+
+  * Add handling of 8-bit grayscale+alpha PNG images (fix taken from master)
+
+ -- Stephen McConnel <stephen_mcconnel@sil.org>  Thu, 30 Nov 2017 15:21:37 -0700
+
 libgdiplus4-sil (4.4.0-1) stable; urgency=low
 
   * Update to be based on current upstream sources
