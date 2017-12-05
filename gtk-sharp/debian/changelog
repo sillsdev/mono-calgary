@@ -1,15 +1,15 @@
-gtk-sharp4-sil (4.6.0-2) stable; urgency=medium
+gtk-sharp4-sil (4.6.0-3) UNRELEASED; urgency=medium
 
+  * Create proper source package 
+
+  * Changes in 4.6.0-2:
   * Fix package build 
 
- -- Eberhard Beilharz <eb1@sil.org>  Thu, 08 Dec 2016 15:13:38 +0100
-
-gtk-sharp4-sil (4.6.0-1) stable; urgency=medium
-
+  * Changes in 4.6.0-1:
   * Revert to GTK 2.x
   * Based on upstream 2.12.42 tag
 
- -- Eberhard Beilharz <eb1@sil.org>  Mon, 21 Nov 2016 18:18:14 +0100
+ -- Eberhard Beilharz <eb1@sil.org>  Tue, 05 Dec 2017 17:31:14 +0100
 
 gtk-sharp4-sil (4.4.0-1) stable; urgency=low
 
