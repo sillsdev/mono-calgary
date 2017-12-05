@@ -4,7 +4,7 @@ libgdiplus4-sil (4.4.0-2) UNRELEASED; urgency=low
 
  -- Stephen McConnel <stephen_mcconnel@sil.org>  Thu, 30 Nov 2017 15:21:37 -0700
 
-libgdiplus4-sil (4.4.0-1) stable; urgency=low
+  Changes in 4.4.0-1:
 
   * Update to be based on current upstream sources
   * Rename to libgdiplus4-sil
