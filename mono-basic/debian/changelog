@@ -1,8 +1,8 @@
-mono-basic-sil (2.10-6) UNRELEASED; urgency=medium
+mono-basic-sil (2.11-1) UNRELEASED; urgency=medium
 
   * Create proper source package
 
- -- Eberhard Beilharz <eb1@sil.org>  Mon, 05 Feb 2018 09:54:13 +0100
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 05 Feb 2018 11:03:45 +0100
 
 mono-basic-sil (2.10-5) stable; urgency=medium
 
