@@ -1,3 +1,9 @@
+gtk-sharp2-sil (2.12.10-3) UNRELEASED; urgency=medium
+
+  * Create proper source package
+
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 05 Feb 2018 09:53:59 +0100
+
 gtk-sharp2-sil (2.12.10-2) stable; urgency=low
 
   * Rename to gtk-sharp2-sil

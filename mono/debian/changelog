@@ -1,3 +1,9 @@
+mono-sil (3.4.0-20) UNRELEASED; urgency=medium
+
+  * Add postrm script for -dev package
+
+ -- Eberhard Beilharz <eb1@sil.org>  Mon, 05 Feb 2018 09:48:20 +0100
+
 mono-sil (3.4.0-19) stable; urgency=medium
 
   * Fix bug when marshalling COM interfaces in arrays
