@@ -1,4 +1,10 @@
-libgdiplus5-sil (5.4.0-1) UNRELEASED; urgency=medium
+libgdiplus5-sil (5.6.0-1) UNRELEASED; urgency=medium
+
+  * Update to 5.6
+
+ -- Eberhard Beilharz <eb1@sil.org>  Wed, 21 Feb 2018 12:22:00 +0100
+
+libgdiplus5-sil (5.4.0-1) stable; urgency=medium
 
   * Rename to libgdiplus5-sil 
 
