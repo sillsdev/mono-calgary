@@ -1,4 +1,10 @@
-mono5-sil (5.4.1-1) UNRELEASED; urgency=medium
+mono5-sil (5.8.0-1) UNRELEASED; urgency=medium
+
+  * Update to mono 5.8.0 
+
+ -- Eberhard Beilharz <eb1@sil.org>  Wed, 21 Feb 2018 11:54:18 +0100
+
+mono5-sil (5.4.1-1) stable; urgency=medium
 
   * Update to mono 5.4.1 
 
