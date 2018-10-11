@@ -1,0 +1,95 @@
+#!/bin/bash
+# Repackage msbuild to be installed in /opt/mono5-sil
+
+. $(dirname $0)/common.sh
+init
+
+PACKAGES="msbuild msbuild-sdkresolver msbuild-libhostfxr"
+PLATFORMS="trusty xenial bionic"
+ARCHES="amd64"
+URL="https://download.mono-project.com/repo/ubuntu"
+
+TEMP=$(mktemp -d)
+OUTPUTBASE=$(dirname $(readlink -f $0))
+
+for arch in $ARCHES; do
+	for platform in $PLATFORMS; do
+		OUTPUTDIR=${OUTPUTBASE}/output/$platform
+		echo "OUTPUTDIR=$OUTPUTDIR"
+		mkdir -p $OUTPUTDIR
+		rm $OUTPUTDIR/*
+		log "$platform/$arch in $TEMP"
+		mkdir -p $TEMP/$platform/$arch
+
+		# Download Packages file to get paths of individual packages
+		cd $TEMP/$platform/$arch
+		wget ${URL}/dists/stable-${platform}/main/binary-${arch}/Packages
+
+		# Process packages
+		for package in $PACKAGES; do
+			log "*************** Processing ${package} for ${platform}/${arch}"
+			mkdir -p $TEMP/$platform/$arch/$package
+			cd $TEMP/$platform/$arch/$package
+			FILEPATH=$(grep-dctrl -F Package ${package} --exact-match --show-field=Filename --no-field-names ../Packages)
+			FILENAME=$(basename $FILEPATH)
+			wget ${URL}/${FILEPATH}
+			cat > $TEMP/repl-package <<-EOF
+				. ${OUTPUTBASE}/common.sh
+				init
+				log "*** Repackaging ${package}"
+				log "Extracting package"
+				mkdir tmp
+				dpkg-deb -R ${FILENAME} tmp
+				cd tmp
+				mkdir -p opt/mono5-sil
+				chmod -R 755 opt
+				mv usr/* opt/mono5-sil/
+				mkdir -p usr/share/doc
+				chmod -R 755 usr
+				mv opt/mono5-sil/share/doc/${package} usr/share/doc/mono5-sil-${package}
+				gunzip usr/share/doc/mono5-sil-${package}/changelog.Debian.gz
+				sed -i -e "s/^${package}/mono5-sil-${package}/" usr/share/doc/mono5-sil-${package}/changelog.Debian
+				cp usr/share/doc/mono5-sil-${package}/changelog.Debian $TEMP
+				gzip usr/share/doc/mono5-sil-${package}/changelog.Debian
+			EOF
+			for dependency in $PACKAGES; do
+				cat >> $TEMP/repl-package <<-EOF
+					sed -i -e "/\(Package\|Breaks\|Depends\|Replaces\):/ { s/$dependency\($\|,\| \)/mono5-sil-$dependency\1/ }" DEBIAN/control
+				EOF
+			done
+			cat >> $TEMP/repl-package <<-EOF
+				sed -i -e '/Depends:.*mono-runtime/ { s/$/, mono5-sil/ }' DEBIAN/control
+				sed -i -e '/Depends:/ { s/\(mono-runtime\|libmono-[a-z0-9.-]*\|mono-xbuild\)\([^)]*)\(,\|\)\|\) *//g }' DEBIAN/control
+				[ -f opt/mono5-sil/bin/msbuild ] && sed -i -e 's#/usr#/opt/mono5-sil#g' opt/mono5-sil/bin/msbuild
+				find opt -type f -print0 | xargs -0 md5sum > DEBIAN/md5sums
+				find usr -type f -print0 | xargs -0 md5sum >> DEBIAN/md5sums
+
+				(grep Source DEBIAN/control || echo "Source: mono5-sil-${package}") > $TEMP/control
+				grep Section DEBIAN/control >> $TEMP/control
+				grep Priority DEBIAN/control >> $TEMP/control
+				grep Maintainer DEBIAN/control >> $TEMP/control
+				echo "Standards-Version: 3.9.5" >> $TEMP/control
+				echo "" >> $TEMP/control
+				grep Package DEBIAN/control >> $TEMP/control
+				grep Architecture DEBIAN/control >> $TEMP/control
+				grep Depends DEBIAN/control >> $TEMP/control
+				grep Description DEBIAN/control >> $TEMP/control
+
+				log "Rebuilding package"
+				cd $OUTPUTDIR
+				dpkg-deb -b $TEMP/$platform/$arch/$package/tmp mono5-sil-${FILENAME}
+			EOF
+
+			fakeroot -u bash $TEMP/repl-package
+			cd $OUTPUTDIR
+			echo "mono5-sil-${FILENAME} $(grep Section $TEMP/control | cut -d' ' -f 2) $(grep Priority $TEMP/control | cut -d' ' -f 2)" > $TEMP/files
+			dpkg-genchanges -b -l$TEMP/changelog.Debian -c$TEMP/control -f$TEMP/files -u. > mono5-sil-${FILENAME%.*}.changes
+			log "Signing package"
+			debsign -k${DEBSIGN_KEYID} mono5-sil-${FILENAME%.*}.changes
+			log "Done processing ${package}"
+			log ""
+		done
+	done
+done
+
+rm -rf $TEMP
