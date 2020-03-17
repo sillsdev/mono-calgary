@@ -14,6 +14,7 @@ override_dh_autoreconf:
 override_dh_auto_configure:
 	# Work around /usr/bin/python not existing in Ubuntu 20.04 python2 package.
 	# There is probably a better way to do this.
+	mkdir -p /usr/bin
 	[ -f /usr/bin/python ] || ln -s python2 /usr/bin/python
 	dh_auto_configure -- --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
 
