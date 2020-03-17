@@ -6,16 +6,24 @@ MONO_PREFIX = /opt/mono5-sil
 export MONO_SHARED_DIR=$(CURDIR)
 
 %:
+	# Horrible hack to work around /usr/bin/python not existing in Ubuntu 20.04 python2 package.
+	if [ ! -f /usr/bin/python ]; then \
+		EXTRABIN="$$(mktemp -d /tmp/bin.XXXXXXXXXXXX)" ;\
+		export PATH="$$PATH:$$EXTRABIN" ;\
+		ln -s /usr/bin/python2 "$$EXTRABIN"/python ;\
+	fi ;\
 	dh --with autoreconf --parallel $@
 
 override_dh_autoreconf:
 	NOCONFIGURE=1 ./autogen.sh
 
 override_dh_auto_configure:
-	# Work around /usr/bin/python not existing in Ubuntu 20.04 python2 package.
-	# There is probably a better way to do this.
-	mkdir -p /usr/bin
-	[ -f /usr/bin/python ] || ln -s python2 /usr/bin/python
+	# Horrible hack to work around /usr/bin/python not existing in Ubuntu 20.04 python2 package.
+	if [ ! -f /usr/bin/python ]; then \
+		EXTRABIN="$$(mktemp -d /tmp/bin.XXXXXXXXXXXX)" ;\
+		export PATH="$$PATH:$$EXTRABIN" ;\
+		ln -s /usr/bin/python2 "$$EXTRABIN"/python ;\
+	fi ;\
 	dh_auto_configure -- --prefix=$(MONO_PREFIX) --sysconfdir=$(MONO_PREFIX)/etc
 
 #override_dh_auto_build:
