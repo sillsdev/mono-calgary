@@ -23,7 +23,7 @@ Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.13.19),
  autoconf,
  automake,
  cmake,
- python2 | python,
+ python-is-python2-but-deprecated | python,
  gettext
 Standards-Version: 3.9.7
 Homepage: http://www.mono-project.com/
