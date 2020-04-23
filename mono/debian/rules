@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 
 MONO_PREFIX = /opt/mono5-sil
+CC = gcc-7
+CXX = g++-7
 
 # Avoid build errors -- see Debian CLI policy
 export MONO_SHARED_DIR=$(CURDIR)
